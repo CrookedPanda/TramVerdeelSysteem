@@ -49,5 +49,11 @@
     <Folder Include="Interface\" />
     <Folder Include="Memory\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{0928fb89-26bf-42f1-abff-273df865318f}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
