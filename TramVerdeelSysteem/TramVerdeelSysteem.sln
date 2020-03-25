@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.902
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TramVerdeelSysteem", "TramVerdeelSysteem\TramVerdeelSysteem.csproj", "{B955BAD8-0C28-496C-BF24-02DF1DB1F5B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TramVerdeelSysteem", "TramVerdeelSysteem\TramVerdeelSysteem.csproj", "{B955BAD8-0C28-496C-BF24-02DF1DB1F5B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{2A3C713E-49F8-4F3E-B79D-B700B79F8B4A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{D83C91F8-354E-45C3-A49C-01F067435B6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{0928FB89-26BF-42F1-ABFF-273DF865318F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D83C91F8-354E-45C3-A49C-01F067435B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D83C91F8-354E-45C3-A49C-01F067435B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D83C91F8-354E-45C3-A49C-01F067435B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0928FB89-26BF-42F1-ABFF-273DF865318F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0928FB89-26BF-42F1-ABFF-273DF865318F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0928FB89-26BF-42F1-ABFF-273DF865318F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0928FB89-26BF-42F1-ABFF-273DF865318F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
