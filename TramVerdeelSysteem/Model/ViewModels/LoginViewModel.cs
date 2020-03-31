@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model.ViewModels
 {
-    class LoginViewModel
+    public class LoginViewModel
     {
-        String name;
-        String password;
+        //[Required]
+        public String name { get; set; }
+        [DataType(DataType.Password)]
+        //[Required]
+        public String password { get; set; }
     }
 }
