@@ -50,5 +50,17 @@ namespace Data
 
             _connect.Con.Close();
         }
+
+        public void DeauthorisePerson(string UserID)
+        {
+            _connect.Con.Open();
+
+            MySqlCommand cmd = _connect.Con.CreateCommand();
+            cmd.CommandText = "DELETE FROM `AuthorisationList` WHERE @idUser";
+            cmd.Parameters.AddWithValue("@idUser", UserID);
+            cmd.ExecuteNonQuery();
+
+            _connect.Con.Close();
+        }
     }
 }
