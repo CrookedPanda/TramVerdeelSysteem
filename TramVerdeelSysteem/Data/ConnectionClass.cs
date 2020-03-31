@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Data
 {
-    class ConnectionClass
+    public class ConnectionClass
     {
         internal MySqlConnection Con { get; }
 
