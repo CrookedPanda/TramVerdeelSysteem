@@ -15,24 +15,33 @@ namespace Data
             _connect = connect;
         }
 
-
         public string GetPassword(string Name)
         {
-            _connect.Con.Open();
             string Password = "";
-
-            string query = "SELECT `Password` FROM `Accounts` WHERE `Name`=@Name";
-            MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
-            cmd.Parameters.AddWithValue("@Name", Name);
-            MySqlDataReader dataReader = cmd.ExecuteReader();
-
-            while (dataReader.Read())
+            try
             {
-                Password = dataReader["Password"] + "";
-            }
-            dataReader.Close();
+                _connect.Con.Open();
 
-            _connect.Con.Close();
+                string query = "SELECT `Password` FROM `User` WHERE `Name`=@Name";
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@Name", Name);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    Password = dataReader["Password"] + "";
+                }
+                dataReader.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            
             return Password;
         }
 
