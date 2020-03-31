@@ -33,8 +33,15 @@ namespace TramVerdeelSysteem.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel user)
         {
-            return RedirectToAction("Index","Remise");
-            //backend aanroepen
+            try
+            {
+                return RedirectToAction("Index", "Remise");
+                //backend aanroepen
+            }
+            catch
+            {
+                return Index();
+            }
         }
     }
 }
