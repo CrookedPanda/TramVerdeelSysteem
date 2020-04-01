@@ -1,6 +1,40 @@
-﻿
+﻿@model Model.ViewModels.SchoonmaakDienstVieuwModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>TODO: Schoonmaak implementation</h1>
+<div class="container">
+    <div class="dropdown">
+        <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 float-left">
+            <ul class="list-group">
+                <li class="list-group-item"><b>Trams:</b></li>
+               @foreach(var Tram in Model.SchoonTeMakenTrams)
+                {
+                    <li class="list-group-item"><input type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" /></li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <label><b>Tram Nummer:</b></label>
+        <label id="TramNummer"></label>
+        <label><b>Spoor numer:</b></label>
+        <label id="Spoor"></label>
+        <label><b>Sector nummer:</b></label>
+        <label id="Sector"></label>
+        <p id="Beschrijving"></p>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function ShowTram(TramNummer, Spoor, Sector,) {
+        var tramnummer = document.getElementById('TramNummer');
+        var spoor = document.getElementById('Spoor')
+        var sector = document.getElementById('Sector')
+
+        tramnummer.innerText = TramNummer;
+        spoor.innerText = Spoor;
+        sector.innerText = Sector;
+    }
+</script>
