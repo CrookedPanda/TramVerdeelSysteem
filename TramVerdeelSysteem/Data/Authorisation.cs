@@ -95,5 +95,47 @@ namespace Data
                 _connect.Con.Close();
             }
         }
+
+        public void AddUser(string Name, string Password)
+        {
+            _connect.Con.Open();
+            try
+            {
+                MySqlCommand cmd = _connect.Con.CreateCommand();
+                cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
+                cmd.Parameters.AddWithValue("@idUser", null);
+                cmd.Parameters.AddWithValue("@UniqueKey", Name);
+                cmd.Parameters.AddWithValue("@Date", Password);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+        }
+
+        public void DeleteUser(int UserID)
+        {
+            _connect.Con.Open();
+            try
+            {
+                MySqlCommand cmd = _connect.Con.CreateCommand();
+                cmd.CommandText = "DELETE FROM `User` WHERE @idUser";
+                cmd.Parameters.AddWithValue("@idUser", UserID);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+        }
     }
 }
