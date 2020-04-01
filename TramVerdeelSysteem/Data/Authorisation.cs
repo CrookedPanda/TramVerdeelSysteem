@@ -82,7 +82,7 @@ namespace Data
             try
             {
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM `authorisationlist` WHERE @idUser";
+                cmd.CommandText = "DELETE FROM `authorisationlist` WHERE idUser = @idUser";
                 cmd.Parameters.AddWithValue("@idUser", UserID);
                 cmd.ExecuteNonQuery();
             }
