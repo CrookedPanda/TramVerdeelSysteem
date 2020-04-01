@@ -124,7 +124,7 @@ namespace Data
             try
             {
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM `User` WHERE @idUser";
+                cmd.CommandText = "DELETE FROM `User` WHERE idUser = @idUser";
                 cmd.Parameters.AddWithValue("@idUser", UserID);
                 cmd.ExecuteNonQuery();
             }

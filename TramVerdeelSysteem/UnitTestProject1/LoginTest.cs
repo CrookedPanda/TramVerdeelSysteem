@@ -47,5 +47,29 @@ namespace DataTest
 
             //Assert
         }
+
+        [TestMethod]
+        public void TestAddAccount()
+        {
+            //Arrange
+            Authorisation test = new Authorisation(con);
+
+            //Act
+            test.AddUser("test2", "test");
+
+            //Assert
+        }
+
+        [TestMethod]
+        public void TestDeleteAccount()
+        {
+            //Arrange
+            Authorisation test = new Authorisation(con);
+
+            //Act
+            test.DeleteUser(4);
+
+            //Assert
+        }
     }
 }
