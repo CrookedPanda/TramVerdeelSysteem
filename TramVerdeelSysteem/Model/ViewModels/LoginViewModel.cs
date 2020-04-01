@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Model.ViewModels
 {
-    class LoginViewModel
+    public class LoginViewModel
     {
         String name;
         String password;
+        int id;
     }
 }

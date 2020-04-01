@@ -3,18 +3,38 @@ using System.Collections.Generic;
 using System.Text;
 using Logic.Interfaces;
 using System.Security.Cryptography;
+using Logic.Interfaces.Front_end;
+using Model.DTOs;
 
 namespace Logic
 {
-    class Authentication
+    public class Authentication
     {
         IDatabaseAccount iDatabaseAccount;
+        IFrontendAccount iFrontendAccount;
 
-        public Authentication(IDatabaseAccount iDatabase)
+        public Authentication(IDatabaseAccount iDatabase, IFrontendAccount iFrontend)
         {
             iDatabaseAccount = iDatabase;
+            iFrontendAccount = iFrontend;
         }
 
+
+        public void Login()
+        {
+            string username = iFrontendAccount.AddAccount().username;
+            string password = iFrontendAccount.AddAccount().password;
+
+            bool verified = VerifyHashedPassword(password, username);
+
+            DateTime dateTime = DateTime.Now;
+
+            if (verified)
+            {
+                iDatabaseAccount.Login(username, dateTime);
+            }
+            
+        }
         public void Login(string username, string password) 
         {
             bool verified = VerifyHashedPassword(password, username);
@@ -35,7 +55,8 @@ namespace Logic
         {
 
             string hashedPassword = HashPassword(password);
-            iDatabaseAccount.AddAccount(roleID, username, hashedPassword);
+            AccountDTO account = new AccountDTO(username, hashedPassword, roleID);
+            iDatabaseAccount.AddAccount(account);
         }
 
         private string HashPassword(string password)

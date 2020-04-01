@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Model.ViewModels
 {
-    class RegisterViewModel
+    public class RegisterViewModel
     {
+        public String username;
+        public String password;
+        public int roleId;
     }
 }
