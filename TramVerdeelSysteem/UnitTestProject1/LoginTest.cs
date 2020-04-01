@@ -7,16 +7,18 @@ namespace DataTest
     [TestClass]
     public class LoginTest
     {
+        readonly ConnectionClass con = new ConnectionClass("Server=studmysql01.fhict.local;Uid=dbi405544;Database=dbi405544;Pwd=SirBotler;");
+
         [TestMethod]
-        public void GetPasswordTest()
+        public void TestGetUser()
         {
             //Arrange
             string username = "test";
-            ConnectionClass con = new ConnectionClass("Server=studmysql01.fhict.local;Uid=dbi405544;Database=dbi405544;Pwd=SirBotler;");
+            
             Authorisation test = new Authorisation(con);
 
             //Act
-            var output = test.GetPassword(username);
+            var output = test.GetUser(username);
 
             //Assert
             Assert.AreEqual(output, "test");
@@ -26,7 +28,6 @@ namespace DataTest
         public void TestInsertQuery()
         {
             //Arrange
-            ConnectionClass con = new ConnectionClass("Server=studmysql01.fhict.local;Uid=dbi405544;Database=dbi405544;Pwd=SirBotler;");
             Authorisation test = new Authorisation(con);
 
             //Act
@@ -39,7 +40,6 @@ namespace DataTest
         public void TestDeleteQuery()
         {
             //Arrange
-            ConnectionClass con = new ConnectionClass("Server=studmysql01.fhict.local;Uid=dbi405544;Database=dbi405544;Pwd=SirBotler;");
             Authorisation test = new Authorisation(con);
 
             //Act

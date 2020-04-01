@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model.DTO;
 using MySql.Data.MySqlClient;
 
 namespace Data
@@ -15,21 +16,29 @@ namespace Data
             _connect = connect;
         }
 
-        public string GetPassword(string Name)
+        public AccountDTO GetUser(string username)
         {
-            string Password = "";
+            AccountDTO account = new AccountDTO();
             try
             {
                 _connect.Con.Open();
 
-                string query = "SELECT `Password` FROM `User` WHERE `Name`=@Name";
+                string query = "SELECT user.idUser, user.Name, user.Password, role.Name as Role FROM `userrole`" 
+                    + " INNER JOIN `user` ON userrole.idUser = user.idUser" 
+                    + " INNER JOIN `role` ON userrole.idRole = role.idRole WHERE user.Name = @Name";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                MySqlDataReader dataReader = cmd.ExecuteReader();
+                cmd.Parameters.AddWithValue("@Name", username);
+                var dataReader = cmd.ExecuteReader();
 
-                while (dataReader.Read())
+                if (dataReader.HasRows)
                 {
-                    Password = dataReader["Password"] + "";
+                    while (dataReader.Read())
+                    {
+                        account.UserId = dataReader.GetInt32("idUser");
+                        account.UserName = dataReader.GetString("Name");
+                        account.HashedPassword = dataReader.GetString("Password");
+                        account.UserRole = dataReader.GetString("Role");
+                    }
                 }
                 dataReader.Close();
             }
@@ -42,7 +51,7 @@ namespace Data
                 _connect.Con.Close();
             }
             
-            return Password;
+            return account;
         }
 
         public void AuthorisePerson(int UserID, int UniqueKey, DateTime Date)
