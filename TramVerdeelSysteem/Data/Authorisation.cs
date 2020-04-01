@@ -104,8 +104,8 @@ namespace Data
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
                 cmd.Parameters.AddWithValue("@idUser", null);
-                cmd.Parameters.AddWithValue("@UniqueKey", Name);
-                cmd.Parameters.AddWithValue("@Date", Password);
+                cmd.Parameters.AddWithValue("@Name", Name);
+                cmd.Parameters.AddWithValue("@Password", Password);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
