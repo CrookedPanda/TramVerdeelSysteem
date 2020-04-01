@@ -13,6 +13,11 @@ namespace Logic
         IDatabaseAccount iDatabaseAccount;
         IFrontendAccount iFrontendAccount;
 
+        public Authentication(IDatabaseAccount iDatabase)
+        {
+            iDatabaseAccount = iDatabase;
+        }
+
         public Authentication(IDatabaseAccount iDatabase, IFrontendAccount iFrontend)
         {
             iDatabaseAccount = iDatabase;
