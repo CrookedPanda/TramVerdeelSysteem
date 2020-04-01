@@ -35,12 +35,19 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                return RedirectToAction("Index", "Remise");
-                //backend aanroepen
+                if(user.name == "admin" && user.password == "admin")
+                {
+                    return RedirectToAction("Index", "Remise");
+                    //backend aanroepen
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             catch
             {
-                return Index();
+                return RedirectToAction("Index", "Home");
             }
         }
     }
