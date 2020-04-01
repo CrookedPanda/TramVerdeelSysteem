@@ -82,7 +82,7 @@ namespace Logic
         private bool VerifyHashedPassword(string password, string username)
         {
             /* Fetch the stored value */
-            string savedPasswordHash = iDatabaseAccount.GetUser(username).hashedPassword;
+            string savedPasswordHash = iDatabaseAccount.GetUser(username).HashedPassword;
             /* Extract the bytes */
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
             /* Get the salt */

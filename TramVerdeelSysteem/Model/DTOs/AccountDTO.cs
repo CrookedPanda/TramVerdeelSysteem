@@ -12,12 +12,14 @@ namespace Model.DTOs
         }
         public AccountDTO(string _username, string _hashedPassword, int _roleID)
         {
-            username = _username;
-            hashedPassword = _hashedPassword;
-            roleId = _roleID;
+            Username = _username;
+            HashedPassword = _hashedPassword;
+            RoleId = _roleID;
         }
-        public string username { get; set; }
-        public string hashedPassword { get; set; }
-        public int roleId { get; set; }
+        public string Username { get; set; }
+        public string HashedPassword { get; set; }
+        public int RoleId { get; set; }
+        public string UserRole { get; set; }
+        public int UserId { get; set; }
     }
 }

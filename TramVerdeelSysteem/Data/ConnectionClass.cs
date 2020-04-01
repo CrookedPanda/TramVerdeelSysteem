@@ -13,5 +13,10 @@ namespace Data
         {
             Con = new MySqlConnection(connectionstring);
         }
+
+        public ConnectionClass()
+        {
+            Con = new MySqlConnection("Server=studmysql01.fhict.local;Uid=dbi405544;Database=dbi405544;Pwd=SirBotler;");
+        }
     }
 }

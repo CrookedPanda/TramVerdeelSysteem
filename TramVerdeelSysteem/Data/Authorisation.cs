@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model.DTO;
+using Logic.Interfaces;
+using Model.DTOs;
 using MySql.Data.MySqlClient;
 
 namespace Data
 {
-    public class Authorisation
+    public class Authorisation : IDatabaseAccount
     {
         private readonly ConnectionClass _connect;
         public Authorisation(ConnectionClass connect)
@@ -35,7 +36,7 @@ namespace Data
                     while (dataReader.Read())
                     {
                         account.UserId = dataReader.GetInt32("idUser");
-                        account.UserName = dataReader.GetString("Name");
+                        account.Username = dataReader.GetString("Name");
                         account.HashedPassword = dataReader.GetString("Password");
                         account.UserRole = dataReader.GetString("Role");
                     }
@@ -54,14 +55,16 @@ namespace Data
             return account;
         }
 
-        public void AuthorisePerson(int UserID, int UniqueKey, DateTime Date)
+        public void Login(string username, DateTime Date)
         {
+            int UserId = 0;
+            int UniqueKey = 0;
             _connect.Con.Open();
             try
             {
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `authorisationlist` (`idUser`, `UniqueKey`, `Date`) VALUES (@idUser, @UniqueKey, @Date)";
-                cmd.Parameters.AddWithValue("@idUser", UserID);
+                cmd.Parameters.AddWithValue("@idUser", UserId);
                 cmd.Parameters.AddWithValue("@UniqueKey", UniqueKey);
                 cmd.Parameters.AddWithValue("@Date", Date);
                 cmd.ExecuteNonQuery();
@@ -76,7 +79,7 @@ namespace Data
             }
         }
 
-        public void DeauthorisePerson(int UserID)
+        public void Logout(int UserID)
         {
             _connect.Con.Open();
             try
@@ -96,7 +99,7 @@ namespace Data
             }
         }
 
-        public void AddUser(string Name, string Password)
+        public void AddAccount(int role, string name, string password)
         {
             _connect.Con.Open();
             try
@@ -104,8 +107,8 @@ namespace Data
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
                 cmd.Parameters.AddWithValue("@idUser", null);
-                cmd.Parameters.AddWithValue("@Name", Name);
-                cmd.Parameters.AddWithValue("@Password", Password);
+                cmd.Parameters.AddWithValue("@Name", name);
+                cmd.Parameters.AddWithValue("@Password", password);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -118,7 +121,29 @@ namespace Data
             }
         }
 
-        public void DeleteUser(int UserID)
+        public void AddAccount(AccountDTO account)
+        {
+            _connect.Con.Open();
+            try
+            {
+                MySqlCommand cmd = _connect.Con.CreateCommand();
+                cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
+                cmd.Parameters.AddWithValue("@idUser", null);
+                cmd.Parameters.AddWithValue("@Name", account.Username);
+                cmd.Parameters.AddWithValue("@Password", account.HashedPassword);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+        }
+
+        public void RemoveAccount(int UserID)
         {
             _connect.Con.Open();
             try

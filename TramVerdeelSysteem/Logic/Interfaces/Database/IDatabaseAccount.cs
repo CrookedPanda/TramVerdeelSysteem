@@ -10,7 +10,7 @@ namespace Logic.Interfaces
     {
         void Login(string username, DateTime dateTime);
 
-        void Logout(int id, DateTime dateTime);
+        void Logout(int id);
 
         void AddAccount(AccountDTO account);
         void AddAccount(int roleID, string name, string hashedPassword);

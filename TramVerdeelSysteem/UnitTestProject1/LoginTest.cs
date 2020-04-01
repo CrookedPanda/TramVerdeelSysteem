@@ -31,7 +31,7 @@ namespace DataTest
             Authorisation test = new Authorisation(con);
 
             //Act
-            test.AuthorisePerson(1, 1, DateTime.Now);
+            test.Login("test", DateTime.Now);
 
             //Assert
         }
@@ -43,7 +43,7 @@ namespace DataTest
             Authorisation test = new Authorisation(con);
 
             //Act
-            test.DeauthorisePerson(1);
+            test.Logout(1);
 
             //Assert
         }
@@ -55,7 +55,7 @@ namespace DataTest
             Authorisation test = new Authorisation(con);
 
             //Act
-            test.AddUser("test2", "test");
+            test.AddAccount(1, "test2", "test");
 
             //Assert
         }
@@ -67,7 +67,7 @@ namespace DataTest
             Authorisation test = new Authorisation(con);
 
             //Act
-            test.DeleteUser(4);
+            test.RemoveAccount(0);
 
             //Assert
         }
