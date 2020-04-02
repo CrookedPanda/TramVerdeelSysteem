@@ -5,40 +5,46 @@
 }
 
 
-<form class="text-center" asp-action="Login">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="name" class="control-label"></label>
-        <input asp-for="name" class="form-control" />
-        <span asp-validation-for="name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="password" class="control-label"></label>
-        <input asp-for="password" class="form-control" />
-        <span asp-validation-for="password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-primary" />
-    </div>
-</form>
+<!--<div class="formcontainer">
+    <form class="loginform" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group ">
+            <input asp-for="name" class="form-control" placeholder="login"/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="password" class="form-control" placeholder="password"/>
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+</div>-->
 
 
-    <!--<body>
-        <div class="wrapper fadeInDown">
+    <body>
+        <div class="wrapper fadeInDown" id="loginwrapper">
             <div id="formContent">
                 <div class="fadeIn first">
-                    <!--<img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+                    <img src="https://static.thenounproject.com/png/79183-200.png" id="icon" alt="User Icon" />
                 </div>
 
-                <!-- Login Form 
+                <!-- Login Form--> 
                 <form asp-action="Login">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input asp-for="name" type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+                    <div class="form-group">
+                    <input asp-for="name" type="text" id="login" class="fadeIn second" placeholder="login">
                     <span asp-validation-for="name" class="text-danger"></span>
-                    <input asp-for="password" type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                    <input asp-for="password" type="password" id="password" class="fadeIn third" placeholder="password">
                     <span asp-validation-for="password" class="text-danger"></span>
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    </div>
+                    <div class="form-group">
+                    <input type="submit" class="fadeIn fourth" value="Login">
+                    </div>
                 </form>
             </div>
         </div>
-    </body>-->
+    </body>
