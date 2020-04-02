@@ -5,13 +5,13 @@
 
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-        <ul class="list-group">
-            <li class="list-group-item"><b>Trams:</b></li>
+        <div class="list-group">
+            <label class="list-group-item"><b>Trams:</b></label>
             @foreach (var Tram in Model.SchoonmaakList)
             {
-                <li class="list-group-item"><input type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" /></li>
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" />
             }
-        </ul>
+        </div>
     </div>
         
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">

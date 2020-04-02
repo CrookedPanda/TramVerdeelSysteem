@@ -4,17 +4,15 @@
 }
 
 <div class="row">
-
-    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 float-left">
-        <ul class="list-group">
-            <li class="list-group-item"><b>Trams:</b></li>
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="list-group">
+            <label class="list-group-item"><b>Trams:</b></label>
             @foreach (var Tram in Model.teReparairenTrams)
             {
-                <li class="list-group-item"><input type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" /></li>
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" />
             }
-            </ul>
+        </div>
     </div>
-
 
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
         <label><b>Tram Nummer:</b></label>
@@ -39,7 +37,7 @@
 </div>
 
 <script type="text/javascript">
-    function ShowTram(TramNummer, Spoor, Sector,) {
+    function ShowTram(TramNummer, Spoor, Sector, ) {
         var tramnummer = document.getElementById('TramNummer');
         var spoor = document.getElementById('Spoor')
         var sector = document.getElementById('Sector')
