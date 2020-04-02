@@ -12,11 +12,26 @@ namespace TramVerdeelSysteem.Controllers
 {
     public class SchoonmaakDienstController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             SchoonmaakDienstVieuwModel model = new SchoonmaakDienstVieuwModel();
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Index(SchoonmaakDienstVieuwModel vieuwModel)
+        {
+            try
+            {
+                //Post het model met de index die gecleand moet worden
+                return Index();
+            }
+            catch
+            {
+                return Index();
+            }
         }
     }
 }

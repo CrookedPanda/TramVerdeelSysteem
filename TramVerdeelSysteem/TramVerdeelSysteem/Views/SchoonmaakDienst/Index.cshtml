@@ -6,23 +6,34 @@
 <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <ul class="list-group">
-             <li class="list-group-item"><b>Trams:</b></li>
-             @foreach(var Tram in Model.SchoonTeMakenTrams)
-             {
-                 <li class="list-group-item"><input type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" /></li>
-             }
+            <li class="list-group-item"><b>Trams:</b></li>
+            @foreach (var Tram in Model.SchoonmaakList)
+            {
+                <li class="list-group-item"><input type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" /></li>
+            }
         </ul>
     </div>
-
+        
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
         <label><b>Tram Nummer:</b></label>
         <label id="TramNummer"></label>
+        <br/>
+
         <label><b>Spoor numer:</b></label>
         <label id="Spoor"></label>
+
+        <br/>
         <label><b>Sector nummer:</b></label>
         <label id="Sector"></label>
         <p id="Beschrijving"></p>
     </div>
+</div>
+
+<div class="row">
+    <form class="col-12" asp-action="Index">
+        <input type="submit" class="btn btn-primary float-right" value="Schoongemaakt" />
+    </form>
+    
 </div>
 
 <script type="text/javascript">
