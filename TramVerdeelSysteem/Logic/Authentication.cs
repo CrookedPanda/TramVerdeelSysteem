@@ -3,43 +3,27 @@ using System.Collections.Generic;
 using System.Text;
 using Logic.Interfaces;
 using System.Security.Cryptography;
-using Logic.Interfaces.Front_end;
 using Model.DTOs;
+using Data;
 
 namespace Logic
 {
     public class Authentication
     {
         IDatabaseAccount iDatabaseAccount;
-        IFrontendAccount iFrontendAccount;
 
         public Authentication(IDatabaseAccount iDatabase)
         {
             iDatabaseAccount = iDatabase;
         }
 
-        public Authentication(IDatabaseAccount iDatabase, IFrontendAccount iFrontend)
+        public Authentication()
         {
-            iDatabaseAccount = iDatabase;
-            iFrontendAccount = iFrontend;
+
+            Authorisation authorisation = new Authorisation();
+            iDatabaseAccount = authorisation;
         }
 
-
-        public void Login()
-        {
-            string username = iFrontendAccount.AddAccount().username;
-            string password = iFrontendAccount.AddAccount().password;
-
-            bool verified = VerifyHashedPassword(password, username);
-
-            DateTime dateTime = DateTime.Now;
-
-            if (verified)
-            {
-                iDatabaseAccount.Login(username, dateTime);
-            }
-            
-        }
         public void Login(string username, string password) 
         {
             bool verified = VerifyHashedPassword(password, username);

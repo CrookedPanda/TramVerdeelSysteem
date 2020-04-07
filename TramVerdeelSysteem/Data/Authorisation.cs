@@ -17,6 +17,11 @@ namespace Data
             _connect = connect;
         }
 
+        public Authorisation()
+        {
+            _connect = new ConnectionClass();
+        }
+
         public AccountDTO GetUser(string username)
         {
             AccountDTO account = new AccountDTO();
