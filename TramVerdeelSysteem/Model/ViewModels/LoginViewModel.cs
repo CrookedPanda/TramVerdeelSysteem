@@ -12,5 +12,6 @@ namespace Model.ViewModels
         [DataType(DataType.Password)]
         //[Required]
         public String password { get; set; }
+        public int key { get; set; }
     }
 }
