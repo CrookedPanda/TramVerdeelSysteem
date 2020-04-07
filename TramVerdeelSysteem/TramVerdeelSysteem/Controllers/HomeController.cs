@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TramVerdeelSysteem.Models;
+using Model.ViewModels;
 
 namespace TramVerdeelSysteem.Controllers
 {
@@ -20,18 +21,34 @@ namespace TramVerdeelSysteem.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            LoginViewModel user = new LoginViewModel();
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpPost]
+        public IActionResult Login(LoginViewModel user)
+        {
+            try
+            {
+                if(user.name == "admin" && user.password == "admin")
+                {
+                    return RedirectToAction("Index", "Remise");
+                    //backend aanroepen
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
