@@ -8,18 +8,18 @@ namespace Logic.Interfaces
 {
     public interface IDatabaseAccount
     {
-        void Login(string username, DateTime dateTime);
+        bool Login(string username, DateTime dateTime, string AuthKey);
 
         void Logout(int id);
 
-        void AddAccount(AccountDTO account);
+        void AddAccount(RegistrationDTO account);
         void AddAccount(int roleID, string name, string hashedPassword);
 
 
         void RemoveAccount(int ID);
 
 
-        AccountDTO GetUser(string username);
+        LoginDTO GetUser(string username);
 
     }
 }

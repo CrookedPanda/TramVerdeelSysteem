@@ -4,6 +4,7 @@ using System.Text;
 using Logic.Interfaces;
 using System.Security.Cryptography;
 using Model.DTOs;
+using Model.ViewModels;
 using Data;
 
 namespace Logic
@@ -24,27 +25,51 @@ namespace Logic
             iDatabaseAccount = authorisation;
         }
 
-        public void Login(string username, string password) 
+        public AuthView Login(string username, string password) 
         {
             bool verified = VerifyHashedPassword(password, username);
 
             DateTime dateTime = DateTime.Now;
 
-            if (verified)
+            try
             {
-                iDatabaseAccount.Login(username, dateTime);
+                if (verified)
+                {
+                    Guid g = Guid.NewGuid();
+                    string AuthKey = Convert.ToBase64String(g.ToByteArray());
+                    AuthKey = AuthKey.Replace("=", "");
+                    AuthKey = AuthKey.Replace("+", "");
+                    AuthKey = AuthKey.Replace("/", "");
+
+                    AuthView view = new AuthView();
+                    if (iDatabaseAccount.Login(username, dateTime, AuthKey))
+                    {
+                        return view;
+                    }
+                    else
+                    {
+                        throw new OperationCanceledException("Username or Password is invalid");
+                    }
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            throw new OperationCanceledException("Username or Password is invalid");
         }
         public void Logout()
         {
 
         }
 
-        public void AddAccount(string username, string password, int roleID)
+        public void AddAccount(string username, string password, List<string> roles)
         {
 
             string hashedPassword = HashPassword(password);
-            AccountDTO account = new AccountDTO(username, hashedPassword, roleID);
+            RegistrationDTO account = new RegistrationDTO(username, hashedPassword, roles);
             iDatabaseAccount.AddAccount(account);
         }
 
@@ -66,7 +91,7 @@ namespace Logic
         private bool VerifyHashedPassword(string password, string username)
         {
             /* Fetch the stored value */
-            string savedPasswordHash = iDatabaseAccount.GetUser(username).HashedPassword;
+            string savedPasswordHash = iDatabaseAccount.GetUser(username).Password;
             /* Extract the bytes */
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
             /* Get the salt */

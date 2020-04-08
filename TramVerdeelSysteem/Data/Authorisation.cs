@@ -22,9 +22,10 @@ namespace Data
             _connect = new ConnectionClass();
         }
 
-        public AccountDTO GetUser(string username)
+        public LoginDTO GetUser(string username)
         {
-            AccountDTO account = new AccountDTO();
+            AuthDTO AuthDTO = new AuthDTO();
+            LoginDTO account = new LoginDTO();
             try
             {
                 _connect.Con.Open();
@@ -40,10 +41,10 @@ namespace Data
                 {
                     while (dataReader.Read())
                     {
-                        account.UserId = dataReader.GetInt32("idUser");
+                        account.ID = dataReader.GetInt32("idUser");
                         account.Username = dataReader.GetString("Name");
-                        account.HashedPassword = dataReader.GetString("Password");
-                        account.UserRole = dataReader.GetString("Role");
+                        account.Password = dataReader.GetString("Password");
+
                     }
                 }
                 dataReader.Close();
@@ -60,13 +61,14 @@ namespace Data
             return account;
         }
 
-        public void Login(string username, DateTime Date)
+        public bool Login(string username, DateTime Date, string AuthKey)
         {
             int UserId = 0;
             int UniqueKey = 0;
-            _connect.Con.Open();
+
             try
             {
+                _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `authorisationlist` (`idUser`, `UniqueKey`, `Date`) VALUES (@idUser, @UniqueKey, @Date)";
                 cmd.Parameters.AddWithValue("@idUser", UserId);
@@ -82,6 +84,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
+            return true;
         }
 
         public void Logout(int UserID)
@@ -126,16 +129,17 @@ namespace Data
             }
         }
 
-        public void AddAccount(AccountDTO account)
+        public void AddAccount(RegistrationDTO account)
         {
             _connect.Con.Open();
             try
             {
+                //TODO add Roles
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
                 cmd.Parameters.AddWithValue("@idUser", null);
                 cmd.Parameters.AddWithValue("@Name", account.Username);
-                cmd.Parameters.AddWithValue("@Password", account.HashedPassword);
+                cmd.Parameters.AddWithValue("@Password", account.Password);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
