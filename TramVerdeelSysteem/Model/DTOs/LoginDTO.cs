@@ -4,14 +4,10 @@ using System.Text;
 
 namespace Model.DTOs
 {
-    class LoginDTO
+    public class LoginDTO
     {
-        public class AccountDTO
-        {
-            public string username { get; set; }
-            public string hashedPassword { get; set; }
-            public int id { get; set; }
-            public DateTime datetime { get; set; }
-        }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime Datetime { get; set; }
     }
 }

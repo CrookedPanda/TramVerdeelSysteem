@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.DTOs
+namespace Model.DTOsOud
 {
     public class LoginStampDTO
     {

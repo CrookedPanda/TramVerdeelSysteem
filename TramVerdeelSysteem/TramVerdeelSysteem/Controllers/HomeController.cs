@@ -41,6 +41,7 @@ namespace TramVerdeelSysteem.Controllers
                
                 Authentication authentication = new Authentication();
                 authentication.Login(user.name, user.password);
+                return Index();
 
                 //if(user.name == "admin" && user.password == "admin")
                 //{
