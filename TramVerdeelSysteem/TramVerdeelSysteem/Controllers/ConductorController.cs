@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TramVerdeelSysteem.Controllers
 {
-    public class RemiseController : Controller
+    public class ConductorController : Controller
     {
         public IActionResult Index()
         {

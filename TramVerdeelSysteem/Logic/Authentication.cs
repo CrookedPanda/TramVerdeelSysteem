@@ -26,41 +26,41 @@ namespace Logic
         }
 
         public AuthView Login(string username, string password) 
-        {
-            bool verified = VerifyHashedPassword(password, username);
-
-            DateTime dateTime = DateTime.Now;
-
-            try
-            {
-                if (verified)
-                {
-                    Guid g = Guid.NewGuid();
-                    string AuthKey = Convert.ToBase64String(g.ToByteArray());
-                    AuthKey = AuthKey.Replace("=", "");
-                    AuthKey = AuthKey.Replace("+", "");
-                    AuthKey = AuthKey.Replace("/", "");
-
-                    AuthView view = new AuthView();
-                    if (iDatabaseAccount.Login(username, dateTime, AuthKey))
-                    {
-                        view.Name = username;
-                        view.Key = AuthKey;
-                        //view.Roles = iDatabaseAccount.GetRoles(username);
-                        return view;
-                    }
-                    else
-                    {
-                        throw new OperationCanceledException("Username or Password is invalid");
-                    }
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
+        {
+            bool verified = VerifyHashedPassword(password, username);
+
+            DateTime dateTime = DateTime.Now;
+
+            try
+            {
+                if (verified)
+                {
+                    Guid g = Guid.NewGuid();
+                    string AuthKey = Convert.ToBase64String(g.ToByteArray());
+                    AuthKey = AuthKey.Replace("=", "");
+                    AuthKey = AuthKey.Replace("+", "");
+                    AuthKey = AuthKey.Replace("/", "");
+
+                    AuthView view = new AuthView();
+                    if (iDatabaseAccount.Login(username, dateTime, AuthKey))
+                    {
+                        view.Name = username;
+                        view.Key = AuthKey;
+                        //view.Roles = iDatabaseAccount.GetRoles(username);
+                        return view;
+                    }
+                    else
+                    {
+                        throw new OperationCanceledException("Username or Password is invalid");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
             throw new OperationCanceledException("Username or Password is invalid");
         }
         public void Logout()
@@ -68,12 +68,12 @@ namespace Logic
 
         }
 
-        public void AddAccount(string username, string password, List<int> roles)
-        {
-
-            string hashedPassword = HashPassword(password);
-            RegistrationDTO account = new RegistrationDTO(username, hashedPassword, roles);
-            iDatabaseAccount.AddAccount(account);
+        public void AddAccount(string username, string password, List<int> roles)
+        {
+
+            string hashedPassword = HashPassword(password);
+            RegistrationDTO account = new RegistrationDTO(username, hashedPassword, roles);
+            iDatabaseAccount.AddAccount(account);
         }
 
         private string HashPassword(string password)

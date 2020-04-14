@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TramVerdeelSysteem.Models;
 using Model.ViewModels;
 
+
 namespace TramVerdeelSysteem.Controllers
 {
-    public class SchoonmaakDienstController : Controller
+    public class MaintenanceController : Controller
     {
         [HttpGet]
         public IActionResult Index()
         {
-            CleaningView model = new CleaningView();
+            ReparatieDienstViewModel Model = new ReparatieDienstViewModel();
 
-            return View(model);
+            return View(Model);
         }
 
         [HttpPost]
