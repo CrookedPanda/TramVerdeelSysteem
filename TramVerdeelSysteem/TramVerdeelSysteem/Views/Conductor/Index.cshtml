@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body>
+    <div class="align-items-center">
+        <form class="align-content-center text-center">
+            <div class="form-group">
+                <div class="form-row">
+                    <label>backend functionaliteit nog niet gekoppeld</label>
+                </div>
+                <div class="form-row">
+                    <label id="TramID"></label>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="button" onclick="addNumber(1)" id="1" value="1" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(2)" id="2" value="2" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(3)" id="3" value="3" class="btn btn-primary form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="button" onclick="addNumber(4)" id="4" value="4" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(5)" id="5" value="5" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(6)" id="6" value="6" class="btn btn-primary form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="button" onclick="addNumber(7)" id="7" value="7" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(8)" id="8" value="8" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col">
+                        <input type="button" onclick="addNumber(9)" id="9" value="9" class="btn btn-primary form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <input type="button" onclick="addNumber(0)" id="0" value="0" class="btn btn-primary form-control" />
+                </div>
+                <div class="form-row">
+                    <input type="button" onclick="addNumber(-1)" id="-1" value="Backspace" class="btn btn-primary form-control" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <text>Schoonmaak Beurt</text><input type="checkbox" id="Schoonmaak" class="form-check-input" />
+                </div>
+                <div class="form-row">
+                    <text>Technische Beurt</text><input type="checkbox" id="Technisch" class="form-check-input" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="button" value="verstuur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+
+<script type="text/javascript">
+    function addNumber(n) {
+        var t = document.getElementById('TramID');
+        if (n == '-1' && t.innerText.length != 0) {
+            t.innerText = t.innerText.slice(0, -1);
+            return t.innerText
+        }
+        else if (n != -1 && t.innerText.length < 4) {
+            return t.innerText += n;
+        }
+    }
+</script>
+

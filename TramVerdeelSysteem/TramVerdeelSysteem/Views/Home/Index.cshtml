@@ -1,8 +1,50 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Model.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<!--<div class="formcontainer">
+    <form class="loginform" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group ">
+            <input asp-for="name" class="form-control" placeholder="login"/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="password" class="form-control" placeholder="password"/>
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+</div>-->
+
+
+    <body>
+        <div class="wrapper fadeInDown" id="loginwrapper">
+            <div id="formContent">
+                <div class="fadeIn first">
+                    <img src="https://static.thenounproject.com/png/79183-200.png" id="icon" alt="User Icon" />
+                </div>
+
+                <!-- Login Form--> 
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                    <input asp-for="name" type="text" id="login" class="fadeIn second" placeholder="login">
+                    <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                    <input asp-for="password" type="password" id="password" class="fadeIn third" placeholder="password">
+                    <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                    <input type="submit" class="fadeIn fourth" value="Login">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
