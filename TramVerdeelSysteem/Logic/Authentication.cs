@@ -44,6 +44,9 @@ namespace Logic
                     AuthView view = new AuthView();
                     if (iDatabaseAccount.Login(username, dateTime, AuthKey))
                     {
+                        view.Name = username;
+                        view.Key = AuthKey;
+                        //view.Roles = iDatabaseAccount.GetRoles(username);
                         return view;
                     }
                     else
@@ -65,7 +68,7 @@ namespace Logic
 
         }
 
-        public void AddAccount(string username, string password, List<string> roles)
+        public void AddAccount(string username, string password, List<int> roles)
         {
 
             string hashedPassword = HashPassword(password);

@@ -107,7 +107,7 @@ namespace Data
             }
         }
 
-        public void AddAccount(int role, string name, string password)
+        public void AddAccount(List<int> roles, string name, string password)
         {
             _connect.Con.Open();
             try

@@ -6,7 +6,7 @@ namespace Model.DTOs
 {
     public class RegistrationDTO
     {
-        public RegistrationDTO(string cUsername, string cPassword, List<string> cRoles)
+        public RegistrationDTO(string cUsername, string cPassword, List<int> cRoles)
         {
             Username = cUsername;
             Password = cPassword;
@@ -14,6 +14,6 @@ namespace Model.DTOs
         }
         public string Username { get; set; }
         public string Password { get; set; }
-        public List<string> Roles { get; set; }
+        public List<int> Roles { get; set; }
     }
 }
