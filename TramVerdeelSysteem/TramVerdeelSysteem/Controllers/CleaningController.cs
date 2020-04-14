@@ -28,13 +28,17 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                //Post het model met de index die gecleand moet worden
-                return Index();
+                return CleanTrain(vieuwModel);
             }
             catch
             {
                 return Index();
             }
+        }
+
+        public IActionResult CleanTrain(CleaningView vieuwModel)
+        {
+            return View();
         }
     }
 }
