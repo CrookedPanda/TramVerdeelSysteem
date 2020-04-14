@@ -19,7 +19,7 @@ namespace TramVerdeelSysteem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(SchoonmaakDienstViewModel vieuwModel)
+        public IActionResult Index(CleaningView vieuwModel)
         {
             try
             {

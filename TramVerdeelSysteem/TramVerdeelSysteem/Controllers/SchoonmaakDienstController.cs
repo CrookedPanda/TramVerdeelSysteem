@@ -15,13 +15,13 @@ namespace TramVerdeelSysteem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            SchoonmaakDienstViewModel model = new SchoonmaakDienstViewModel();
+            CleaningView model = new CleaningView();
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(SchoonmaakDienstViewModel vieuwModel)
+        public IActionResult Index(CleaningView vieuwModel)
         {
             try
             {
