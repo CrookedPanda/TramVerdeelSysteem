@@ -3,65 +3,77 @@ using System.Collections.Generic;
 using System.Text;
 using Logic.Interfaces;
 using System.Security.Cryptography;
-using Logic.Interfaces.Front_end;
 using Model.DTOs;
+using Model.ViewModels;
+using Data;
 
 namespace Logic
 {
     public class Authentication
     {
         IDatabaseAccount iDatabaseAccount;
-        IFrontendAccount iFrontendAccount;
 
         public Authentication(IDatabaseAccount iDatabase)
         {
             iDatabaseAccount = iDatabase;
         }
 
-        public Authentication(IDatabaseAccount iDatabase, IFrontendAccount iFrontend)
+        public Authentication()
         {
-            iDatabaseAccount = iDatabase;
-            iFrontendAccount = iFrontend;
+
+            Authorisation authorisation = new Authorisation();
+            iDatabaseAccount = authorisation;
         }
 
-
-        public void Login()
-        {
-            string username = iFrontendAccount.AddAccount().username;
-            string password = iFrontendAccount.AddAccount().password;
-
-            bool verified = VerifyHashedPassword(password, username);
-
-            DateTime dateTime = DateTime.Now;
-
-            if (verified)
-            {
-                iDatabaseAccount.Login(username, dateTime);
-            }
-            
-        }
-        public void Login(string username, string password) 
-        {
-            bool verified = VerifyHashedPassword(password, username);
-
-            DateTime dateTime = DateTime.Now;
-
-            if (verified)
-            {
-                iDatabaseAccount.Login(username, dateTime);
-            }
+        public AuthView Login(string username, string password) 
+        {
+            bool verified = VerifyHashedPassword(password, username);
+
+            DateTime dateTime = DateTime.Now;
+
+            try
+            {
+                if (verified)
+                {
+                    Guid g = Guid.NewGuid();
+                    string AuthKey = Convert.ToBase64String(g.ToByteArray());
+                    AuthKey = AuthKey.Replace("=", "");
+                    AuthKey = AuthKey.Replace("+", "");
+                    AuthKey = AuthKey.Replace("/", "");
+
+                    AuthView view = new AuthView();
+                    if (iDatabaseAccount.Login(username, dateTime, AuthKey))
+                    {
+                        view.Name = username;
+                        view.Key = AuthKey;
+                        //view.Roles = iDatabaseAccount.GetRoles(username);
+                        return view;
+                    }
+                    else
+                    {
+                        throw new OperationCanceledException("Username or Password is invalid");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            throw new OperationCanceledException("Username or Password is invalid");
         }
         public void Logout()
         {
 
         }
 
-        public void AddAccount(string username, string password, int roleID)
-        {
-
-            string hashedPassword = HashPassword(password);
-            AccountDTO account = new AccountDTO(username, hashedPassword, roleID);
-            iDatabaseAccount.AddAccount(account);
+        public void AddAccount(string username, string password, List<int> roles)
+        {
+
+            string hashedPassword = HashPassword(password);
+            RegistrationDTO account = new RegistrationDTO(username, hashedPassword, roles);
+            iDatabaseAccount.AddAccount(account);
         }
 
         private string HashPassword(string password)
@@ -82,7 +94,7 @@ namespace Logic
         private bool VerifyHashedPassword(string password, string username)
         {
             /* Fetch the stored value */
-            string savedPasswordHash = iDatabaseAccount.GetUser(username).HashedPassword;
+            string savedPasswordHash = iDatabaseAccount.GetUser(username).Password;
             /* Extract the bytes */
             byte[] hashBytes = Convert.FromBase64String(savedPasswordHash);
             /* Get the salt */

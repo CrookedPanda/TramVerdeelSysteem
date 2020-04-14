@@ -1,0 +1,49 @@
+﻿@model Model.ViewModels.CleaningView
+@{   
+ ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="list-group">
+            <label class="list-group-item"><b>Trams:</b></label>
+            @foreach (var train in Model.CleaningList)
+            {
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector)" value="@train.Number.ToString()" />
+            }
+        </div>
+    </div>
+        
+    <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <label><b>Tram Nummer:</b></label>
+        <label id="TramNummer"></label>
+        <br/>
+
+        <label><b>Spoor numer:</b></label>
+        <label id="Spoor"></label>
+
+        <br/>
+        <label><b>Sector nummer:</b></label>
+        <label id="Sector"></label>
+        <p id="Beschrijving"></p>
+    </div>
+</div>
+
+<div class="row">
+    <form class="col-12" asp-action="Index">
+        <input type="submit" class="btn btn-primary float-right" value="Schoongemaakt" />
+    </form>
+    
+</div>
+
+<script type="text/javascript">
+    function ShowTram(TramNummer, Spoor, Sector,) {
+        var tramnummer = document.getElementById('TramNummer');
+        var spoor = document.getElementById('Spoor')
+        var sector = document.getElementById('Sector')
+
+        tramnummer.innerText = TramNummer;
+        spoor.innerText = Spoor;
+        sector.innerText = Sector;
+    }
+</script>

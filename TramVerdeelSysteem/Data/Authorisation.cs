@@ -17,16 +17,19 @@ namespace Data
             _connect = connect;
         }
 
-        public AccountDTO GetUser(string username)
+        public Authorisation()
         {
-            AccountDTO account = new AccountDTO();
+            _connect = new ConnectionClass();
+        }
+
+        public LoginDTO GetUser(string username)
+        {
+            LoginDTO account = new LoginDTO();
             try
             {
                 _connect.Con.Open();
 
-                string query = "SELECT user.idUser, user.Name, user.Password, role.Name as Role FROM `userrole`" 
-                    + " INNER JOIN `user` ON userrole.idUser = user.idUser" 
-                    + " INNER JOIN `role` ON userrole.idRole = role.idRole WHERE user.Name = @Name";
+                string query = "SELECT user.idUser, user.Name, user.Password FROM User WHERE user.Name = @name";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@Name", username);
                 var dataReader = cmd.ExecuteReader();
@@ -35,10 +38,10 @@ namespace Data
                 {
                     while (dataReader.Read())
                     {
-                        account.UserId = dataReader.GetInt32("idUser");
+                        account.ID = dataReader.GetInt32("idUser");
                         account.Username = dataReader.GetString("Name");
-                        account.HashedPassword = dataReader.GetString("Password");
-                        account.UserRole = dataReader.GetString("Role");
+                        account.Password = dataReader.GetString("Password");
+
                     }
                 }
                 dataReader.Close();
@@ -55,17 +58,15 @@ namespace Data
             return account;
         }
 
-        public void Login(string username, DateTime Date)
+        public bool Login(string username, DateTime Date, string AuthKey)
         {
-            int UserId = 0;
-            int UniqueKey = 0;
-            _connect.Con.Open();
             try
             {
+                _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `authorisationlist` (`idUser`, `UniqueKey`, `Date`) VALUES (@idUser, @UniqueKey, @Date)";
-                cmd.Parameters.AddWithValue("@idUser", UserId);
-                cmd.Parameters.AddWithValue("@UniqueKey", UniqueKey);
+                cmd.CommandText = "INSERT INTO `authorisationlist` (`idUser`, `UniqueKey`, `Date`) VALUES ((SELECT idUser FROM User WHERE Name = @Username), @UniqueKey, @Date)";
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@UniqueKey", AuthKey);
                 cmd.Parameters.AddWithValue("@Date", Date);
                 cmd.ExecuteNonQuery();
             }
@@ -77,6 +78,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
+            return true;
         }
 
         public void Logout(int UserID)
@@ -99,7 +101,7 @@ namespace Data
             }
         }
 
-        public void AddAccount(int role, string name, string password)
+        public void AddAccount(List<int> roles, string name, string password)
         {
             _connect.Con.Open();
             try
@@ -121,16 +123,17 @@ namespace Data
             }
         }
 
-        public void AddAccount(AccountDTO account)
+        public void AddAccount(RegistrationDTO account)
         {
             _connect.Con.Open();
             try
             {
+                //TODO add Roles
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `User` (`idUser`, `Name`, `Password`) VALUES (@idUser, @Name, @Password)";
                 cmd.Parameters.AddWithValue("@idUser", null);
                 cmd.Parameters.AddWithValue("@Name", account.Username);
-                cmd.Parameters.AddWithValue("@Password", account.HashedPassword);
+                cmd.Parameters.AddWithValue("@Password", account.Password);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
