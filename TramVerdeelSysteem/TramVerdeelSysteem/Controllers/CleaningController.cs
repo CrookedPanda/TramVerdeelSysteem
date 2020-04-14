@@ -15,7 +15,10 @@ namespace TramVerdeelSysteem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            CleaningView model = new CleaningView();
+            CleaningView model;
+            //model = new CleaningView();
+            //tijdelijke model inhoud
+            model = new CleaningView("");
 
             return View(model);
         }
