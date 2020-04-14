@@ -1,5 +1,4 @@
-﻿@model Model.ViewModels.SchoonmaakDienstVieuwModel
-@{
+﻿@model Model.ViewModels.CleaningView
     ViewData["Title"] = "Index";
 }
 
@@ -7,9 +6,9 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-            @foreach (var Tram in Model.SchoonmaakList)
+            @foreach (var train in Model.CleaningList)
             {
-                <input class="list-group-item text-left" type="button" onclick="ShowTram(@Tram.TramNummer, @Tram.SpoorNummer, @Tram.SectorNummer)" value="@Tram.TramNummer.ToString()" />
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector)" value="@train.Number.ToString()" />
             }
         </div>
     </div>
