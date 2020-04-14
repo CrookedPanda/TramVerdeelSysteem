@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TramVerdeelSysteem.Models;
 using Model.ViewModels;
+using Logic;
 
 namespace TramVerdeelSysteem.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -35,15 +38,21 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                if(user.name == "admin" && user.password == "admin")
-                {
-                    return RedirectToAction("Index", "Remise");
-                    //backend aanroepen
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+               
+                Authentication authentication = new Authentication();
+                authentication.Login(user.name, user.password);
+                return Index();
+
+                //if(user.name == "admin" && user.password == "admin")
+                //{
+
+                //    return RedirectToAction("Index", "Remise");
+                //    //backend aanroepen
+                //}
+                //else
+                //{
+                //    return RedirectToAction("Index", "Home");
+                //}
             }
             catch
             {

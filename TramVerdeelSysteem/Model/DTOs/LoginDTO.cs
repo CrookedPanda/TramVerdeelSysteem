@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Model.DTOs
 {
-    class LoginDTO
+    public class LoginDTO
     {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public DateTime Datetime { get; set; }
+        public int ID { get; set; }
     }
 }
