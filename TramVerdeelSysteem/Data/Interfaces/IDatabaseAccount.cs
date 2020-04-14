@@ -13,7 +13,7 @@ namespace Logic.Interfaces
         void Logout(int id);
 
         void AddAccount(RegistrationDTO account);
-        void AddAccount(int roleID, string name, string hashedPassword);
+        void AddAccount(List<int> roleID, string name, string hashedPassword);
 
 
         void RemoveAccount(int ID);
