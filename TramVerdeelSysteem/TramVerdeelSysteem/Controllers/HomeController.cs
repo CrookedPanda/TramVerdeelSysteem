@@ -41,7 +41,7 @@ namespace TramVerdeelSysteem.Controllers
                
                 Authentication authentication = new Authentication();
                 authentication.Login(user.name, user.password);
-                return Index();
+                return RedirectToAction("Index", "Home");
 
                 //if(user.name == "admin" && user.password == "admin")
                 //{
