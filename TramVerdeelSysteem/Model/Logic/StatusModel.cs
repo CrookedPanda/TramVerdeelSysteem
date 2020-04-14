@@ -8,5 +8,15 @@ namespace Model.Logic
     {
         public string Status { get; set; }
         public string Description { get; set; }
+
+        public StatusModel()
+        {
+
+        }
+        public StatusModel(string cStatus, string cDescription)
+        {
+            Status = cStatus;
+            Description = cDescription;
+        }
     }
 }
