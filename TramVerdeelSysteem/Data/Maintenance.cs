@@ -26,7 +26,7 @@ namespace Data
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "INSERT INTO `service` (`idTram`, `Size`, `Priority`, `Description`) VALUES (@idTram, @Size, @Priority, @Description)";
-                cmd.Parameters.AddWithValue("@idTram", maintenance.Target);
+                cmd.Parameters.AddWithValue("@idTram", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", "1");
                 cmd.Parameters.AddWithValue("@Priority", "1");
                 cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
@@ -49,8 +49,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES (@idTram, (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
-                cmd.Parameters.AddWithValue("@idTram", maintenance.Target);
+                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", maintenance.AuthKey);
                 cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
@@ -124,7 +124,7 @@ namespace Data
                     {
                         MaintenanceDTO maintenance = new MaintenanceDTO
                         {
-                            Target = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("idTram"),
                             Annotation = dataReader.GetString("Description")
                         };
                         maintenanceList.Add(maintenance);
@@ -160,7 +160,7 @@ namespace Data
                     {
                         MaintenanceDTO maintenance = new MaintenanceDTO
                         {
-                            Target = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("idTram"),
                             Annotation = dataReader.GetString("Description")
                         };
                     }

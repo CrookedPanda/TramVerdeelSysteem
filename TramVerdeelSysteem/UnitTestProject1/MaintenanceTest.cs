@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DataTest
 {
+    [TestClass]
     public class MaintenanceTest
     {
         [TestMethod]
@@ -12,7 +13,7 @@ namespace DataTest
             //Arrange
             Maintenance maint = new Maintenance();
             MaintenanceDTO maintenanceDTO = new MaintenanceDTO();
-            maintenanceDTO.Target = 2000;
+            maintenanceDTO.TramNumber = 2000;
             maintenanceDTO.Annotation = "Cleaning i think";
             maintenanceDTO.AuthKey = "";
 
