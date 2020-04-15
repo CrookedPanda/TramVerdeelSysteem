@@ -25,8 +25,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `service` (`idTram`, `Size`, `Priority`, `Description`) VALUES (@idTram, @Size, @Priority, @Description)";
-                cmd.Parameters.AddWithValue("@idTram", maintenance.TramNumber);
+                cmd.CommandText = "INSERT INTO `service` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Description)";
+                cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", "1");
                 cmd.Parameters.AddWithValue("@Priority", "1");
                 cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
@@ -43,7 +43,7 @@ namespace Data
             return false;
         }
 
-        private void AddMaintenanceHistory(MaintenanceDTO maintenance)
+        private void IndicateCompletedMaintenace(MaintenanceDTO maintenance)
         {
             try
             {
