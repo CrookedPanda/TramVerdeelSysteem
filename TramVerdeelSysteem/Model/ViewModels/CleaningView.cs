@@ -9,6 +9,7 @@ namespace Model.ViewModels
         public int Target { get; set; }
         public string Annotation { get; set; }
         public List<Logic.CleaningTramModel> CleaningList { get; set; }
+        public string Key { get; set; }
 
         public CleaningView()
         {

@@ -10,6 +10,6 @@ namespace Model.ViewModels
         public string Annotation { get; set; }
         public List<Logic.MaintenanceTramModel> MaintenanceList { get; set; }
 
-        
+        public string Key { get; set; }
     }
 }

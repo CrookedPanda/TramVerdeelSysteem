@@ -10,5 +10,6 @@ namespace Model.ViewModels
         public int Maintenance { get; set; }
         public int Cleaning { get; set; }
         public Logic.TramModel Tram { get; set; }
+        public string Key { get; set; }
     }
 }
