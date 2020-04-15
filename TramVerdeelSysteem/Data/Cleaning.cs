@@ -27,8 +27,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO 'cleaning' ('idTram', 'Size', 'Priority', 'Description') VALUES (@tramID, @Size, @Priority, @Desc)";
-                cmd.Parameters.AddWithValue("@tramID", cleaning.Target);
+                cmd.CommandText = "INSERT INTO 'cleaning' ('idTram', 'Size', 'Priority', 'Description') VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Desc)";
+                cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", 1);
                 cmd.Parameters.AddWithValue("@Priority", 1);
                 cmd.Parameters.AddWithValue("@Desc", cleaning.Annotation);
@@ -50,8 +50,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES (@idTram, (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
-                cmd.Parameters.AddWithValue("@idTram", cleaning.Target);
+                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", cleaning.AuthKey);
                 cmd.Parameters.AddWithValue("@Description", cleaning.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
@@ -125,7 +125,7 @@ namespace Data
                     {
                         CleaningDTO cleaning = new CleaningDTO
                         {
-                            Target = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("idTram"),
                             Annotation = dataReader.GetString("Description")
                         };
                         cleaningList.Add(cleaning);
@@ -161,7 +161,7 @@ namespace Data
                     {
                         CleaningDTO cleaning = new CleaningDTO
                         {
-                            Target = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("idTram"),
                             Annotation = dataReader.GetString("Description")
                         };
                     }
