@@ -9,6 +9,10 @@ namespace Model.Logic
         public bool IsLarge { get; set; }
 
 
+        public CleaningTramModel()
+        {
+
+        }
         //constructor voor test data
         public CleaningTramModel(bool cIsLarge, int cNumber, int cRails, int cSector)
         {

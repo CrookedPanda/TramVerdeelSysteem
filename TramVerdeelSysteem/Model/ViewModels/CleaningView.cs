@@ -6,9 +6,10 @@ namespace Model.ViewModels
 {
     public class CleaningView
     {
-        public int Target { get; set; }
+        public Logic.CleaningTramModel Target { get; set; }
         public string Annotation { get; set; }
         public List<Logic.CleaningTramModel> CleaningList { get; set; }
+        public string Key { get; set; }
 
         public CleaningView()
         {
@@ -16,7 +17,7 @@ namespace Model.ViewModels
         }
         public CleaningView(string test)
         {
-            Target = 0;
+            Target = new Logic.CleaningTramModel();
             Annotation = "annotation";
             CleaningList = new List<Logic.CleaningTramModel>() { 
                 new Logic.CleaningTramModel(false, 202, 64, 1), 

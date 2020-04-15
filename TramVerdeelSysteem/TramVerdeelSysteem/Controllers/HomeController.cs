@@ -38,21 +38,14 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-               
+                AuthView auth = new AuthView();
                 Authentication authentication = new Authentication();
-                authentication.Login(user.name, user.password);
-                return RedirectToAction("Index", "Home");
-
-                //if(user.name == "admin" && user.password == "admin")
-                //{
-
-                //    return RedirectToAction("Index", "Remise");
-                //    //backend aanroepen
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Index", "Home");
-                //}
+                auth = authentication.Login(user.name, user.password);
+                if(auth.Key != null || auth.Key != "")
+                {
+                    HttpContext.Response.Cookies.Append("key", auth.Key);
+                    return RedirectToAction("Index","Depot");
+                } else return RedirectToAction("Index", "Home");
             }
             catch
             {
