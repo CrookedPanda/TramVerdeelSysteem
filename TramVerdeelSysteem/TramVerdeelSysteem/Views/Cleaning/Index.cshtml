@@ -37,25 +37,23 @@
     <form class="col-12" asp-action="Index">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="TargetNumber" type="hidden"  id="targetNumber" name="targetNumber" value=""/>
-        
-        <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>
-        
+        <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>  
+        <input asp-for="TargetRail" type="hidden" id="targetRail"  name="targetRail" value=""/>  
+        <input asp-for="TargetSector" type="hidden" id="targetSector"  name="targetSector" value=""/>  
         <input type="submit" class="btn btn-primary float-right" value="clean" />
     </form>
 </div>
 
 <script type="text/javascript">
-    function ShowTram(TramNumber, Spoor, Sector, Islarge) {
-        var tramnumber = document.getElementById('TramNumber');
-        var spoor = document.getElementById('Spoor')
-        var sector = document.getElementById('Sector')
-
+    function ShowTram(TramNumber, Rail, Sector, Islarge) {
+        document.getElementById('TramNumber').innerText = TramNumber;
+        document.getElementById('Spoor').innerText = Rail;
+        document.getElementById('Sector').innerText = Sector;
         document.getElementById('IsLarge').innerText = Islarge;
-        tramnumber.innerText = TramNumber;
-        spoor.innerText = Spoor;
-        sector.innerText = Sector;
         
-        document.getElementById('targetNumber').value = TramNummer;
+        document.getElementById('targetNumber').value = TramNumber;
         document.getElementById('targetIsLarge').value = Islarge;
+        document.getElementById('targetRail').value = Rail;
+        document.getElementById('targetSector').value = Sector;
     }
 </script>
