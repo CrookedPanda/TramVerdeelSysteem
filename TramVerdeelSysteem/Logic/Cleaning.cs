@@ -4,15 +4,14 @@ using System.Text;
 
 namespace Logic
 {
-    class Service
+    class Cleaning
     {
-
         Train Train { get; set; }
         Size ServiceSize { get; set; }
 
         bool Priority { get; set; }
 
-        public bool CompleteService()
+        public bool CompleteCleaning()
         {
 
         }
