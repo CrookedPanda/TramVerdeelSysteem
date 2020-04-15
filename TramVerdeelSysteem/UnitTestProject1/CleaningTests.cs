@@ -1,8 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Model.DTOs;
+
 
 namespace Data.Tests
 {
@@ -14,8 +13,17 @@ namespace Data.Tests
         [TestMethod()]
         public void AddCleaningTest()
         {
+            //Arrange
             Cleaning cleaning = new Cleaning();
-            Assert.Fail();
+            CleaningDTO cleaningDTO = new CleaningDTO();
+            cleaningDTO.TramNumber = 2035;
+            cleaningDTO.Annotation = "Cleaning i think";
+            cleaningDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
+
+            //Act
+            cleaning.AddCleaning(cleaningDTO);
+
+            //Assert
         }
     }
 }

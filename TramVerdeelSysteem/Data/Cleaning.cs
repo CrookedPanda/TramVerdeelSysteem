@@ -27,7 +27,7 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO 'cleaning' ('idTram', 'Size', 'Priority', 'Description') VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Desc)";
+                cmd.CommandText = "INSERT INTO `cleaning` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Desc)";
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", 1);
                 cmd.Parameters.AddWithValue("@Priority", 1);
@@ -114,8 +114,8 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT cleaning.idTram, cleaning.Size, cleaning.Priority, cleaning.Description FROM cleaning";
-
+                string query = "SELECT Tram.Number, cleaning.Size, cleaning.Priority, cleaning.Description FROM cleaning"
+                    + " INNER JOIN Tram ON Tram.idTram = cleaning.idTram";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
@@ -150,8 +150,9 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT user.Name, ch.idTram, ch.ServiceDate, ch.Description FROM cleaninghistory AS ch"
-                    + " INNER JOIN user ON user.idUser = ch.idUser";
+                string query = "SELECT user.Name, tram.Number, ch.CleaningDate, ch.Description FROM cleaninghistory AS ch"
+                    + " INNER JOIN user ON user.idUser = ch.idUser"
+                    + " INNER JOIN tram ON tram.idTram = ch.idTram";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
