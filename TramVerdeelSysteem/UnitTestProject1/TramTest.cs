@@ -16,12 +16,11 @@ namespace DataTest
             Tram tram = new Tram();
 
             //Act
-            for (int i = 2001; i < 2073; i++)
+            for (int i = 817; i < 842; i++)
             {
-                tram.AddTram(4, 1, 1, i);
+                tram.AddTram(4, 3, 1, i);
             }
             
-
             //Assert
         }
     }

@@ -24,7 +24,7 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `service` (`idTramStatus`, `idTramType`, `Line`, `Number`) VALUES (@idTram, @Size, @Priority, @Description)";
+                cmd.CommandText = "INSERT INTO `tram` (`idTramStatus`, `idTramType`, `Line`, `Number`) VALUES (@Status, @Type, @Line, @Number)";
                 cmd.Parameters.AddWithValue("@Status", idTramStatus);
                 cmd.Parameters.AddWithValue("@Type", idTramType);
                 cmd.Parameters.AddWithValue("@Line", Line);
