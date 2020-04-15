@@ -16,10 +16,37 @@ namespace Data
         {
             _connect = connect;
         }
-
         public Cleaning()
         {
             _connect = new ConnectionClass();
+        }
+
+        public void AddCleaning(CleaningDTO cleaning)
+        {
+            try
+            {
+                _connect.Con.Open();
+                MySqlCommand cmd = _connect.Con.CreateCommand();
+                cmd.CommandText = "INSERT INTO 'cleaning' ('idTram', 'Size', 'Priority', 'Description') VALUES (@tramID, @Size, @Priority, @Desc)";
+                cmd.Parameters.AddWithValue("@tramID", cleaning.Target);
+                cmd.Parameters.AddWithValue("@Size", 1);
+                cmd.Parameters.AddWithValue("@Priority", 1);
+                cmd.Parameters.AddWithValue("@Desc", cleaning.Annotation);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+        }
+
+        public void RemoveCleaning()
+        {
+
         }
     }
 }
