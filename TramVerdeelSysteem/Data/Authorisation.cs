@@ -41,7 +41,6 @@ namespace Data
                         account.ID = dataReader.GetInt32("idUser");
                         account.Username = dataReader.GetString("Name");
                         account.Password = dataReader.GetString("Password");
-
                     }
                 }
                 dataReader.Close();
