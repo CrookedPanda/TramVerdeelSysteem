@@ -6,8 +6,9 @@ namespace Model.DTOs
 {
     public class CleaningDTO
     {
-        public int Target { get; set; }
+        public int TramNumber { get; set; }
         public string Annotation { get; set; }
+        public string AuthKey { get; set; }
         public List<Logic.CleaningTramModel> CleaningList { get; set; }
     }
 }
