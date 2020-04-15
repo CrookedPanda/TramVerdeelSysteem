@@ -9,44 +9,51 @@
             <label class="list-group-item"><b>Trams:</b></label>
             @foreach (var train in Model.CleaningList)
             {
-                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector)" value="@train.Number.ToString()" />
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector, @train.IsLarge.ToString().ToLower())" value="@train.Number.ToString()" />
             }
         </div>
     </div>
         
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
         <label><b>Tram Nummer:</b></label>
-        <label id="TramNummer"></label>
-        <br/>
+        <label id="TramNumber"></label>
+        <br />
 
         <label><b>Spoor numer:</b></label>
         <label id="Spoor"></label>
 
-        <br/>
+        <br />
         <label><b>Sector nummer:</b></label>
         <label id="Sector"></label>
+        <br />
+        <label><b>grote/kleine schoonmaak:</b></label>
+        <label id="IsLarge"></label>
         <p id="Beschrijving"></p>
+
     </div>
 </div>
 
 <div class="row">
     <form class="col-12" asp-action="Index">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input asp-for="Target" type="hidden" id="target" name="target" value="3"/>
-        <input type="submit" class="btn btn-primary float-right" value="Index" />
+        <input asp-for="TargetNumber" type="hidden"  id="targetNumber" name="targetNumber" value=""/>
+        <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>  
+        <input asp-for="TargetRail" type="hidden" id="targetRail"  name="targetRail" value=""/>  
+        <input asp-for="TargetSector" type="hidden" id="targetSector"  name="targetSector" value=""/>  
+        <input type="submit" class="btn btn-primary float-right" value="clean" />
     </form>
 </div>
 
 <script type="text/javascript">
-    function ShowTram(TramNummer, Spoor, Sector,) {
-        var tramnummer = document.getElementById('TramNummer');
-        var spoor = document.getElementById('Spoor')
-        var sector = document.getElementById('Sector')
-
-        tramnummer.innerText = TramNummer;
-        spoor.innerText = Spoor;
-        sector.innerText = Sector;
-
-        document.getElementById('target').value = TramNummer;
+    function ShowTram(TramNumber, Rail, Sector, Islarge) {
+        document.getElementById('TramNumber').innerText = TramNumber;
+        document.getElementById('Spoor').innerText = Rail;
+        document.getElementById('Sector').innerText = Sector;
+        document.getElementById('IsLarge').innerText = Islarge;
+        
+        document.getElementById('targetNumber').value = TramNumber;
+        document.getElementById('targetIsLarge').value = Islarge;
+        document.getElementById('targetRail').value = Rail;
+        document.getElementById('targetSector').value = Sector;
     }
 </script>
