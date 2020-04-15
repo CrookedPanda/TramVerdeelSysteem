@@ -8,12 +8,12 @@ namespace DataTest
     public class MaintenanceTest
     {
         [TestMethod]
-        public void TestDeleteAccount()
+        public void AddMaintenanceTest()
         {
             //Arrange
             Maintenance maint = new Maintenance();
             MaintenanceDTO maintenanceDTO = new MaintenanceDTO();
-            maintenanceDTO.TramNumber = 2000;
+            maintenanceDTO.TramNumber = 2001;
             maintenanceDTO.Annotation = "Cleaning i think";
             maintenanceDTO.AuthKey = "";
 
@@ -21,6 +21,12 @@ namespace DataTest
             maint.AddMaintenance(maintenanceDTO);
 
             //Assert
+        }
+
+        [TestMethod]
+        public void GetMaintenanceList()
+        {
+
         }
     }
 }

@@ -113,7 +113,8 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT service.idTram, service.Size, service.Priority, service.Description FROM service";
+                string query = "SELECT Tram.Number, service.Size, service.Priority, service.Description FROM service"
+                    + " INNER JOIN Tram ON Tram.idTram = service.idTram";
                     
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
@@ -149,8 +150,9 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT user.Name, sh.idTram, sh.ServiceDate, sh.Description FROM servicehistory AS sh"
-                    + " INNER JOIN user ON user.idUser = sh.idUser";
+                string query = "SELECT user.Name, tram.Number, sh.ServiceDate, sh.Description FROM servicehistory AS sh"
+                    + " INNER JOIN user ON user.idUser = sh.idUser"
+                    + " INNER JOIN tram ON tram.idTram = sh.idTram";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
