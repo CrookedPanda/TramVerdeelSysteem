@@ -11,9 +11,5 @@ namespace Logic
 
         bool Priority { get; set; }
 
-        public bool CompleteCleaning()
-        {
-
-        }
     }
 }
