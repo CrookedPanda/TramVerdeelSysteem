@@ -35,20 +35,29 @@
         <br />
         <label><b>grote/kleine schoonmaak:</b></label>
         <label id="IsLarge"></label>
-        <p id="Beschrijving"></p>
 
+        <br />
+        <form class="col-12" asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
+            <input asp-for="TargetNumber" type="hidden" id="targetNumber" name="targetNumber" value="" />
+            <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge" name="targetIsLarge" value="" />
+            <input asp-for="TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
+            <input asp-for="TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
+            <input type="submit" class="btn btn-primary float-right" value="clean" />
+        </form>
     </div>
 </div>
 
 <div class="row">
-    <form class="col-12" asp-action="Index">
+    @*<form class="col-12" asp-action="Index">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="TargetNumber" type="hidden"  id="targetNumber" name="targetNumber" value=""/>
         <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>  
         <input asp-for="TargetRail" type="hidden" id="targetRail"  name="targetRail" value=""/>  
         <input asp-for="TargetSector" type="hidden" id="targetSector"  name="targetSector" value=""/>  
         <input type="submit" class="btn btn-primary float-right" value="clean" />
-    </form>
+    </form>*@
 </div>
 
 <script type="text/javascript">
@@ -62,5 +71,7 @@
         document.getElementById('targetIsLarge').value = Islarge;
         document.getElementById('targetRail').value = Rail;
         document.getElementById('targetSector').value = Sector;
+
+        //document.getElementById('tragetAnnotation').value = "";
     }
 </script>

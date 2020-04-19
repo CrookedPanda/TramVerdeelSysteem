@@ -24,24 +24,17 @@ namespace TramVerdeelSysteem.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(CleaningView vieuwModel)
+        public IActionResult Index(CleaningView Model)
         {
             try
             {
-                CleanTramView cleanTramView = new CleanTramView(vieuwModel);
-                return CleanTrain(cleanTramView);
+                // implement clean logic
+                return View(Model);
             }
             catch
             {
-                // werkt nog niet door null references.
                 return Index();
             }
-        }
-
-        [HttpGet]
-        public IActionResult CleanTrain(CleanTramView Model)
-        {
-            return View(Model);
         }
     }
 }
