@@ -11,5 +11,22 @@ namespace Model.ViewModels
         public int Cleaning { get; set; }
         public Logic.TramModel Tram { get; set; }
         public string Key { get; set; }
+
+        public ConductorView()
+        {
+            TramNumber = 0;
+            Maintenance = 0;
+            Cleaning = 0;
+            Tram = new Logic.TramModel();
+            Key = "" ;
+        }
+        public ConductorView(int cTramNummer)
+        {
+            TramNumber = cTramNummer;
+            Maintenance = 0;
+            Cleaning = 0;
+            Tram = new Logic.TramModel();
+            Key = "";
+        }
     }
 }

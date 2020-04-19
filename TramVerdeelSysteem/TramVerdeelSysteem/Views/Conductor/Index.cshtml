@@ -1,4 +1,4 @@
-﻿
+﻿@model Model.ViewModels.ConductorView
 @{
     ViewData["Title"] = "Index";
 }
@@ -62,14 +62,20 @@
                     <text>Technische Beurt</text><input type="checkbox" id="Technisch" class="form-check-input" />
                 </div>
             </div>
+        </form>
+
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber" value="" />
             <div class="form-group">
-                <input type="button" value="verstuur" class="btn btn-primary" />
+                <input type="submit" value="verstuur" class="btn btn-primary" />
             </div>
         </form>
+
     </div>
 </body>
 
-<script type="text/javascript">
+@*<script type="text/javascript">
     function addNumber(n) {
         var t = document.getElementById('TramID');
         if (n == '-1' && t.innerText.length != 0) {
@@ -79,6 +85,21 @@
         else if (n != -1 && t.innerText.length < 4) {
             return t.innerText += n;
         }
+    }
+</script>*@
+
+<script type="text/javascript">
+    function addNumber(n) {
+        var t = document.getElementById('TramID');
+        if (n == '-1' && t.innerText.length != 0) {
+            t.innerText = t.innerText.slice(0, -1);
+        }
+        else if (n != -1 && t.innerText.length < 4) {
+            t.innerText += n;
+        }
+
+        var v = document.getElementById('TramNumber');
+        v.value = t.innerText;   
     }
 </script>
 

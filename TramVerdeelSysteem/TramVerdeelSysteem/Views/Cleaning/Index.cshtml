@@ -7,9 +7,16 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-            @foreach (var train in Model.CleaningList)
+            @if (Model.CleaningList != null)
             {
-                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector, @train.IsLarge.ToString().ToLower())" value="@train.Number.ToString()" />
+                @foreach (var train in Model.CleaningList)
+                {
+                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.Number, @train.Rails, @train.Sector, @train.IsLarge.ToString().ToLower())" value="@train.Number.ToString()" />
+                }
+            }
+            else
+            {
+                <label>Er zijn geen trams om schoon te maken</label>
             }
         </div>
     </div>

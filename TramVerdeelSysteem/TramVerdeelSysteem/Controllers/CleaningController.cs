@@ -28,19 +28,20 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-
-                return CleanTrain(vieuwModel);
+                CleanTramView cleanTramView = new CleanTramView(vieuwModel);
+                return CleanTrain(cleanTramView);
             }
             catch
             {
+                // werkt nog niet door null references.
                 return Index();
             }
         }
 
         [HttpGet]
-        public IActionResult CleanTrain(CleaningView vieuwModel)
+        public IActionResult CleanTrain(CleanTramView Model)
         {
-            return View();
+            return View(Model);
         }
     }
 }
