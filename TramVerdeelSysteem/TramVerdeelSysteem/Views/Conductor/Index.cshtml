@@ -54,18 +54,22 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <div class="form-row">
                     <text>Schoonmaak Beurt</text><input type="checkbox" id="Schoonmaak" class="form-check-input" />
                 </div>
                 <div class="form-row">
                     <text>Technische Beurt</text><input type="checkbox" id="Technisch" class="form-check-input" />
                 </div>
-            </div>
+            </div>*@
         </form>
 
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*<input asp-for="Maintenance" type="checkbox" id="Maintenance" name="Maintenance" />
+            <input asp-for="Cleaning" type="checkbox" id="Cleaning" name="Cleaning" />*@
+
             <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber" value="" />
             <div class="form-group">
                 <input type="submit" value="verstuur" class="btn btn-primary" />
