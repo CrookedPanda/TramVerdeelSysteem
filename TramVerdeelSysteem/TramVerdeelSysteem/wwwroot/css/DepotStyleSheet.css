@@ -1,0 +1,62 @@
+﻿.padding-0 {
+    padding-right: 0;
+    padding-left: 0;
+    max-width: 120px;
+    min-width: 60px;
+}
+
+.padding-50 {
+    padding-right: 50px;
+    padding-left: 50px;
+    max-width: 30%;
+}
+
+.padding-bot{
+    padding-bottom: 50px;
+}
+
+.options {
+    max-width: 300px;
+    padding-right: 50px;
+    padding-left: 0;
+}
+
+.depotPart {
+    max-width: 30%;
+}
+
+.colorRail {
+    background-color: #BAC8D3;
+}
+
+.colorRed {
+    background-color: #F8CECC;
+}
+
+.colorBlue {
+    background-color: #DAE8FC;
+}
+
+.colorYellow {
+    background-color: #FFF2CC;
+}
+
+.colorGreen {
+    background-color: #D5E8D4;
+}
+
+.colorOrange {
+    background-color: #FFE6CC;
+}
+
+.colorPurple {
+    background-color: #E1D5E7;
+}
+
+.colorReserved {
+    background-color: #B0E3E6;
+}
+
+.colorBlocked {
+    background-color: #647687;
+}
