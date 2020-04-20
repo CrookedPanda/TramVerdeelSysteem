@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model.ViewModels
 {
-    class CleanTramView
+    public class CleanTramView
     {
         public int TrainNumber { get; set; }
         public int Rail { get; set; }

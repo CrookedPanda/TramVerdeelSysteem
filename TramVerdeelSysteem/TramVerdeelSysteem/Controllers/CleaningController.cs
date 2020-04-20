@@ -18,29 +18,25 @@ namespace TramVerdeelSysteem.Controllers
             CleaningView model;
             //model = new CleaningView();
             //tijdelijke model inhoud
+
+            // implemetn get cleaning list logic;
             model = new CleaningView("");
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Index(CleaningView vieuwModel)
+        public IActionResult Index(CleaningView Model)
         {
             try
             {
-
-                return CleanTrain(vieuwModel);
+                // implement clean logic
+                return Index();
             }
             catch
             {
                 return Index();
             }
-        }
-
-        [HttpGet]
-        public IActionResult CleanTrain(CleaningView vieuwModel)
-        {
-            return View();
         }
     }
 }

@@ -1,8 +1,15 @@
-﻿@model Model.ViewModels.CleaningView
+﻿@*@model Model.ViewModels.CleanTramView
 @{
     ViewData["Title"] = "CleanTrain";
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 <h1>CleanTrain</h1>
+<div class="row">
+    <form class="col-12" asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="Annotation" type="text" value=""/>
 
+        <input type="submit" class="btn btn-primary float-right" value="clean" />
+    </form>
+</div>*@
