@@ -37,6 +37,7 @@ namespace TramVerdeelSysteem.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult CleanTrain(CleaningView vieuwModel)
         {
             return View();
