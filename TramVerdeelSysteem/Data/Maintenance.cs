@@ -75,8 +75,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM service WHERE idService = @MaintId";
-                cmd.Parameters.AddWithValue("@MaintId", maintenance.TramNumber);
+                cmd.CommandText = "DELETE FROM service WHERE idTram = @TramNumber";
+                cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -237,8 +237,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM cleaning WHERE idService = @CleanId";
-                cmd.Parameters.AddWithValue("@CleanId", cleaning.TramNumber);
+                cmd.CommandText = "DELETE FROM cleaning WHERE idTram = @TramNumber";
+                cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
