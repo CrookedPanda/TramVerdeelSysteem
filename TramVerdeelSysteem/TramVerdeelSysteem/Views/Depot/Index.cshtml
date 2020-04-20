@@ -3,8 +3,32 @@
     ViewData["Title"] = "Index";
 }
 
-    <div class="popUp" id="popUpContainer">
-
+    <div class="popUp" id="addPopUpContainer">
+        <input type="number" />
+        <select id="Spoor" name="Spoor">
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="31">31</option>
+            <option value="32">32</option>
+            <option value="33">33</option>
+            <option value="34">34</option>
+            <option value="35">35</option>
+            <option value="60">60</option>
+            <option value="61">61</option>
+            <option value="62">62</option>
+            <option value="63">63</option>
+            <option value="64">64</option>
+        </select>
+        <select id="Sector" name="Sector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <input type="button" id="cancel" class="btn-danger" value="Cancel" />
+        <input type="button" id="accept" class="btn-success" value="Accept" />
     </div>
 
     <div class="row">
@@ -14,7 +38,7 @@
                 <!--TODO: FORLOOP-->
                 <input type="button" class="list-group-item text-center" value="202" />
                 <!--Must-->
-                <input type="button" id="addPopUp" class="btn-primary text-center" value="Add" />
+                <input type="button" id="addPopUp" class="btn-primary text-center" value="Add"/>
             </div>
         </div>
 
@@ -196,10 +220,18 @@
         </div>
     </div>
 
-    <script>
-    document.getElementById("addPopUp").onclick = function () { myFunction() };
-    function myFunction() {
+    <script type="text/javascript">
+        var addPopUpContainer = document.getElementById("addPopUpContainer");
+        addPopUpContainer.style.visibility = 'hidden';
 
-        $("#popUpContainer").load("@Html.Raw(Url.Action("AddPopUp", "Depot")) ")
-    }
+        document.getElementById("cancel").onclick = function () { closeAddDiv() };
+        document.getElementById("accept").onclick = function () { closeAddDiv() };
+        function closeAddDiv() {
+            addPopUpContainer.style.visibility = 'hidden';
+        }
+
+        document.getElementById("addPopUp").onclick = function () { openAddDiv() };
+        function openAddDiv() {
+            addPopUpContainer.style.visibility = 'visible';
+        }
     </script>
