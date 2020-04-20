@@ -66,16 +66,17 @@
 
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label>Technische hulp:</label>
+            <input asp-for="Maintenance" type="checkbox" id="Maintenance" name="Maintenance"/>
+            <br />
+            <label>Schoonmaak:</label>
+            <input asp-for="Cleaning" type="checkbox" id="Cleaning" name="Cleaning" />
 
-            @*<input asp-for="Maintenance" type="checkbox" id="Maintenance" name="Maintenance" />
-            <input asp-for="Cleaning" type="checkbox" id="Cleaning" name="Cleaning" />*@
-
-            <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber" value="" />
+            <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber"/>
             <div class="form-group">
                 <input type="submit" value="verstuur" class="btn btn-primary" />
             </div>
         </form>
-
     </div>
 </body>
 

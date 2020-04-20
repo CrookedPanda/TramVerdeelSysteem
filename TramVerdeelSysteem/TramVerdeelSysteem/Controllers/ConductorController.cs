@@ -23,7 +23,7 @@ namespace TramVerdeelSysteem.Controllers
             try
             {
                 // implement hier de get location logic e plaats trijn in de Depot
-                return View(Model);
+                return Index();
             }
             catch
             {
