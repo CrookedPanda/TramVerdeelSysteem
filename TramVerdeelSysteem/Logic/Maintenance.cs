@@ -16,9 +16,9 @@ namespace Logic
     {
         private IDatabaseMaintenance DatabaseMaintenance;
 
-        private List<Service> Services;
+        private List<MaintenanceDTO> Services;
 
-        private List<Cleaning> Cleanings;
+        private List<CleaningDTO> Cleanings;
 
         public Maintenance(IDatabaseMaintenance iDatabaseMaintenance)
         {
@@ -89,11 +89,14 @@ namespace Logic
             }
         }
 
-        private bool IndicateCompleteCleaning(CleaningDTO cleaning)
+        private bool IndicateCompleteCleaning(CleaningView cleaning)
         {
             try
             {
-                if (this.DatabaseMaintenance.IndicateCompleteCleaning(cleaning)) return true;
+                CleaningDTO completedCleaning = new CleaningDTO();
+                completedCleaning.TramNumber = cleaning.TargetNumber;
+                completedCleaning.AuthKey = cleaning.Key;
+                if (this.DatabaseMaintenance.IndicateCompleteCleaning(completedCleaning)) return true;
                 else return false;
             }
             catch (Exception e)
@@ -119,6 +122,8 @@ namespace Logic
 
         private List<MaintenanceDTO> GetServiceList()
         {
+
+
             try
             {
                 var services = new List<MaintenanceDTO>();
@@ -133,13 +138,16 @@ namespace Logic
             }
         }
 
-        private List<CleaningDTO> GetCleaningList()
+        private CleaningView GetCleaningList()
         {
+
             try
             {
-                var cleanings = new List<CleaningDTO>();
-                cleanings = this.DatabaseMaintenance.GetCleaningList();
-                if (cleanings.Any()) return cleanings;
+                // var cleanings = new List<CleaningDTO>();
+                var cleanings = this.DatabaseMaintenance.GetCleaningList();
+                var cleaningsView = new CleaningView();
+                cleaningsView.CleaningList = cleanings.CleaningList;
+                if (cleanings.CleaningList.Any()) return cleaningsView;
                 else throw new Exception("No cleanings");
             }
             catch (Exception e)
@@ -149,13 +157,12 @@ namespace Logic
             }
         }
 
-        private List<CleaningDTO> GetCleaningHistory()
+        private void GetCleaningHistory()
         {
             try
             {
-                var cleanings = new List<CleaningDTO>();
-                cleanings = this.DatabaseMaintenance.GetCleaningHistory();
-                if (cleanings.Any()) return cleanings;
+                Cleanings = this.DatabaseMaintenance.GetCleaningHistory();
+                if (Cleanings.Any()) OrganiseCleaningHistory();
                 else throw new Exception("No cleanings");
             }
             catch (Exception e)
@@ -165,7 +172,7 @@ namespace Logic
             }
         }
 
-        private List<MaintenanceDTO> GetServiceHistory()
+        private void GetServiceHistory()
         {
             try
             {
@@ -179,6 +186,11 @@ namespace Logic
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        private void OrganiseCleaningList()
+        {
+
         }
     }
 }
