@@ -15,7 +15,7 @@ namespace DataTest
             MaintenanceDTO maintenanceDTO = new MaintenanceDTO();
             maintenanceDTO.TramNumber = 2001;
             maintenanceDTO.Annotation = "Cleaning i think";
-            maintenanceDTO.AuthKey = "";
+            maintenanceDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
 
             //Act
             maint.AddMaintenance(maintenanceDTO);
