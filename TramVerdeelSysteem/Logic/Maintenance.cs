@@ -31,8 +31,10 @@ namespace Logic
             try
             {
                 var cleaning = new CleaningDTO();
-
-
+                cleaning.TramNumber = cleaningView.TargetNumber;
+                cleaning.Annotation = cleaningView.TargetAnnotation;
+                cleaning.AuthKey = cleaningView.Key;
+                //TODO: add IsLarge bool to DTO 
                 if (this.DatabaseMaintenance.AddCleaning(cleaning)) return true;
                 else return false;
             }
@@ -43,12 +45,14 @@ namespace Logic
             }
         }
 
-        private bool AddService()
+        private bool AddService(MaintenanceView maintenanceView)
         {
             try
             {
                 var service = new MaintenanceDTO();
-
+                service.TramNumber = maintenanceView.Target;
+                service.Annotation = maintenanceView.Annotation;
+                service.AuthKey = maintenanceView.Key;
                 if (this.DatabaseMaintenance.AddService(service)) return true;
                 else return false;
             }
@@ -59,12 +63,13 @@ namespace Logic
             }
         }
 
-        private bool RemoveCleaning()
+        private bool RemoveCleaning(CleaningView cleaningView)
         {
             try
             {
                 var cleaning = new CleaningDTO();
-
+                cleaning.TramNumber = cleaningView.TargetNumber;
+                cleaning.AuthKey = cleaningView.Key;
                 if (this.DatabaseMaintenance.RemoveCleaning(cleaning)) return true;
                 else return false;
             }
@@ -75,12 +80,13 @@ namespace Logic
             }
         }
 
-        private bool RemoveService()
+        private bool RemoveService(MaintenanceView maintenanceView)
         {
             try
             {
                 var service = new MaintenanceDTO();
-
+                service.TramNumber = maintenanceView.Target;
+                service.AuthKey = maintenanceView.Key;
                 if (this.DatabaseMaintenance.RemoveService(service)) return true;
                 else return false;
             }
@@ -98,6 +104,7 @@ namespace Logic
                 CleaningDTO completedCleaning = new CleaningDTO();
                 completedCleaning.TramNumber = cleaning.TargetNumber;
                 completedCleaning.AuthKey = cleaning.Key;
+                completedCleaning.Annotation = cleaning.TargetAnnotation;
                 if (this.DatabaseMaintenance.IndicateCompleteCleaning(completedCleaning)) return true;
                 else return false;
             }
@@ -108,10 +115,14 @@ namespace Logic
             }
         }
 
-        private bool IndicateCompleteService(MaintenanceDTO service)
+        private bool IndicateCompleteService(MaintenanceView maintenanceView)
         {
             try
             {
+                MaintenanceDTO service = new MaintenanceDTO();
+                service.TramNumber = maintenanceView.Target;
+                service.AuthKey = maintenanceView.Key;
+                service.Annotation = maintenanceView.Annotation;
                 if (this.DatabaseMaintenance.IndicateCompleteService(service)) return true;
                 else return false;
             }
