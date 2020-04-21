@@ -12,5 +12,10 @@ namespace TramVerdeelSysteem.Controllers
         {
             return View();
         }
+
+        public IActionResult AddPopUp()
+        {
+            return View();
+        }
     }
 }
