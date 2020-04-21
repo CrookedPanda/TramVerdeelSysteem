@@ -13,7 +13,7 @@ namespace Logic
     /// <summary>
     /// The maintenance.
     /// </summary>
-    internal class Maintenance
+    public class Maintenance
     {
         private IDatabaseMaintenance DatabaseMaintenance;
 
@@ -24,6 +24,11 @@ namespace Logic
         public Maintenance(IDatabaseMaintenance iDatabaseMaintenance)
         {
             this.DatabaseMaintenance = iDatabaseMaintenance;
+        }
+
+        public Maintenance()
+        {
+            this.DatabaseMaintenance = new Data.Maintenance();
         }
 
         private bool AddCleaning(CleaningView cleaningView)
@@ -164,7 +169,7 @@ namespace Logic
             }
         }
 
-        private List<CleaningView> GetCleaningList()
+        public List<CleaningView> GetCleaningList()
         {
 
             try

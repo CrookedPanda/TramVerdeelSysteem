@@ -25,7 +25,11 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                conductorLogic.AddTramToCleaning(Model);
+                if(Model.TramNumber != 0)
+                {
+                    conductorLogic.AddTramToCleaning(Model);
+                }
+                
                 return Index();
             }
             catch
