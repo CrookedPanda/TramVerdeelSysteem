@@ -163,6 +163,7 @@ namespace Logic
             }
         }
 
+        /*
         private void GetCleaningHistory()
         {
             try
@@ -193,6 +194,7 @@ namespace Logic
                 throw;
             }
         }
+        */
 
         private List<CleaningTramModel> OrganiseCleaningList(List<CleaningTramModel> maintenanceList)
         {
@@ -233,7 +235,7 @@ namespace Logic
                 organisedList.Add(tram);
             }
 
-            return organisedList
+            return organisedList;
         }
 
 
