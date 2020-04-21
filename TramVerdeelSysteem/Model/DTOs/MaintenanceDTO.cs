@@ -10,5 +10,7 @@ namespace Model.DTOs
         public string Annotation { get; set; }
         public string AuthKey { get; set; }
         public List<Logic.MaintenanceTramModel> MaintenanceList { get; set; }
+
+
     }
 }
