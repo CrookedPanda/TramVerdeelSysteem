@@ -129,7 +129,7 @@ namespace Data
                     {
                         MaintenanceDTO maintenance = new MaintenanceDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("Number"),
                             Annotation = dataReader.GetString("Description"),
                             Urgent = dataReader.GetBoolean("Priority")
                         };
@@ -293,7 +293,7 @@ namespace Data
                     {
                         CleaningDTO cleaning = new CleaningDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
+                            TramNumber = dataReader.GetInt32("Number"),
                             Annotation = dataReader.GetString("Description"),
                             Urgent = dataReader.GetBoolean("Priority")
                         };
