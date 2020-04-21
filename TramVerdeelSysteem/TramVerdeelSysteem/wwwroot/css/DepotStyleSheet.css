@@ -1,4 +1,18 @@
-﻿.popUp {
+﻿.addPopUp {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    z-index: 10;
+}
+
+.wijzigPopUp {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    z-index: 10;
+}
+
+.sectorPopUp {
     position: absolute;
     left: 30%;
     top: 30%;
