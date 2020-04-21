@@ -102,7 +102,7 @@ namespace Logic
             }
         }
 
-        private bool IndicateCompleteCleaning(CleaningView cleaning)
+        public bool IndicateCompleteCleaning(CleaningView cleaning)
         {
             try
             {

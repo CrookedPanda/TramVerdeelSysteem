@@ -39,12 +39,12 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                // implement clean logic
+                maintenanceLogic.IndicateCompleteCleaning(Model);
                 return Index();
             }
-            catch
+            catch(Exception e)
             {
-                return Index();
+                throw (e);
             }
         }
     }
