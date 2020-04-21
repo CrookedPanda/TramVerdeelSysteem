@@ -247,7 +247,10 @@ namespace Logic
             // dit moet sorteren op history & groot/klein worden
             foreach (CleaningDTO tram in maintenanceList)
             {
-                organisedList.Add(tram);
+                if (!tram.Urgent)
+                {
+                    organisedList.Add(tram);
+                }
             }
 
             return organisedList;
@@ -268,7 +271,10 @@ namespace Logic
             // dit moet sorteren op history & groot/klein worden
             foreach (MaintenanceDTO tram in maintenanceList)
             {
-                organisedList.Add(tram);
+                if (!tram.Urgent)
+                {
+                    organisedList.Add(tram);
+                }
             }
 
             return organisedList;
