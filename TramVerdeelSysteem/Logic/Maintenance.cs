@@ -133,7 +133,7 @@ namespace Logic
             }
         }
 
-        private MaintenanceView GetServiceList()
+        private List<MaintenanceView> GetServiceList()
         {
 
 
@@ -141,10 +141,20 @@ namespace Logic
             {
                 //var services = new List<MaintenanceDTO>();
                 var services = this.DatabaseMaintenance.GetServiceList();
-                var serviceView = new MaintenanceView();
-                serviceView.MaintenanceList = OrganiseServiceList(services.MaintenanceList);
 
-                if (serviceView.MaintenanceList.Any()) return serviceView;
+                var maintenanceDTO = new List<MaintenanceDTO>();
+                maintenanceDTO = OrganiseServiceList(services);
+                var serviceView = new List<MaintenanceView>();
+                foreach (MaintenanceDTO DTO in maintenanceDTO)
+                {
+                    var service = new MaintenanceView();
+                    service.Key = DTO.AuthKey;
+                    service.Target = DTO.TramNumber;
+                    service.Annotation = DTO.Annotation;
+                    serviceView.Add(service);
+                }
+
+                if (serviceView.Any()) return serviceView;
                 else throw new Exception("No services");
             }
             catch (Exception e)
@@ -154,7 +164,7 @@ namespace Logic
             }
         }
 
-        private CleaningView GetCleaningList()
+        private List<CleaningView> GetCleaningList()
         {
 
             try
@@ -162,9 +172,19 @@ namespace Logic
                 // var cleanings = new List<CleaningDTO>();
                 var cleanings = this.DatabaseMaintenance.GetCleaningList();
                 
-                var cleaningsView = new CleaningView();
-                cleaningsView.CleaningList = OrganiseCleaningList(cleanings.CleaningList);
-                if (cleaningsView.CleaningList.Any()) return cleaningsView;
+                var cleaningsDTO = new List<CleaningDTO>();
+                cleaningsDTO = OrganiseCleaningList(cleanings);
+                var cleaningsView = new List<CleaningView>();
+                foreach (CleaningDTO DTO in cleaningsDTO)
+                {
+                    var cleaning = new CleaningView();
+                    cleaning.Key = DTO.AuthKey;
+                    cleaning.TargetNumber = DTO.TramNumber;
+                    cleaning.TargetAnnotation = DTO.Annotation;
+                    cleaningsView.Add(cleaning);
+                }
+                
+                if (cleaningsView.Any()) return cleaningsView;
                 else throw new Exception("No cleanings");
             }
             catch (Exception e)
@@ -207,20 +227,20 @@ namespace Logic
         }
         */
 
-        private List<CleaningTramModel> OrganiseCleaningList(List<CleaningTramModel> maintenanceList)
+        private List<CleaningDTO> OrganiseCleaningList(List<CleaningDTO> maintenanceList)
         {
-            List<CleaningTramModel> organisedList = new List<CleaningTramModel>();
+            List<CleaningDTO> organisedList = new List<CleaningDTO>();
 
-            foreach(CleaningTramModel tram in maintenanceList)
+            foreach(CleaningDTO tram in maintenanceList)
             {
-                if (tram.IsUrgent)
+                if (tram.Urgent)
                 {
                     organisedList.Add(tram);
                 }
             }
 
             // dit moet sorteren op history & groot/klein worden
-            foreach (CleaningTramModel tram in maintenanceList)
+            foreach (CleaningDTO tram in maintenanceList)
             {
                 organisedList.Add(tram);
             }
@@ -228,20 +248,20 @@ namespace Logic
             return organisedList;
         }
 
-        private List<MaintenanceTramModel> OrganiseServiceList(List<MaintenanceTramModel> maintenanceList)
+        private List<MaintenanceDTO> OrganiseServiceList(List<MaintenanceDTO> maintenanceList)
         {
-            List<MaintenanceTramModel> organisedList = new List<MaintenanceTramModel>();
+            List<MaintenanceDTO> organisedList = new List<MaintenanceDTO>();
 
-            foreach (MaintenanceTramModel tram in maintenanceList)
+            foreach (MaintenanceDTO tram in maintenanceList)
             {
-                if (tram.IsUrgent)
+                if (tram.Urgent)
                 {
                     organisedList.Add(tram);
                 }
             }
 
             // dit moet sorteren op history & groot/klein worden
-            foreach (MaintenanceTramModel tram in maintenanceList)
+            foreach (MaintenanceDTO tram in maintenanceList)
             {
                 organisedList.Add(tram);
             }

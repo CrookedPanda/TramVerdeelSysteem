@@ -11,7 +11,6 @@ namespace Model.ViewModels
         public int TargetSector { get; set; }
         public bool TargetIsLarge { get; set; }
         public string TargetAnnotation { get; set; }
-        public List<Logic.CleaningTramModel> CleaningList { get; set; }
         public string Key { get; set; }
 
         public CleaningView()
