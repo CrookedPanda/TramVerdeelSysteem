@@ -50,10 +50,10 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE UniqueKey = @AuthKey), @Date, @Annotation)";
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", maintenance.AuthKey);
-                cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
+                cmd.Parameters.AddWithValue("@Annotation", maintenance.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                 cmd.ExecuteNonQuery();
             }
@@ -215,10 +215,10 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `CleaningDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE UniqueKey = @AuthKey), @Date, @Annotation)";
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", cleaning.AuthKey);
-                cmd.Parameters.AddWithValue("@Description", cleaning.Annotation);
+                cmd.Parameters.AddWithValue("@Annotation", cleaning.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                 cmd.ExecuteNonQuery();
             }
