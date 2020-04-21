@@ -65,7 +65,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
-
+            RemoveService(maintenance);
             return true;
         }
 
@@ -76,6 +76,7 @@ namespace Data
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "DELETE FROM service WHERE idTram = @TramNumber";
+                //TODO: require AuthKey
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.ExecuteNonQuery();
             }
@@ -228,6 +229,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
+            RemoveCleaning(cleaning);
             return true;
         }
 
@@ -238,6 +240,7 @@ namespace Data
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
                 cmd.CommandText = "DELETE FROM cleaning WHERE idTram = @TramNumber";
+                //TODO: require AuthKey
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.ExecuteNonQuery();
             }
