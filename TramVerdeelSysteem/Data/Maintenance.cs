@@ -29,7 +29,7 @@ namespace Data
                 cmd.CommandText = "INSERT INTO `service` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Description)";
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", "1");
-                cmd.Parameters.AddWithValue("@Priority", "1");
+                cmd.Parameters.AddWithValue("@Priority", maintenance.Urgent);
                 cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
                 cmd.ExecuteNonQuery();
             }
@@ -193,7 +193,7 @@ namespace Data
                 cmd.CommandText = "INSERT INTO `cleaning` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Desc)";
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", 1);
-                cmd.Parameters.AddWithValue("@Priority", 1);
+                cmd.Parameters.AddWithValue("@Priority", cleaning.Urgent);
                 cmd.Parameters.AddWithValue("@Desc", cleaning.Annotation);
                 cmd.ExecuteNonQuery();
             }
