@@ -29,7 +29,7 @@ namespace Data
                 cmd.CommandText = "INSERT INTO `service` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Description)";
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", "1");
-                cmd.Parameters.AddWithValue("@Priority", "1");
+                cmd.Parameters.AddWithValue("@Priority", maintenance.Urgent);
                 cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
                 cmd.ExecuteNonQuery();
             }
@@ -50,10 +50,10 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.CommandText = "INSERT INTO `servicehistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE UniqueKey = @AuthKey), @Date, @Annotation)";
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", maintenance.AuthKey);
-                cmd.Parameters.AddWithValue("@Description", maintenance.Annotation);
+                cmd.Parameters.AddWithValue("@Annotation", maintenance.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                 cmd.ExecuteNonQuery();
             }
@@ -65,7 +65,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
-
+            RemoveService(maintenance);
             return true;
         }
 
@@ -75,7 +75,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM service WHERE idTram = @TramNumber";
+                cmd.CommandText = "DELETE FROM service WHERE idTram = (SELECT idTram FROM Tram WHERE Number = @TramNumber)";
+                //TODO: require AuthKey
                 cmd.Parameters.AddWithValue("@TramNumber", maintenance.TramNumber);
                 cmd.ExecuteNonQuery();
             }
@@ -128,8 +129,9 @@ namespace Data
                     {
                         MaintenanceDTO maintenance = new MaintenanceDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
-                            Annotation = dataReader.GetString("Description")
+                            TramNumber = dataReader.GetInt32("Number"),
+                            Annotation = dataReader.GetString("Description"),
+                            Urgent = dataReader.GetBoolean("Priority")
                         };
                         maintenanceList.Add(maintenance);
                     }
@@ -192,7 +194,7 @@ namespace Data
                 cmd.CommandText = "INSERT INTO `cleaning` (`idTram`, `Size`, `Priority`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), @Size, @Priority, @Desc)";
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@Size", 1);
-                cmd.Parameters.AddWithValue("@Priority", 1);
+                cmd.Parameters.AddWithValue("@Priority", cleaning.Urgent);
                 cmd.Parameters.AddWithValue("@Desc", cleaning.Annotation);
                 cmd.ExecuteNonQuery();
             }
@@ -213,10 +215,10 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `ServiceDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE Name = @AuthKey), @Date, @Annotation)";
+                cmd.CommandText = "INSERT INTO `cleaninghistory` (`idTram`, `idUser`, `CleaningDate`, `Description`) VALUES ((SELECT idTram FROM Tram WHERE Number = @TramNumber), (SELECT idUser FROM authorisationlist WHERE UniqueKey = @AuthKey), @Date, @Annotation)";
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.Parameters.AddWithValue("@AuthKey", cleaning.AuthKey);
-                cmd.Parameters.AddWithValue("@Description", cleaning.Annotation);
+                cmd.Parameters.AddWithValue("@Annotation", cleaning.Annotation);
                 cmd.Parameters.AddWithValue("@Date", DateTime.Now);
                 cmd.ExecuteNonQuery();
             }
@@ -228,6 +230,7 @@ namespace Data
             {
                 _connect.Con.Close();
             }
+            RemoveCleaning(cleaning);
             return true;
         }
 
@@ -237,7 +240,8 @@ namespace Data
             {
                 _connect.Con.Open();
                 MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "DELETE FROM cleaning WHERE idTram = @TramNumber";
+                cmd.CommandText = "DELETE FROM cleaning WHERE idTram = (SELECT idTram FROM Tram WHERE Number = @TramNumber)";
+                //TODO: require AuthKey
                 cmd.Parameters.AddWithValue("@TramNumber", cleaning.TramNumber);
                 cmd.ExecuteNonQuery();
             }
@@ -289,8 +293,9 @@ namespace Data
                     {
                         CleaningDTO cleaning = new CleaningDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
-                            Annotation = dataReader.GetString("Description")
+                            TramNumber = dataReader.GetInt32("Number"),
+                            Annotation = dataReader.GetString("Description"),
+                            Urgent = dataReader.GetBoolean("Priority")
                         };
                         cleaningList.Add(cleaning);
                     }

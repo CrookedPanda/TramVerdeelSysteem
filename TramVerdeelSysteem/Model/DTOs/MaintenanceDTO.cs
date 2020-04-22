@@ -9,6 +9,9 @@ namespace Model.DTOs
         public int TramNumber { get; set; }
         public string Annotation { get; set; }
         public string AuthKey { get; set; }
+        public bool Urgent { get; set; }
         public List<Logic.MaintenanceTramModel> MaintenanceList { get; set; }
+
+
     }
 }

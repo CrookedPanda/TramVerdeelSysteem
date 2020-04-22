@@ -7,5 +7,6 @@ namespace Model.Logic
     public class MaintenanceTramModel : TramModel
     {
         public bool IsLarge { get; set; }
+        public bool IsUrgent { get; set; }
     }
 }

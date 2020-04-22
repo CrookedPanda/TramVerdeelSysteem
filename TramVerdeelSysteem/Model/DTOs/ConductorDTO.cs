@@ -7,8 +7,8 @@ namespace Model.DTOs
     public class ConductorDTO
     {
         public int TramNumber { get; set; }
-        public int Maintenance { get; set; }
-        public int Cleaning { get; set; }
+        public bool Maintenance { get; set; }
+        public bool Cleaning { get; set; }
         public Logic.TramModel Tram { get; set; }
     }
 }
