@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TramVerdeelSysteem", "TramVerdeelSysteem\TramVerdeelSysteem.csproj", "{F8EDEA70-DE55-4618-9F97-5A6D1D82C3F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TramVerdeelSysteem", "TramVerdeelSysteem\TramVerdeelSysteem.csproj", "{F8EDEA70-DE55-4618-9F97-5A6D1D82C3F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{11C83EF8-46EE-4A47-BBCE-D6D93BA85D86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{11C83EF8-46EE-4A47-BBCE-D6D93BA85D86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{26FC1E73-76C5-4865-995B-82E1A67A93B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{26FC1E73-76C5-4865-995B-82E1A67A93B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{43CB43CF-BE28-406D-AFC7-5C2644080212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{43CB43CF-BE28-406D-AFC7-5C2644080212}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTest", "UnitTestProject1\DataTest.csproj", "{C05C4C4B-7F37-45A1-A9A7-BD7331E1F149}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicUnitTest", "LogicUnitTest\LogicUnitTest.csproj", "{69974F21-F517-4293-AFF9-1F0623D0E3B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{43CB43CF-BE28-406D-AFC7-5C2644080212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43CB43CF-BE28-406D-AFC7-5C2644080212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43CB43CF-BE28-406D-AFC7-5C2644080212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C05C4C4B-7F37-45A1-A9A7-BD7331E1F149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05C4C4B-7F37-45A1-A9A7-BD7331E1F149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05C4C4B-7F37-45A1-A9A7-BD7331E1F149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05C4C4B-7F37-45A1-A9A7-BD7331E1F149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69974F21-F517-4293-AFF9-1F0623D0E3B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69974F21-F517-4293-AFF9-1F0623D0E3B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69974F21-F517-4293-AFF9-1F0623D0E3B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69974F21-F517-4293-AFF9-1F0623D0E3B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
