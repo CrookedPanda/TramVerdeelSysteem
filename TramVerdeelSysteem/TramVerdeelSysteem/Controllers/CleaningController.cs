@@ -39,6 +39,8 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
+                string authKey = HttpContext.Request.Cookies["key"];
+                Model.Key = authKey;
                 maintenanceLogic.IndicateCompleteCleaning(Model);
                 return Index();
             }
