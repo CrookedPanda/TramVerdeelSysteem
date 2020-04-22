@@ -30,7 +30,12 @@ namespace Logic
             {
                 CleaningDTO cleaning = new CleaningDTO() {TramNumber = Train.TramNumber,  Annotation = "de tram licht vol met bierblikjes van carnaval."};
                 DataBase.AddCleaning(cleaning);
-            }            
+            }
+            if(Train.Maintenance == true)
+            {
+                MaintenanceDTO maintenance = new MaintenanceDTO() {TramNumber = Train.TramNumber, Annotation = "de trams remmen maken een gek geluid" };
+                DataBase.AddService(maintenance);
+            }
         }
     }
 }

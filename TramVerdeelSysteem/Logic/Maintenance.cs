@@ -55,8 +55,8 @@ namespace Logic
             try
             {
                 var service = new MaintenanceDTO();
-                service.TramNumber = maintenanceView.Target;
-                service.Annotation = maintenanceView.Annotation;
+                service.TramNumber = maintenanceView.TargetNumber;
+                service.Annotation = maintenanceView.TargetAnnotation;
                 service.AuthKey = maintenanceView.Key;
                 if (this.DatabaseMaintenance.AddService(service)) return true;
                 else return false;
@@ -90,7 +90,7 @@ namespace Logic
             try
             {
                 var service = new MaintenanceDTO();
-                service.TramNumber = maintenanceView.Target;
+                service.TramNumber = maintenanceView.TargetNumber;
                 service.AuthKey = maintenanceView.Key;
                 if (this.DatabaseMaintenance.RemoveService(service)) return true;
                 else return false;
@@ -120,14 +120,14 @@ namespace Logic
             }
         }
 
-        private bool IndicateCompleteService(MaintenanceView maintenanceView)
+        public bool IndicateCompleteService(MaintenanceView maintenanceView)
         {
             try
             {
                 MaintenanceDTO service = new MaintenanceDTO();
-                service.TramNumber = maintenanceView.Target;
+                service.TramNumber = maintenanceView.TargetNumber;
                 service.AuthKey = maintenanceView.Key;
-                service.Annotation = maintenanceView.Annotation;
+                service.Annotation = maintenanceView.TargetAnnotation;
                 if (this.DatabaseMaintenance.IndicateCompleteService(service)) return true;
                 else return false;
             }
@@ -138,7 +138,7 @@ namespace Logic
             }
         }
 
-        private List<MaintenanceView> GetServiceList()
+        public List<MaintenanceView> GetServiceList()
         {
 
 
@@ -154,8 +154,8 @@ namespace Logic
                 {
                     var service = new MaintenanceView();
                     service.Key = DTO.AuthKey;
-                    service.Target = DTO.TramNumber;
-                    service.Annotation = DTO.Annotation;
+                    service.TargetNumber = DTO.TramNumber;
+                    service.TargetAnnotation = DTO.Annotation;
                     serviceView.Add(service);
                 }
 
