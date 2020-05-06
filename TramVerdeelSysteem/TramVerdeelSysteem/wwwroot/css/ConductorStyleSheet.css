@@ -1,0 +1,20 @@
+﻿#ConductorForm {
+    width: 50%;
+    margin-left: 40%;
+}
+
+    .form-row {
+        margin-bottom: 2px;
+    }
+
+#ActionForm {
+    margin-left: 40%;
+}
+
+.buttonNumbers {
+    max-width: 100px;
+}
+
+.buttonZeroBack {
+    max-width: 300px;
+}
