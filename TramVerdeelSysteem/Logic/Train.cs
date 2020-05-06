@@ -3,10 +3,11 @@ using Model.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Logic
 {
-    class Train
+    public class Train
     {
         private IDatabaseTrain DatabaseTrain;
 

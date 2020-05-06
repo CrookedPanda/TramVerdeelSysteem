@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logic
 {
-    class Sector
+    public class Sector
     {
         public int position { get; set; }
         public Status status { get; set; } = Status.Open;
