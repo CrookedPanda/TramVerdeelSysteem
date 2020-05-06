@@ -7,8 +7,12 @@ namespace Model.Logic
     public class CleaningTramModel : TramModel
     {
         public bool IsLarge { get; set; }
+        public bool IsUrgent { get; set; }
 
+        public CleaningTramModel()
+        {
 
+        }
         //constructor voor test data
         public CleaningTramModel(bool cIsLarge, int cNumber, int cRails, int cSector)
         {

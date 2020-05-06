@@ -7,8 +7,26 @@ namespace Model.ViewModels
     public class ConductorView
     {
         public int TramNumber { get; set; }
-        public int Maintenance { get; set; }
-        public int Cleaning { get; set; }
+        public bool Maintenance { get; set; }
+        public bool Cleaning { get; set; }
         public Logic.TramModel Tram { get; set; }
+        public string Key { get; set; }
+
+        public ConductorView()
+        {
+            TramNumber = 0;
+            Maintenance = false;
+            Cleaning = false;
+            Tram = new Logic.TramModel();
+            Key = "" ;
+        }
+        public ConductorView(int cTramNummer)
+        {
+            TramNumber = cTramNummer;
+            Maintenance = false;
+            Cleaning = false;
+            Tram = new Logic.TramModel();
+            Key = "";
+        }
     }
 }
