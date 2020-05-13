@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Linq;
+using Data.Interfaces;
 
 namespace Logic
 {
@@ -11,16 +12,17 @@ namespace Logic
         public int Line { get; set; }
         public int TrackNumber { get; set; }
         private List<Sector> sectors;
+        private IDatabaseTrack databaseTrack;
 
-        public Track(int cLine, List<Sector> cSectors)
+        public Track()
         {
-            Line = cLine;
-            sectors = cSectors;
+            // database track = default database class
         }
-        public Track(int cLine)
+        public Track(IDatabaseTrack cDatabase)
         {
-            Line = cLine;
+            databaseTrack = cDatabase;
         }
+
 
         public void ChangeLine(int pLine)
         {
@@ -45,16 +47,9 @@ namespace Logic
             }
         }
 
-        public void ReserveSector(int position, Train train)
+        public bool ReserveSector(Train pTrain, string pRemeseName, int pPosition)
         {
-            try
-            {
-                sectors.Where(i => i.position == position).FirstOrDefault().ReserveForTrain(train);
-            }
-            catch (Exception e)
-            {
-                throw (e);
-            }
+           return sectors.Where(i => i.position == pPosition).FirstOrDefault().ReserveForTrain(pTrain, pRemeseName, TrackNumber);
         }
     }
 }
