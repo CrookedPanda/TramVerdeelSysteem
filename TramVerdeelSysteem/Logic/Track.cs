@@ -9,6 +9,7 @@ namespace Logic
     public class Track
     {
         public int Line { get; set; }
+        public int TrackNumber { get; set; }
         private List<Sector> sectors;
 
         public Track(int cLine, List<Sector> cSectors)
@@ -21,16 +22,22 @@ namespace Logic
             Line = cLine;
         }
 
+        public void ChangeLine(int pLine)
+        {
+            Line = pLine;
+            // roep data aan om de verandering door te voeren in de database.
+        }
+
         public void AddSector(Sector pSector)
         {
             sectors.Add(pSector);
         }
 
-        public void ChangeSectorStatus(int position, Sector.Status status)
+        public void ChangeSectorStatus(Sector.Status pStatus, string pRemeseName, int pPosition)
         {
             try
             {
-                sectors.Where(i => i.position == position).FirstOrDefault().ChangeSectorStatus(status);
+                sectors.Where(i => i.position == pPosition).FirstOrDefault().ChangeSectorStatus(pStatus, TrackNumber, pRemeseName);
             }
             catch(Exception e)
             {

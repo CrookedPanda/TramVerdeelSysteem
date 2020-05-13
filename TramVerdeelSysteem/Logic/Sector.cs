@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Data.Interfaces;
+using Model.DTOs;
 
 namespace Logic
 {
@@ -9,49 +11,67 @@ namespace Logic
         public int position { get; set; }
         public Status status { get; set; } = Status.Open;
         public Train train { get; set; }
+        private IDatabaseSector databaseSector;
 
-        public void ChangeSectorStatus(Status pStatus)
+        public Sector()
         {
-            status = pStatus;
-            // roep de database aan voor de aanpassingen
+            //implemetn standard datasorce
+        }
+        public Sector(IDatabaseSector cDatabase)
+        {
+            databaseSector = cDatabase;
         }
 
-        public void ClearSector()
+
+        public void ChangeSectorStatus(Status pStatus, int pTracknumber, string pRemeseName)
+        {
+            status = pStatus;
+            ChangeSectorStatusDTO sectorStatusDTO = new ChangeSectorStatusDTO()
+            {
+                RemeseName = pRemeseName,
+                Tracknumber = pTracknumber,
+                SectorPosiotion = position,
+                SectorStatus = (int)status
+            };
+
+            databaseSector.ChangeSectorStatus(sectorStatusDTO);
+        }
+        public void ClearSector(string pRemese, int pTrackNumber)
         {
             status = Status.Open;
             train = null;
-            // roep de database aan voor de aanpassingen
+            databaseSector.ClearSector(new EditSectorDTO() {RemeseName = pRemese, Tracknumber = pTrackNumber, SectorPosiotion = position });
         }
 
-        public bool ReserveForTrain(Train pTrain)
+        public bool ReserveForTrain(Train pTrain, string pRemese, int pTrackNumber)
         {
-            if(status == Status.Blocked)
+            if(status == Status.Open)
             {
-                return false;
-            }
-            else
-            {
-                train = pTrain;
-                status = Status.Reserved;
-
-                // roep de database aan voor de aanpassingen
+                // database
+                databaseSector.ReserveSector(new ReserveSectorDTO
+                {
+                    RemeseName = pRemese,
+                    Tracknumber = pTrackNumber,
+                    SectorPosiotion = position,
+                    TrainNumber = pTrain.Number
+                });
                 return true;
             }
+            return false;
         }
 
-        public bool AddTrain(Train pTrain)
+        public bool AddTrain(Train pTrain, string pRemese, int pTrackNumber)
         {
             switch(status)
             {
                 case Status.Open:
                     train = pTrain;
-                    // pas de verandering aan in de database
+                    status = Status.occupied;
                     return true;
                 case Status.Reserved:
                     if (pTrain == train)
                     {
-                        status = Status.occupied;
-                        // pas de verandering aan in de database
+                        ChangeSectorStatus(Status.occupied, pTrackNumber, pRemese);
                         return true;
                     }
                     else
@@ -60,8 +80,7 @@ namespace Logic
                     }
                 default:
                     return false;             
-            }
-                
+            }                
         }
 
         public enum Status

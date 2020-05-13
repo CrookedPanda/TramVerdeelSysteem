@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Model.DTOs
 {
-    class ChangeSectorStatusDTO
+    public class ChangeSectorStatusDTO : EditSectorDTO
     {
-        //Change status van een sector veranderen. hoe weet de datalayer welke sector verandered moet worden?
+        public int SectorStatus { get; set; }
     }
 }
