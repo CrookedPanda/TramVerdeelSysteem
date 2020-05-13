@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Model;
 
 namespace Logic
 {
     class Depot
     {
         public Depot()
+        {
+
+        }
+
+        public Model.ViewModels.DepotView GetDepotView()
         {
 
         }
