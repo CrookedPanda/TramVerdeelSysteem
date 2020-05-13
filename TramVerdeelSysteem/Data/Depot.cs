@@ -17,7 +17,6 @@ namespace Data
         public DepotDTO GetDepot(string depotName)
         {
             int trackNumber = 0;
-            int sectorNumber = 0;
 
             DepotDTO depot = new DepotDTO();
 
