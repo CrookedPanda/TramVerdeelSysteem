@@ -14,30 +14,30 @@ namespace Logic
 
         }
 
-        public Model.ViewModels.DepotView GetDepotView()
-        {
+        //public Model.ViewModels.DepotView GetDepotView()
+        //{
             
-            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView();
-        }
+        //    Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView();
+        //}
 
         public void AddTrain()
         {
 
         }
 
-        public void ClearSector(/*Track*/ track, int position)
-        {
-            track.ClearSector(position);
-        }
+        //public void ClearSector(/*Track*/ track, int position)
+        //{
+        //    track.ClearSector(position);
+        //}
 
-        public void ReserveSector(/*Track*/ track, int position, Train train)
-        {
-            track.ReserveSector(position, train);
-        }
+        //public void ReserveSector(/*Track*/ track, int position, Train train)
+        //{
+        //    track.ReserveSector(position, train);
+        //}
 
-        public void ChangeSectorStatus(/*Track*/ track, int position, Enum status)
-        {
-            track.ChangeSectorStatus(position, status);
-        }
+        //public void ChangeSectorStatus(/*Track*/ track, int position, Enum status)
+        //{
+        //    track.ChangeSectorStatus(position, status);
+        //}
     }
 }
