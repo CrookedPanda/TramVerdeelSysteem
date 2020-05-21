@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - TramVerdeelSysteem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="~/css/DepotStyleSheet.css"/>
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Depot" asp-action="Index">Remise</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Conductor" asp-action="Index">Conducteur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Cleaning" asp-action="Index">Schoonmaak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Maintenance" asp-action="Index">Technische Dienst</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item ">
+                        <a class="nav-link text-dark " asp-area="" asp-controller="Home" asp-action="Index">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main" class="pb-3">
+    <div id="map"></div>
+    @RenderBody()
+</main>
+
+<footer class="border-top footer text-muted">
+    <div class="container">
+        &copy; 2020 - TramVerdeelSysteem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+</footer>
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic2FuZGVybiIsImEiOiJjam8xaXVubXQwYjV4M3BrdTF2eWViOXk1In0.KqdhiFgZrFqFaRwo6bZ_1g';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [4.852828, 52.347853],
+        zoom: 16
+    });
+
+    var places = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': "Ford's Theater",
+                    'icon': 'theatre'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [4.852828, 52.347853]
+                }
+            }
+        ]
+    };
+
+    map.on('load', function() {
+// Add a GeoJSON source containing place coordinates and information.
+        map.addSource('places',
+            {
+                'type': 'geojson',
+                'data': places
+            });
+
+        map.on('click',
+            'places',
+            function(e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+        map.on('mouseenter',
+            'places',
+            function() {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+// Change it back to a pointer when it leaves.
+        map.on('mouseleave',
+            'places',
+            function() {
+                map.getCanvas().style.cursor = '';
+            });
+        </script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
