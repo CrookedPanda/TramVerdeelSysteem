@@ -1,0 +1,73 @@
+﻿@model Model.ViewModels.CleaningHistoryMasterView
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMaintanance.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="list-group">
+            <label class="list-group-item"><b>Trams:</b></label>
+
+            @foreach (var train in Model.cleanings)
+            {
+                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TramNumber, @train.UserName, @train.Description, @train.Datetime" value="@train.TramNumber.ToString()" />
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <label><b>Tram Nummer:</b></label>
+        <label id="TramNumber"></label>
+        <br />
+
+        <label><b>Schoonmaker:</b></label>
+        <label id="Schoonmaker"></label>
+
+        <br />
+        <label><b>Beschrijving:</b></label>
+        <label id="Beschrijving"></label>
+        <br />
+        <label><b>Datum & Tijd:</b></label>
+        <label id="DateTijd"></label>
+
+        <br />
+        <form class="col-12" asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
+            <input asp-for="cleaning.TramNumber" type="hidden" id="TN" name="targetNumber" value="" />
+            <input asp-for="cleaning.Datetime" type="hidden" id="DT" name="targetIsLarge" value="" />
+            <input asp-for="cleaning.UserName" type="hidden" id="S" name="targetRail" value="" />
+            <input asp-for="cleaning.Description" type="hidden" id="B" name="targetSector" value="" />
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    @*<form class="col-12" asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="TargetNumber" type="hidden"  id="targetNumber" name="targetNumber" value=""/>
+            <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>
+            <input asp-for="TargetRail" type="hidden" id="targetRail"  name="targetRail" value=""/>
+            <input asp-for="TargetSector" type="hidden" id="targetSector"  name="targetSector" value=""/>
+            <input type="submit" class="btn btn-primary float-right" value="clean" />
+        </form>*@
+</div>
+
+<script type="text/javascript">
+    function ShowTram(TramNumber, UserName, Description, DateTime) {
+        document.getElementById('TN').innerText = TramNumber;
+        document.getElementById('S').innerText = UserName;
+        document.getElementById('DT').innerText = DateTime;
+        document.getElementById('B').innerText = Description;
+
+        document.getElementById('TramNumber').value = TramNumber;
+        document.getElementById('DateTijd').value = DateTime;
+        document.getElementById('Schoonmaker').value = UserName;
+        document.getElementById('Beschrijving').value = Description;
+
+        //document.getElementById('tragetAnnotation').value = "";
+    }
+</script>
+
+
