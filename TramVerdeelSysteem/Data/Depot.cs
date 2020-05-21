@@ -27,6 +27,7 @@ namespace Data
             DepotDTO depot = new DepotDTO();
 
             TrackDepotDTO trackDepot = new TrackDepotDTO();
+            SectorDepotDTO sectorDepot = new SectorDepotDTO();
 
             List<TrackDepotDTO> trackDepots = new List<TrackDepotDTO>();
             List<SectorDepotDTO> sectorDepots = new List<SectorDepotDTO>();
@@ -37,7 +38,7 @@ namespace Data
                 string query = "SELECT track.OrderNumber, track.TrackNumber, track.Line, sector.Position, sector.idSectorStatus, sector.idTram, remise.Name FROM `track` "
                     + "INNER JOIN sector ON sector.idTrack = track.idTrack "
                     + "INNER JOIN remise ON remise.idRemise = track.idRemise "
-                    + "WHERE remise.Name = '@name' ORDER BY track.OrderNumber, track.TrackNumber, sector.Position";
+                    + "WHERE remise.Name = @name ORDER BY track.OrderNumber, track.TrackNumber, sector.Position";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@Name", depotName);
                 var dataReader = cmd.ExecuteReader();
@@ -47,7 +48,8 @@ namespace Data
                     while (dataReader.Read())
                     {
                         trackDepot = new TrackDepotDTO();
-                        SectorDepotDTO sectorDepot = new SectorDepotDTO();
+                        sectorDepot = new SectorDepotDTO();
+                        
                         depot.Name = dataReader.GetString("Name");
                         trackDepot.Line = dataReader.GetInt32("Line");
                         trackDepot.TrackNumber = dataReader.GetInt32("TrackNumber");
@@ -67,7 +69,7 @@ namespace Data
                             {
                                 trackDepot.Sectors = sectorDepots;
                                 trackDepots.Add(trackDepot);
-                                sectorDepots.Clear();
+                                sectorDepots = new List<SectorDepotDTO>();
                             }
                             sectorDepots.Add(sectorDepot);
                             trackNumber = trackDepot.TrackNumber;

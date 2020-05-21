@@ -6,8 +6,16 @@ namespace Model.ViewModels
 {
     public class TrackDepotView
     {
+
+        public int TrackNumber { get; set; }
+        public int Line { get; set; }
+        public int OrderNumber { get; set; }
+        public List<SectorDepotView> Sectors { get; set; }
+
         public TrackDepotView(DTOs.TrackDepotDTO track)
         {
+            Sectors = new List<SectorDepotView>();
+            OrderNumber = track.OrderNumber;
             TrackNumber = track.TrackNumber;
             Line = track.Line;
 
@@ -20,6 +28,8 @@ namespace Model.ViewModels
 
         public TrackDepotView(TrackDepotView track)
         {
+            Sectors = new List<SectorDepotView>();
+            OrderNumber = track.OrderNumber;
             TrackNumber = track.TrackNumber;
             Line = track.Line;
 
@@ -29,10 +39,5 @@ namespace Model.ViewModels
                 Sectors.Add(sector);
             }
         }
-
-        public int TrackNumber { get; set; }
-        public int Line { get; set; }
-        public int OrderNumber { get; set; }
-        public List<SectorDepotView> Sectors { get; set; }
     }
 }

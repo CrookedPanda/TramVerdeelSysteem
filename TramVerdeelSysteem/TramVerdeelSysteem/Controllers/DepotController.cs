@@ -16,6 +16,7 @@ namespace TramVerdeelSysteem.Controllers
         Depot lDepot = new Depot();
         public IActionResult Index()
         {
+            depotDumpView.trackPartitions = new List<TrackPartition>();
             DepotView depotView = lDepot.GetDepotView("Remise Havenstraat");
             for(int i = 1; i <= depotView.Tracks.Last().OrderNumber; i++)
             {
