@@ -9,7 +9,7 @@ using TramVerdeelSysteem.Models;
 using Model.ViewModels;
 using Logic;
 using System.Dynamic;
-
+using Microsoft.VisualBasic;
 
 namespace TramVerdeelSysteem.Controllers
 {
@@ -44,5 +44,10 @@ namespace TramVerdeelSysteem.Controllers
                 throw e;
             }
         }
+
+        List<string> stringss = new List<string>();
+        public List<Tuple<int, float, float>> TrackCoordinates = new List<Tuple<int, float, float>>();
+        
+
     }
 }

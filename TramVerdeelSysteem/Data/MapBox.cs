@@ -7,6 +7,7 @@ namespace Data
 {
     class MapBox
     {
+        /*
         public GeoFeatueDTO GeoFeatureMaker()
         {
             var request = new Request()
@@ -20,5 +21,6 @@ namespace Data
                 }
             };
         }
+        */
     }
 }
