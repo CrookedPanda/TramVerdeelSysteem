@@ -26,24 +26,24 @@ namespace Logic
         public void ChangeSectorStatus(Status pStatus, int pTracknumber, string pRemeseName)
         {
             status = pStatus;
-            ChangeSectorStatusDTO sectorStatusDTO = new ChangeSectorStatusDTO()
+            SectorStatusChangeDTO sectorStatusDTO = new SectorStatusChangeDTO()
             {
-                RemeseName = pRemeseName,
-                Tracknumber = pTracknumber,
-                SectorPosiotion = position,
+                DepotName = pRemeseName,
+                TrackNumber = pTracknumber,
+                SectorPosition = position,
                 SectorStatus = (int)status
             };
 
-            databaseSector.ChangeSectorStatus(sectorStatusDTO);
+            databaseSector.SectorStatusChange(sectorStatusDTO);
         }
         public void ClearSector(string pRemese, int pTrackNumber)
         {
             status = Status.Open;
             train = null;
-            databaseSector.ClearSector(new EditSectorDTO() {RemeseName = pRemese, Tracknumber = pTrackNumber, SectorPosiotion = position });
+            databaseSector.ClearSector(new SectorDTO() {DepotName = pRemese, TrackNumber = pTrackNumber, SectorPosition = position });
         }
 
-        public bool ReserveForTrain(Train pTrain, string pRemese, int pTrackNumber)
+        /*public bool ReserveForTrain(Train pTrain, string pRemese, int pTrackNumber)
         {
             if(status == Status.Open)
             {
@@ -58,7 +58,7 @@ namespace Logic
                 return true;
             }
             return false;
-        }
+        }*/
 
         public bool AddTrain(Train pTrain, string pRemese, int pTrackNumber)
         {

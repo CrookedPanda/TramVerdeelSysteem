@@ -1,4 +1,5 @@
-﻿using Model.DTOs;
+﻿using Data.Interfaces;
+using Model.DTOs;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,17 @@ using System.Text;
 
 namespace Data
 {
-    public class Depot
+    public class Depot:IDatabaseDepot
     {
         private readonly ConnectionClass _connect;
         public Depot(ConnectionClass connect)
         {
             _connect = connect;
+        }
+
+        public Depot()
+        {
+            _connect = new ConnectionClass();
         }
 
         public DepotDTO GetDepot(string depotName)
