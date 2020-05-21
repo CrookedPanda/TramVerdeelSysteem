@@ -6,7 +6,7 @@ namespace Model.Enums
 {
     public class EnumCollection
     {
-        enum Size
+        public enum Size
         {
             Small,
             Big

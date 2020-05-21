@@ -7,22 +7,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TramVerdeelSysteem.Models;
 using Model.ViewModels;
+using Logic;
+using System.Dynamic;
 
 namespace TramVerdeelSysteem.Controllers
 {
     public class CleaningController : Controller
     {
+        Logic.Maintenance maintenanceLogic = new Logic.Maintenance();
+
         [HttpGet]
         public IActionResult Index()
         {
-            CleaningView model;
+            //CleaningView model;
             //model = new CleaningView();
             //tijdelijke model inhoud
 
             // implemetn get cleaning list logic;
-            model = new CleaningView("");
+            //model = new CleaningView();
+            //dynamic model = new ExpandoObject();
 
-            return View(model);
+            CleaningMasterView Model = new CleaningMasterView();
+            Model.cleanings = maintenanceLogic.GetCleaningList();
+            Model.cleaning = new CleaningView();
+
+            return View(Model);
         }
 
         [HttpPost]
@@ -30,12 +39,14 @@ namespace TramVerdeelSysteem.Controllers
         {
             try
             {
-                // implement clean logic
+                string authKey = HttpContext.Request.Cookies["key"];
+                Model.Key = authKey;
+                maintenanceLogic.IndicateCompleteCleaning(Model);
                 return Index();
             }
-            catch
+            catch(Exception e)
             {
-                return Index();
+                throw (e);
             }
         }
     }
