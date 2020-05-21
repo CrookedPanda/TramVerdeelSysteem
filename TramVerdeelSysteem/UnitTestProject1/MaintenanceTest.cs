@@ -11,14 +11,14 @@ namespace DataTest
         public void AddMaintenanceTest()
         {
             //Arrange
-            Maintenance maint = new Maintenance();
-            MaintenanceDTO maintenanceDTO = new MaintenanceDTO();
-            maintenanceDTO.TramNumber = 2001;
-            maintenanceDTO.Annotation = "Cleaning i think";
-            maintenanceDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
+            //Maintenance maint = new Maintenance();
+            //MaintenanceDTO maintenanceDTO = new MaintenanceDTO();
+            //maintenanceDTO.TramNumber = 2001;
+            //maintenanceDTO.Annotation = "Cleaning i think";
+            //maintenanceDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
 
             //Act
-            maint.AddMaintenance(maintenanceDTO);
+            //maint.AddMaintenance(maintenanceDTO);
 
             //Assert
         }
