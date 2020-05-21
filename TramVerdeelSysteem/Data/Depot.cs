@@ -34,10 +34,10 @@ namespace Data
             {
                 _connect.Con.Open();
 
-                string query = "SELECT track.TrackNumber, track.Line, sector.Position, sector.idSectorStatus, sector.idTram, remise.Name FROM `track` "
+                string query = "SELECT track.OrderNumber, track.TrackNumber, track.Line, sector.Position, sector.idSectorStatus, sector.idTram, remise.Name FROM `track` "
                     + "INNER JOIN sector ON sector.idTrack = track.idTrack "
                     + "INNER JOIN remise ON remise.idRemise = track.idRemise "
-                    + "WHERE remise.Name = @name ORDER BY track.TrackNumber, sector.Position";
+                    + "WHERE remise.Name = '@name' ORDER BY track.OrderNumber, track.TrackNumber, sector.Position";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@Name", depotName);
                 var dataReader = cmd.ExecuteReader();
@@ -51,6 +51,7 @@ namespace Data
                         depot.Name = dataReader.GetString("Name");
                         trackDepot.Line = dataReader.GetInt32("Line");
                         trackDepot.TrackNumber = dataReader.GetInt32("TrackNumber");
+                        trackDepot.OrderNumber = dataReader.GetInt32("OrderNumber");
                         sectorDepot.idSectorStatus = dataReader.GetInt32("idSectorStatus");
                         sectorDepot.Position = dataReader.GetInt32("Position");
                         sectorDepot.idTram = dataReader.IsDBNull(dataReader.GetOrdinal("idTram")) ? 0 : dataReader.GetInt32("idTram");

@@ -20,6 +20,7 @@ namespace Model.ViewModels
 
         public int TrackNumber { get; set; }
         public int Line { get; set; }
+        public int OrderNumber { get; set; }
         public List<SectorDepotView> Sectors { get; set; }
     }
 }
