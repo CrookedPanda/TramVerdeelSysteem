@@ -15,6 +15,11 @@ namespace Data
             _connect = connect;
         }
 
+        public Depot()
+        {
+            _connect = new ConnectionClass();
+        }
+
         public DepotDTO GetDepot(string depotName)
         {
             int trackNumber = 0;

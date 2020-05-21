@@ -7,9 +7,14 @@ using Data.Interfaces;
 
 namespace Logic
 {
-    class Depot
+    public class Depot
     {
         IDatabaseDepot iDepot;
+
+        public Depot()
+        {
+            this.iDepot = new Data.Depot();
+        }
         public Depot(IDatabaseDepot iDatabaseDepot)
         {
             this.iDepot = iDatabaseDepot;
