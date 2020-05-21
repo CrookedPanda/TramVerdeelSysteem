@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Model.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using Model;
-using Model.DTOs;
 
 namespace Data.Interfaces
 {
-    interface IDatabaseSector
+    public interface IDatabaseSector
     {
-        bool SectorStatusChange(SectorStatusChangeDTO sectorStatusChange);
+        public void ChangeSectorStatus(ChangeSectorStatusDTO DTO);
+        public void ClearSector(EditSectorDTO DTO);
+        public void ReserveSector(ReserveSectorDTO DTO);
     }
 }
