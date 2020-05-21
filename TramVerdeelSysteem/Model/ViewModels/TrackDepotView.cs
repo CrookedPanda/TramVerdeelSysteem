@@ -18,6 +18,18 @@ namespace Model.ViewModels
             }
         }
 
+        public TrackDepotView(TrackDepotView track)
+        {
+            TrackNumber = track.TrackNumber;
+            Line = track.Line;
+
+            for (int i = 0; i < track.Sectors.Count; i++)
+            {
+                SectorDepotView sector = new SectorDepotView(track.Sectors[i]);
+                Sectors.Add(sector);
+            }
+        }
+
         public int TrackNumber { get; set; }
         public int Line { get; set; }
         public int OrderNumber { get; set; }

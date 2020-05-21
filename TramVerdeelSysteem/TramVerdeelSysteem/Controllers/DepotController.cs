@@ -5,16 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model.ViewModels;
 using Logic;
+using TramVerdeelSysteem.Views.Depot;
+using System.Linq;
 
 namespace TramVerdeelSysteem.Controllers
 {
     public class DepotController : Controller
     {
+        DepotModelDumpView depotDumpView = new DepotModelDumpView();
         Depot lDepot = new Depot();
         public IActionResult Index()
         {
             DepotView depotView = lDepot.GetDepotView("Remise Havenstraat");
-            return View(depotView);
+            for(int i = 1; i <= depotView.Tracks.Last().OrderNumber; i++)
+            {
+                TrackPartition trackPartition = new TrackPartition();
+                IEnumerable<TrackDepotView> query = from track in depotView.Tracks where track.OrderNumber == i select new TrackDepotView(track);
+                trackPartition.trackDepots = query.ToList();
+                depotDumpView.trackPartitions.Add(trackPartition);
+            }
+            return View(depotDumpView);
         }
 
         /*public IActionResult AddPopUp()
