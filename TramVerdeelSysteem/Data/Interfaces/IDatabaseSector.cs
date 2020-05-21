@@ -7,8 +7,9 @@ namespace Data.Interfaces
 {
     public interface IDatabaseSector
     {
-        public void ChangeSectorStatus(ChangeSectorStatusDTO DTO);
-        public void ClearSector(EditSectorDTO DTO);
-        public void ReserveSector(ReserveSectorDTO DTO);
+        public bool SectorStatusChange(SectorStatusChangeDTO DTO);
+        public bool ClearSector(SectorDTO DTO);
+        //public bool ReserveSector(SectorDTO DTO);
+        public bool AddTrain(SectorDTO DTO);
     }
 }
