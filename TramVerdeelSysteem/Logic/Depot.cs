@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Model;
+using Data;
 
 namespace Logic
 {
@@ -15,7 +16,8 @@ namespace Logic
 
         public Model.ViewModels.DepotView GetDepotView()
         {
-
+            
+            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView();
         }
 
         public void AddTrain()
