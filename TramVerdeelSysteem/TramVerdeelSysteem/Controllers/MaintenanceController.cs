@@ -10,22 +10,27 @@ using Model.ViewModels;
 using Logic;
 using System.Dynamic;
 using Microsoft.VisualBasic;
+using Model.DTOs;
 
 namespace TramVerdeelSysteem.Controllers
 {
     public class MaintenanceController : Controller
     {
         Logic.Maintenance maintenanceLogic = new Logic.Maintenance();
+        
 
         [HttpGet]
         public IActionResult Index()
         {
             //ReparatieDienstViewModel Model = new ReparatieDienstViewModel();
-
+            GeoFeature geoFeature = new GeoFeature();
             MaintenanceMasterView Model = new MaintenanceMasterView();
 
             Model.maintenances = maintenanceLogic.GetServiceList();
             Model.maintenance = new MaintenanceView();
+
+            geoFeature.TrackCoordinates
+
             return View(Model);
         }
 
@@ -45,9 +50,12 @@ namespace TramVerdeelSysteem.Controllers
             }
         }
 
-        List<string> stringss = new List<string>();
-        public List<Tuple<int, float, float>> TrackCoordinates = new List<Tuple<int, float, float>>();
-        
+        public class GeoList
+        {
+            List<string> stringss = new List<string>();
+            
+            
+        }
 
     }
 }
