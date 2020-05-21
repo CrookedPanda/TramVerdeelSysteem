@@ -3,41 +3,47 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using Model;
-using Data;
+using Data.Interfaces;
 
 namespace Logic
 {
-    class Depot
+    public class Depot
     {
+        IDatabaseDepot iDepot;
+
         public Depot()
         {
-
+            this.iDepot = new Data.Depot();
+        }
+        public Depot(IDatabaseDepot iDatabaseDepot)
+        {
+            this.iDepot = iDatabaseDepot;
         }
 
-        public Model.ViewModels.DepotView GetDepotView()
+        public Model.ViewModels.DepotView GetDepotView(string depotName)
         {
-            
-            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView();
+            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView(this.iDepot.GetDepot(depotName));
+            return depotView;
         }
 
-        public void AddTrain()
+        public bool AddTrain()
         {
-
+            return false;
         }
 
-        public void ClearSector(/*Track*/ track, int position)
+        public bool ClearSector(string depotName, int trackNumber,int position)
         {
-            track.ClearSector(position);
+            return false;
         }
 
-        public void ReserveSector(/*Track*/ track, int position, Train train)
+        public bool ReserveSector(string depotName, int trackNumber, int position/*, tramView tram*/)
         {
-            track.ReserveSector(position, train);
+            return false;
         }
 
-        public void ChangeSectorStatus(/*Track*/ track, int position, Enum status)
+        public bool ChangeSectorStatus(string depotName, int trackNumber, int position, Enum status)
         {
-            track.ChangeSectorStatus(position, status);
+            return false;
         }
     }
 }

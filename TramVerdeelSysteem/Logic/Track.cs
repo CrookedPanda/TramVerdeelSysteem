@@ -47,9 +47,9 @@ namespace Logic
             }
         }
 
-        public bool ReserveSector(Train pTrain, string pRemeseName, int pPosition)
+        /*public bool ReserveSector(Train pTrain, string pRemeseName, int pPosition)
         {
            return sectors.Where(i => i.position == pPosition).FirstOrDefault().ReserveForTrain(pTrain, pRemeseName, TrackNumber);
-        }
+        }*/
     }
 }
