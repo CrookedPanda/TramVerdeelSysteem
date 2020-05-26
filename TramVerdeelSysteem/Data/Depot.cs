@@ -23,6 +23,11 @@ namespace Data
         public DepotDTO GetDepot(string depotName)
         {
             int trackNumber = 0;
+            int lineNumber = 0;
+            int orderNumber = 0;
+            int saveTrackNumber = 0;
+            int saveLineNumber = 0;
+            int saveOrderNumber = 0;
 
             DepotDTO depot = new DepotDTO();
 
@@ -51,30 +56,39 @@ namespace Data
                         sectorDepot = new SectorDepotDTO();
                         
                         depot.Name = dataReader.GetString("Name");
-                        trackDepot.Line = dataReader.GetInt32("Line");
-                        trackDepot.TrackNumber = dataReader.GetInt32("TrackNumber");
-                        trackDepot.OrderNumber = dataReader.GetInt32("OrderNumber");
+                        
+                        saveTrackNumber = dataReader.GetInt32("TrackNumber");
+                        saveOrderNumber = dataReader.GetInt32("OrderNumber");
+                        saveLineNumber = dataReader.GetInt32("Line");
                         sectorDepot.idSectorStatus = dataReader.GetInt32("idSectorStatus");
                         sectorDepot.Position = dataReader.GetInt32("Position");
                         sectorDepot.idTram = dataReader.IsDBNull(dataReader.GetOrdinal("idTram")) ? 0 : dataReader.GetInt32("idTram");
-                        if (trackNumber == trackDepot.TrackNumber)
+                        if (trackNumber == saveTrackNumber)
                         {
                             sectorDepots.Add(sectorDepot);
                             trackDepot.Sectors = sectorDepots;
-                            trackNumber = trackDepot.TrackNumber;
                         }
                         else
                         {
                             if (trackNumber != 0)
                             {
+                                trackDepot.TrackNumber = trackNumber;
+                                trackDepot.OrderNumber = orderNumber;
+                                trackDepot.Line = lineNumber;
                                 trackDepot.Sectors = sectorDepots;
+                                
                                 trackDepots.Add(trackDepot);
                                 sectorDepots = new List<SectorDepotDTO>();
                             }
                             sectorDepots.Add(sectorDepot);
-                            trackNumber = trackDepot.TrackNumber;
                         }
+                        trackNumber = saveTrackNumber;
+                        orderNumber = saveOrderNumber;
+                        lineNumber = saveLineNumber;
                     }
+                    trackDepot.TrackNumber = trackNumber;
+                    trackDepot.OrderNumber = orderNumber;
+                    trackDepot.Line = lineNumber;
                     trackDepots.Add(trackDepot);
                     depot.Tracks = trackDepots;
                 }

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Model.ViewModels;
 using Logic;
 using TramVerdeelSysteem.Views.Depot;
-using System.Linq;
 
 namespace TramVerdeelSysteem.Controllers
 {
