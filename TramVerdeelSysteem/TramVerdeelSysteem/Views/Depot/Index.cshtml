@@ -109,7 +109,7 @@
             </div>
         </div>
 
-        <div class="col padding-50">
+        <div class="col padding-75">
             @foreach (TramVerdeelSysteem.Views.Depot.TrackPartition trackPartition in Model.trackPartitions)
             {
                 <div class="row padding-bot">
@@ -118,12 +118,12 @@
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
                         <div class="list-group">
                             <!--Rail-->
-                            <input type="button" class="list-group-item text-center" value="@trackDepotView.TrackNumber;">
+                            <input type="button" class="list-group-item text-center" value="@trackDepotView.TrackNumber">
                             <!--Line-->
-                            <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line;">
+                            <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line">
                             @foreach (Model.ViewModels.SectorDepotView sectorDepotView in trackDepotView.Sectors)
                             {
-                                <input type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber;,1)" class="list-group-item text-center" value="@sectorDepotView.idTram;">
+                                <input type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
                             }
                         </div>
                     </div>
