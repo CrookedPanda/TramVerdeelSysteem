@@ -52,7 +52,7 @@ namespace Logic
                 {
                     RemeseName = pRemese,
                     Tracknumber = pTrackNumber,
-                    SectorPosiotion = position,
+                    SectorPosition = position,
                     TrainNumber = pTrain.Number
                 });
                 return true;

@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Linq;
 using Data.Interfaces;
+using Model.DTOs;
 
 namespace Logic
 {
@@ -24,10 +25,11 @@ namespace Logic
         }
 
 
-        public void ChangeLine(int pLine)
+        public void ChangeLine(int pLine, string pRemeseName)
         {
             Line = pLine;
-            // roep data aan om de verandering door te voeren in de database.
+            TrackLineDTO trackLineDTO = new TrackLineDTO() { RemeseName = pRemeseName, TargetLine = pLine, TrackNummer = TrackNumber };
+            databaseTrack.changeTrackLine(trackLineDTO);
         }
 
         public void AddSector(Sector pSector)

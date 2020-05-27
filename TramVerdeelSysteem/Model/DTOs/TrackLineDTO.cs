@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Model.DTOs
 {
-    public class EditSectorDTO
+    public class TrackLineDTO
     {
+        public int TrackNummer { get; set; }
+        public int TargetLine { get; set; }
         public string RemeseName { get; set; }
-        public int SectorPosiotion { get; set; }
-        public int Tracknumber { get; set; }
     }
 }
