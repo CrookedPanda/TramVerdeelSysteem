@@ -227,21 +227,33 @@ namespace Logic
             }
         }
 
-        //public void GetServiceHistory()
-        //{
-        //    try
-        //    {
-        //        var services = new List<MaintenanceDTO>();
-        //        services = this.DatabaseMaintenance.GetServiceHistory();
-        //        if (services.Any()) return services;
-        //        else throw new Exception("No services");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
+        public List<MaintenanceHistoryView> GetServiceHistory()
+        {
+            try
+            {
+                // var cleanings = new List<CleaningDTO>();
+                var maintenanceHistoryDTO = this.DatabaseMaintenance.GetServiceHistory();
+
+                var maintenancesHistoryView = new List<MaintenanceHistoryView>();
+                foreach (MaintenanceHistoryDTO DTO in maintenanceHistoryDTO)
+                {
+                    var maintenance = new MaintenanceHistoryView();
+                    maintenance.UserName = DTO.UserName;
+                    maintenance.TramNumber = DTO.TramNumber;
+                    maintenance.Description = DTO.Description;
+                    maintenance.Datetime = DTO.Datetime;
+                    maintenancesHistoryView.Add(maintenance);
+                }
+
+                if (maintenancesHistoryView.Any()) return maintenancesHistoryView;
+                else throw new Exception("No maintenances.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         private List<CleaningDTO> OrganiseCleaningList(List<CleaningDTO> maintenanceList)
         {
