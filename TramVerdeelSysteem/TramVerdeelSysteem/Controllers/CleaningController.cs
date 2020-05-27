@@ -31,7 +31,8 @@ namespace TramVerdeelSysteem.Controllers
             CleaningMasterView Model = new CleaningMasterView();
             Model.cleanings = maintenanceLogic.GetCleaningList();
             Model.cleaning = new CleaningView();
-
+            GeoFeature geo = new GeoFeature();
+            Model.geo = geo;
             return View(Model);
         }
 

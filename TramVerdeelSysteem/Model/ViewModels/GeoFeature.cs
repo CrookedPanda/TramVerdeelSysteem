@@ -10,7 +10,7 @@ namespace Model.ViewModels
         
         public GeoFeature()
         {
-
+            this.TrackCoordinates = new List<Tuple<int, double, double>>();
             TrackCoordinates.Add(Tuple.Create(38, 52.349145, 4.853109));
             TrackCoordinates.Add(Tuple.Create(37, 52.349116, 4.853116));
             TrackCoordinates.Add(Tuple.Create(36, 52.349089, 4.853129));
