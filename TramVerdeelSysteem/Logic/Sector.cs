@@ -15,7 +15,7 @@ namespace Logic
 
         public Sector()
         {
-            //implemetn standard datasorce
+            //implement standard datasorce
         }
         public Sector(IDatabaseSector cDatabase)
         {
