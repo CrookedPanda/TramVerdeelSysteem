@@ -30,7 +30,7 @@ namespace Logic
             {
                 RemeseName = pRemeseName,
                 Tracknumber = pTracknumber,
-                SectorPosiotion = position,
+                SectorPosition = position,
                 SectorStatus = (int)status
             };
 
@@ -40,7 +40,7 @@ namespace Logic
         {
             status = Status.Open;
             train = null;
-            databaseSector.ClearSector(new EditSectorDTO() {RemeseName = pRemese, Tracknumber = pTrackNumber, SectorPosiotion = position });
+            databaseSector.ClearSector(new EditSectorDTO() {RemeseName = pRemese, Tracknumber = pTrackNumber, SectorPosition = position });
         }
 
         public bool ReserveForTrain(Train pTrain, string pRemese, int pTrackNumber)
@@ -52,7 +52,7 @@ namespace Logic
                 {
                     RemeseName = pRemese,
                     Tracknumber = pTrackNumber,
-                    SectorPosiotion = position,
+                    SectorPosition = position,
                     TrainNumber = pTrain.Number
                 });
                 return true;
