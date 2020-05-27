@@ -199,13 +199,25 @@ namespace Logic
             }
         }
 
-        /*
-        private void GetCleaningHistory()
+        public List<CleaningHistoryView> GetCleaningHistory()
         {
             try
             {
-                Cleanings = this.DatabaseMaintenance.GetCleaningHistory();
-                if (Cleanings.Any()) OrganiseCleaningHistory();
+                // var cleanings = new List<CleaningDTO>();
+                var cleaningsHistoryDTO = this.DatabaseMaintenance.GetCleaningHistory();
+
+                var cleaningsHistoryView = new List<CleaningHistoryView>();
+                foreach (CleaningHistoryDTO DTO in cleaningsHistoryDTO)
+                {
+                    var cleaning = new CleaningHistoryView();
+                    cleaning.UserName = DTO.UserID;
+                    cleaning.TramNumber = DTO.TramNumber;
+                    cleaning.Description = DTO.Description;
+                    cleaning.Datetime = DTO.Datetime;
+                    cleaningsHistoryView.Add(cleaning);
+                }
+
+                if (cleaningsHistoryView.Any()) return cleaningsHistoryView;
                 else throw new Exception("No cleanings");
             }
             catch (Exception e)
@@ -215,22 +227,21 @@ namespace Logic
             }
         }
 
-        private void GetServiceHistory()
-        {
-            try
-            {
-                var services = new List<MaintenanceDTO>();
-                services = this.DatabaseMaintenance.GetServiceHistory();
-                if (services.Any()) return services;
-                else throw new Exception("No services");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-        */
+        //public void GetServiceHistory()
+        //{
+        //    try
+        //    {
+        //        var services = new List<MaintenanceDTO>();
+        //        services = this.DatabaseMaintenance.GetServiceHistory();
+        //        if (services.Any()) return services;
+        //        else throw new Exception("No services");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        throw;
+        //    }
+        //}
 
         private List<CleaningDTO> OrganiseCleaningList(List<CleaningDTO> maintenanceList)
         {

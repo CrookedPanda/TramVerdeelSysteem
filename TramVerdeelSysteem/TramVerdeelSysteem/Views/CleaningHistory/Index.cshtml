@@ -1,0 +1,47 @@
+﻿@model Model.ViewModels.CleaningHistoryMasterView
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutMaintanance.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+        <div class="list-group">
+            <label class="list-group-item"><b>Trams:</b></label>
+
+            @foreach (var train in Model.cleanings)
+            {
+                <input class="list-group-item text-left" type="button" onclick="ShowHistoryClean('@train.TramNumber.ToString()', '@train.UserName.ToString()', '@train.Description.ToString()', '@train.Datetime.ToString()')" value="@train.TramNumber.ToString()" />
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <label><b>Tram Nummer:</b></label>
+        <label id="TramNumber"></label>
+        <br />
+
+        <label><b>Schoonmaker:</b></label>
+        <label id="Schoonmaker"></label>
+
+        <br />
+        <label><b>Beschrijving:</b></label>
+        <label id="Beschrijving"></label>
+        <br />
+        <label><b>Datum & Tijd:</b></label>
+        <label id="DateTijd"></label>
+
+        <br />
+    </div>
+</div>
+
+<script type="text/javascript">
+    function ShowHistoryClean(TramNumber, UserName, Description, DateTime) {
+        document.getElementById('TramNumber').innerText = TramNumber;
+        document.getElementById('DateTijd').innerText = DateTime;
+        document.getElementById('Schoonmaker').innerText = UserName;
+        document.getElementById('Beschrijving').innerText = Description;
+
+        //document.getElementById('tragetAnnotation').value = "";
+    }
+</script>
