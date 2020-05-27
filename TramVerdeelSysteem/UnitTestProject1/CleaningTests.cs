@@ -14,14 +14,14 @@ namespace Data.Tests
         public void AddCleaningTest()
         {
             //Arrange
-            Cleaning cleaning = new Cleaning();
-            CleaningDTO cleaningDTO = new CleaningDTO();
-            cleaningDTO.TramNumber = 2035;
-            cleaningDTO.Annotation = "Cleaning i think";
-            cleaningDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
+            //Cleaning cleaning = new Cleaning();
+            //CleaningDTO cleaningDTO = new CleaningDTO();
+            //cleaningDTO.TramNumber = 2035;
+            //cleaningDTO.Annotation = "Cleaning i think";
+            //cleaningDTO.AuthKey = "KG91WM56XkCG1zNUQkZYmA";
 
             //Act
-            cleaning.AddCleaning(cleaningDTO);
+            //cleaning.AddCleaning(cleaningDTO);
 
             //Assert
         }

@@ -40,5 +40,26 @@ namespace Data
                 _connect.Con.Close();
             }
         }
+
+        public void AddSector(int idTrack, int Position)
+        {
+            try
+            {
+                _connect.Con.Open();
+                MySqlCommand cmd = _connect.Con.CreateCommand();
+                cmd.CommandText = "INSERT INTO `sector`(`idTrack`, `Position`) VALUES (@track,@pos)";
+                cmd.Parameters.AddWithValue("@track", idTrack);
+                cmd.Parameters.AddWithValue("@pos", Position);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+        }
     }
 }

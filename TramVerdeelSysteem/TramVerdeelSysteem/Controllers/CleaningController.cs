@@ -12,6 +12,7 @@ using System.Dynamic;
 
 namespace TramVerdeelSysteem.Controllers
 {
+    using Microsoft.Extensions.WebEncoders.Testing;
     public class CleaningController : Controller
     {
         Logic.Maintenance maintenanceLogic = new Logic.Maintenance();
@@ -30,7 +31,8 @@ namespace TramVerdeelSysteem.Controllers
             CleaningMasterView Model = new CleaningMasterView();
             Model.cleanings = maintenanceLogic.GetCleaningList();
             Model.cleaning = new CleaningView();
-
+            GeoFeature geo = new GeoFeature();
+            Model.geo = geo;
             return View(Model);
         }
 
