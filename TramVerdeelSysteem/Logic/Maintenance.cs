@@ -199,13 +199,25 @@ namespace Logic
             }
         }
 
-        /*
-        private void GetCleaningHistory()
+        public List<CleaningHistoryView> GetCleaningHistory()
         {
             try
             {
-                Cleanings = this.DatabaseMaintenance.GetCleaningHistory();
-                if (Cleanings.Any()) OrganiseCleaningHistory();
+                // var cleanings = new List<CleaningDTO>();
+                var cleaningsHistoryDTO = this.DatabaseMaintenance.GetCleaningHistory();
+
+                var cleaningsHistoryView = new List<CleaningHistoryView>();
+                foreach (CleaningHistoryDTO DTO in cleaningsHistoryDTO)
+                {
+                    var cleaning = new CleaningHistoryView();
+                    cleaning.UserName = DTO.UserID;
+                    cleaning.TramNumber = DTO.TramNumber;
+                    cleaning.Description = DTO.Description;
+                    cleaning.Datetime = DTO.Datetime;
+                    cleaningsHistoryView.Add(cleaning);
+                }
+
+                if (cleaningsHistoryView.Any()) return cleaningsHistoryView;
                 else throw new Exception("No cleanings");
             }
             catch (Exception e)
@@ -215,14 +227,26 @@ namespace Logic
             }
         }
 
-        private void GetServiceHistory()
+        public List<MaintenanceHistoryView> GetServiceHistory()
         {
             try
             {
-                var services = new List<MaintenanceDTO>();
-                services = this.DatabaseMaintenance.GetServiceHistory();
-                if (services.Any()) return services;
-                else throw new Exception("No services");
+                // var cleanings = new List<CleaningDTO>();
+                var maintenanceHistoryDTO = this.DatabaseMaintenance.GetServiceHistory();
+
+                var maintenancesHistoryView = new List<MaintenanceHistoryView>();
+                foreach (MaintenanceHistoryDTO DTO in maintenanceHistoryDTO)
+                {
+                    var maintenance = new MaintenanceHistoryView();
+                    maintenance.UserName = DTO.UserName;
+                    maintenance.TramNumber = DTO.TramNumber;
+                    maintenance.Description = DTO.Description;
+                    maintenance.Datetime = DTO.Datetime;
+                    maintenancesHistoryView.Add(maintenance);
+                }
+
+                if (maintenancesHistoryView.Any()) return maintenancesHistoryView;
+                else throw new Exception("No maintenances.");
             }
             catch (Exception e)
             {
@@ -230,7 +254,6 @@ namespace Logic
                 throw;
             }
         }
-        */
 
         private List<CleaningDTO> OrganiseCleaningList(List<CleaningDTO> maintenanceList)
         {

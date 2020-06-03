@@ -1,6 +1,7 @@
 ﻿using Data;
 using Model.DTOs;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace DataTest
 {
@@ -27,6 +28,28 @@ namespace DataTest
         public void GetMaintenanceList()
         {
 
+        }
+
+        [TestMethod]
+        public void GetMaintenanceHistory()
+        {
+            //arrange
+            Maintenance maintenance = new Maintenance();
+            //act
+            List<MaintenanceHistoryDTO> maintenanceHistoryDTOList = new List<MaintenanceHistoryDTO>();
+            maintenanceHistoryDTOList = maintenance.GetServiceHistory();
+            //assert
+        }
+
+        [TestMethod]
+        public void GetCleaningHistory()
+        {
+            //arrange
+            Maintenance maintenance = new Maintenance();
+            //act
+            List<CleaningHistoryDTO> cleaningHistoryDTOList = new List<CleaningHistoryDTO>();
+            cleaningHistoryDTOList = maintenance.GetCleaningHistory();
+            //assert
         }
     }
 }
