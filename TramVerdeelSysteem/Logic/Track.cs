@@ -24,6 +24,10 @@ namespace Logic
             databaseTrack = cDatabase;
         }
 
+        public void SetSectors(List<Sector> pSectors)
+        {
+            sectors = pSectors;
+        }
 
         public void ChangeLine(int pLine, string pRemeseName)
         {

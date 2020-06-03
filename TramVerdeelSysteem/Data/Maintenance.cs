@@ -149,9 +149,9 @@ namespace Data
             return maintenanceList;
         }
 
-        public List<MaintenanceDTO> GetServiceHistory()
+        public List<MaintenanceHistoryDTO> GetServiceHistory()
         {
-            List<MaintenanceDTO> maintenanceList = new List<MaintenanceDTO>();
+            List<MaintenanceHistoryDTO> maintenanceList = new List<MaintenanceHistoryDTO>();
             try
             {
                 _connect.Con.Open();
@@ -165,11 +165,14 @@ namespace Data
                 {
                     while (dataReader.Read())
                     {
-                        MaintenanceDTO maintenance = new MaintenanceDTO
+                        MaintenanceHistoryDTO maintenance = new MaintenanceHistoryDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
-                            Annotation = dataReader.GetString("Description")
+                            TramNumber = dataReader.GetInt32("Number"),
+                            Description = dataReader.GetString("Description"),
+                            Datetime = dataReader.GetDateTime("ServiceDate"),
+                            UserName = dataReader.GetString("Name")
                         };
+                        maintenanceList.Add(maintenance);
                     }
                 }
                 dataReader.Close();
@@ -313,9 +316,9 @@ namespace Data
             return cleaningList;
         }
 
-        public List<CleaningDTO> GetCleaningHistory()
+        public List<CleaningHistoryDTO> GetCleaningHistory()
         {
-            List<CleaningDTO> cleaningList = new List<CleaningDTO>();
+            List<CleaningHistoryDTO> cleaningList = new List<CleaningHistoryDTO>();
             try
             {
                 _connect.Con.Open();
@@ -329,11 +332,14 @@ namespace Data
                 {
                     while (dataReader.Read())
                     {
-                        CleaningDTO cleaning = new CleaningDTO
+                        CleaningHistoryDTO cleaning = new CleaningHistoryDTO
                         {
-                            TramNumber = dataReader.GetInt32("idTram"),
-                            Annotation = dataReader.GetString("Description")
+                            TramNumber = dataReader.GetInt32("Number"),
+                            Description = dataReader.GetString("Description"),
+                            UserID = dataReader.GetString("Name"),
+                            Datetime = dataReader.GetDateTime("CleaningDate")
                         };
+                        cleaningList.Add(cleaning);
                     }
                 }
                 dataReader.Close();
