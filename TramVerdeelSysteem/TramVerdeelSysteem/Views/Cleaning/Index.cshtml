@@ -106,12 +106,13 @@
         style: 'mapbox://styles/mapbox/outdoors-v11',
         center: [4.852428, 52.347953],
         zoom: 17.5,
-        bearing: -60
+        bearing: -60,
+        interactive: false
     });
 
     map.on('load', function () {
         map.addSource('places', {
-            
+
             'type': 'geojson',
             'data': {
                 'type': 'FeatureCollection',
@@ -121,14 +122,14 @@
             @if (train.TargetRail >= 0)
             {
                 <text>
-                   
+
 
                                 {
                                     'type': 'Feature',
                                     'properties': {
                                         'description':
-                                            '<strong>@train.TargetNumber</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
-                                        'icon': 'theatre'
+                                            '<strong>Tram nummer:</strong><br><strong>@train.TargetNumber</strong>',
+                                        'icon': 'monument'
                                     },
                                     'geometry': {
                                         'type': 'Point',
@@ -136,14 +137,14 @@
                                     }
                                 },
 
-                            
+
                 </text>
             }
         }
                 ]
             }
         });
-       
+
         // Add a layer showing the places.
         map.addLayer({
             'id': 'places',
@@ -151,7 +152,8 @@
             'source': 'places',
             'layout': {
                 'icon-image': '{icon}-15',
-                'icon-allow-overlap': true
+                'icon-allow-overlap': true,
+                'icon-size': 1.5
             }
         });
 
@@ -183,6 +185,7 @@
         map.on('mouseleave', 'places', function () {
             map.getCanvas().style.cursor = '';
         });
+
     });
 </script>
 <script type="text/javascript">
