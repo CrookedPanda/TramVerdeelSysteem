@@ -11,7 +11,7 @@
 
             @foreach (var train in Model.maintenances)
             {
-                <input class="list-group-item text-left" type="button" onclick="ShowHistoryClean('@train.TramNumber.ToString()', '@train.UserName.ToString()', '@train.Description.ToString()', '@train.Datetime.ToString()')" value="Tram @train.TramNumber.ToString(), op @train.Datetime.ToString()" />
+                <input class="list-group-item text-left" type="button" onclick="ShowHistoryClean('@train.TramNumber.ToString()', '@train.UserName.ToString()', '@train.Description.ToString()', '@train.Datetime.ToString("dd-M-yyyy HH:mm")')" value="Tram @train.TramNumber.ToString(), op @train.Datetime.ToString("dd-M-yyyy HH:mm")" />
             }
         </div>
     </div>

@@ -28,18 +28,20 @@
         <label><b>Sector nummer:</b></label>
         <label id="Sector"></label>
         <br />
-        <label><b>grote/kleine schoonmaak:</b></label>
+        <label><b>grote/kleine onderhoudsbeurt:</b></label>
         <label id="IsLarge"></label>
 
         <br />
-        <form class="col-12" asp-action="Index">
+        <form class="col-12" asp-action="Index" style="padding-left:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
             <input asp-for="maintenance.TargetNumber" type="hidden" id="targetNumber" name="targetNumber" value="" />
             <input asp-for="maintenance.TargetIsLarge" type="hidden" id="targetIsLarge" name="targetIsLarge" value="" />
             <input asp-for="maintenance.TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
             <input asp-for="maintenance.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
-            <input type="submit" class="btn btn-primary float-right" value="clean" />
+            <label for="targetAnnotation"><b>Opmerkingen:</b></label>
+            <input asp-for="maintenance.TargetAnnotation" type="text" name="targetAnnotation" value="" required />
+            <input type="submit" class="btn btn-primary float-right" value="Complete" />
         </form>
     </div>
 </div>
