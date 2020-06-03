@@ -9,8 +9,8 @@ namespace Logic
 {
     public class Depot
     {
-        IDatabaseDepot iDepot;
-
+        IDatabaseDepot iDepot;
+
         public Depot()
         {
             this.iDepot = new Data.Depot();
@@ -20,10 +20,10 @@ namespace Logic
             this.iDepot = iDatabaseDepot;
         }
 
-        public Model.ViewModels.DepotView GetDepotView(string depotName)
-        {
-            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView(this.iDepot.GetDepot(depotName));
-            return depotView;
+        public Model.ViewModels.DepotView GetDepotView(string depotName)
+        {
+            Model.ViewModels.DepotView depotView = new Model.ViewModels.DepotView(this.iDepot.GetDepot(depotName));
+            return depotView;
         }
 
         public bool AddTrain()

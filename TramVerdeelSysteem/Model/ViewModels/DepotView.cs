@@ -8,6 +8,7 @@ namespace Model.ViewModels
     {
         public DepotView(DTOs.DepotDTO depot)
         {
+            Tracks = new List<TrackDepotView>();
             Name = depot.Name;
 
             for(int i = 0; i < depot.Tracks.Count; i++)

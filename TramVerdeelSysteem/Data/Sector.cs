@@ -15,22 +15,7 @@ namespace Data
         {
             _connect = connect;
         }
-
-
-        public void ChangeSectorStatus(ChangeSectorStatusDTO DTO)
-        {
-
-        }
-        public void ClearSector(EditSectorDTO DTO)
-        {
-
-        }
-        public void ReserveSector(ReserveSectorDTO DTO)
-        {
-
-        }
-
-
+        
         public bool SectorStatusChange(SectorStatusChangeDTO sectorStatusChange)
         {
             try
