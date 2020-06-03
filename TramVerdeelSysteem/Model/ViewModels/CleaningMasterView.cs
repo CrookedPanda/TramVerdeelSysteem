@@ -8,5 +8,7 @@ namespace Model.ViewModels
     {
         public List<CleaningView> cleanings { get; set; }
         public CleaningView cleaning { get; set; }
+
+        public GeoFeature geo { get; set; }
     }
 }

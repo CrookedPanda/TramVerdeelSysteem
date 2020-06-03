@@ -15,7 +15,7 @@ namespace Logic
 
         public Sector()
         {
-            //implemetn standard datasorce
+            //implement standard datasorce
         }
         public Sector(IDatabaseSector cDatabase)
         {
@@ -52,7 +52,7 @@ namespace Logic
                 {
                     RemeseName = pRemese,
                     Tracknumber = pTrackNumber,
-                    SectorPosiotion = position,
+                    SectorPosition = position,
                     TrainNumber = pTrain.Number
                 });
                 return true;
