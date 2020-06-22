@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Data.Interfaces;
 using Logic.Interfaces;
@@ -72,16 +73,18 @@ namespace Data
             {
                 _connect.Con.Open();
 
-                MySqlCommand cmd = _connect.Con.CreateCommand();
-                cmd.CommandText = "UPDATE sector SET idTram = '@idTram' WHERE Position = '@Position' AND idTrack = (SELECT idTrack FROM track WHERE TrackNumber = '@TrackNumber' AND idRemise = (SELECT idRemise FROM remise WHERE Name = '@DepotName'))";
+                string query = "UPDATE sector SET idTram = (SELECT idTram FROM tram WHERE tram.Number = @idTram) WHERE Position = @Position AND idTrack = (SELECT idTrack FROM track WHERE TrackNumber = @TrackNumber AND idRemise = (SELECT idRemise FROM remise WHERE Name = @DepotName))";
+
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@idTram", sector.TramId);
                 cmd.Parameters.AddWithValue("@Position", sector.SectorPosition);
                 cmd.Parameters.AddWithValue("@TrackNumber", sector.TrackNumber);
                 cmd.Parameters.AddWithValue("@DepotName", sector.DepotName);
                 cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Debug.WriteLine(e);
                 return false;
             }
             finally

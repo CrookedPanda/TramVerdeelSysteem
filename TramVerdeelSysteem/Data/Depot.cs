@@ -25,10 +25,6 @@ namespace Data
             int trackNumber = 0;
             int lineNumber = 0;
             int orderNumber = 0;
-            int saveTrackNumber = 0;
-            int saveLineNumber = 0;
-            int saveOrderNumber = 0;
-
             DepotDTO depot = new DepotDTO();
 
             TrackDepotDTO trackDepot = new TrackDepotDTO();
@@ -40,9 +36,10 @@ namespace Data
             {
                 _connect.Con.Open();
 
-                string query = "SELECT track.OrderNumber, track.TrackNumber, track.Line, sector.Position, sector.idSectorStatus, sector.idTram, remise.Name FROM `track` "
+                string query = "SELECT track.OrderNumber, track.TrackNumber, track.Line, sector.Position, sector.idSectorStatus, tram.Number, remise.Name FROM `track` "
                     + "INNER JOIN sector ON sector.idTrack = track.idTrack "
                     + "INNER JOIN remise ON remise.idRemise = track.idRemise "
+                    + "LEFT JOIN tram ON tram.idTram = sector.idTram "
                     + "WHERE remise.Name = @name ORDER BY track.OrderNumber, track.TrackNumber, sector.Position";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@Name", depotName);
@@ -56,13 +53,13 @@ namespace Data
                         sectorDepot = new SectorDepotDTO();
                         
                         depot.Name = dataReader.GetString("Name");
-                        
-                        saveTrackNumber = dataReader.GetInt32("TrackNumber");
-                        saveOrderNumber = dataReader.GetInt32("OrderNumber");
-                        saveLineNumber = dataReader.GetInt32("Line");
+
+                        int saveTrackNumber = dataReader.GetInt32("TrackNumber");
+                        int saveOrderNumber = dataReader.GetInt32("OrderNumber");
+                        int saveLineNumber = dataReader.GetInt32("Line");
                         sectorDepot.idSectorStatus = dataReader.GetInt32("idSectorStatus");
                         sectorDepot.Position = dataReader.GetInt32("Position");
-                        sectorDepot.idTram = dataReader.IsDBNull(dataReader.GetOrdinal("idTram")) ? 0 : dataReader.GetInt32("idTram");
+                        sectorDepot.idTram = dataReader.IsDBNull(dataReader.GetOrdinal("Number")) ? 0 : dataReader.GetInt32("Number");
                         if (trackNumber == saveTrackNumber)
                         {
                             sectorDepots.Add(sectorDepot);
