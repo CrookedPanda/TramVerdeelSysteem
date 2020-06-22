@@ -9,5 +9,6 @@ namespace TramVerdeelSysteem.Views.Depot
     public class DepotModelDumpView
     {
         public List<TrackPartition> trackPartitions { get; set; }
+        public AddTrainView Train { get; set; }
     }
 }

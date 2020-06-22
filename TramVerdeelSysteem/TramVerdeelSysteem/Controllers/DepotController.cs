@@ -27,6 +27,12 @@ namespace TramVerdeelSysteem.Controllers
             return View(depotDumpView);
         }
 
+        [HttpPost]
+        public IActionResult AddTrain(DepotModelDumpView depot)
+        {
+            return View();
+        }
+
         /*public IActionResult AddPopUp()
         {
             return View();

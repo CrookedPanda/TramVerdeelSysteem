@@ -79,23 +79,26 @@
         <div class="row">
             <label id="spoorSector">Spoor , Sector</label>
         </div>
-        <div class="row">
-            <input type="number" />
-            <select id="Spoor" name="Spoor">
-                <option value="Operationeel">Operationeel</option>
-                <option value="Kapot">Kapot</option>
-                <option value="Vies">Vies</option>
-                <option value="Vies en Kapot">Vies en Kapot</option>
-            </select>
-            <input type="button" id="freeUp" class="btn-warning" value="Free up" />
-        </div>
-        <div class="row">
-            <label>geblokkeerd</label><input type="checkbox" id="blocked" value="Blocked" />
-        </div>
-        <div class="row">
-            <input type="button" id="sectorCancel" class="btn-danger" value="Cancel" />
-            <input type="button" id="sectorAccept" class="btn-success" value="Accept" />
-        </div>
+        <form asp-action="AddTrain">
+            <div class="row">
+                <input type="number" asp-for="Train.TramId" />
+                <input id="sectorPos" type="hidden" asp-for="Train.SectorPosition" />
+                <input id="trackNum" type="hidden" asp-for="Train.TrackNumber" />
+                @Html.DropDownListFor(m => m.Train.SectorStatus,
+                        new SelectList(Enum.GetValues(typeof(Model.ViewModels.AddTrainView.Status))))
+                <input type="button" id="freeUp" class="btn-warning" value="Free up" />
+            </div>
+            <div class="row">
+                <label>geblokkeerd</label><input type="checkbox" id="blocked" value="Blocked" />
+            </div>
+            <div class="row">
+                <input type="button" id="sectorCancel" class="btn-danger" value="Cancel" />
+                @using (Html.BeginForm("AddTrain", "Depot", FormMethod.Post))
+                {
+                    <input type="submit" id="sectorAccept" class="btn-success" value="Accept" />
+                }
+            </div>
+        </form>
     </div>
 
     <div class="row-editted">
@@ -354,6 +357,11 @@
 
                         function openSectorDiv(Rail, Sector) {
                             document.getElementById("spoorSector").innerHTML = 'Spoor ' + Rail.toString() + ", Sector " + Sector.toString();
+                            $("[id=trackNum").val(Rail);
+                            $("[id=sectorPos").val(Sector);
+
+                            //document.getElementById("trackNum").Val = Rail.toString();
+                            //document.getElementById("sectorPos").Val = Sector.toString();
                             sectorPopUpContainer.style.visibility = 'visible';
                         }
                     </script>
