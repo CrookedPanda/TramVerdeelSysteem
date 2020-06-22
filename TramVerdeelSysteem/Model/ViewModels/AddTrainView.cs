@@ -9,7 +9,7 @@ namespace Model.ViewModels
         public int TramId { get; set; }
         public int TrackNumber { get; set; }
         public int SectorPosition { get; set; }
-        public string SectorStatus { get; set; }
+        public int SectorStatus { get; set; }
         public string DepotName { get; set; }
 
         public enum Status

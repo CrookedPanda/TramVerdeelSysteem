@@ -9,10 +9,13 @@ using TramVerdeelSysteem.Views.Depot;
 
 namespace TramVerdeelSysteem.Controllers
 {
+    using Model.DTOs;
+
     public class DepotController : Controller
     {
         DepotModelDumpView depotDumpView = new DepotModelDumpView();
         Depot lDepot = new Depot();
+        Sector ISector = new Sector();
         public IActionResult Index()
         {
             depotDumpView.trackPartitions = new List<TrackPartition>();
@@ -30,7 +33,9 @@ namespace TramVerdeelSysteem.Controllers
         [HttpPost]
         public IActionResult AddTrain(DepotModelDumpView depot)
         {
-            return View();
+            
+            this.ISector.AddTrain(depot.Train);
+            return this.RedirectToAction("Index");
         }
 
         /*public IActionResult AddPopUp()

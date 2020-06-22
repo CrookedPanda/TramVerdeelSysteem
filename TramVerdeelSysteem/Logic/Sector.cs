@@ -6,6 +6,8 @@ using Model.DTOs;
 
 namespace Logic
 {
+    using Model.ViewModels;
+
     public class Sector
     {
         public int position { get; set; }
@@ -15,7 +17,7 @@ namespace Logic
 
         public Sector()
         {
-            //implement standard datasorce
+            this.databaseSector = new Data.Sector();
         }
         public Sector(IDatabaseSector cDatabase)
         {
@@ -60,27 +62,40 @@ namespace Logic
             return false;
         }*/
 
-        public bool AddTrain(Train pTrain, string pRemese, int pTrackNumber)
+        public bool AddTrain(AddTrainView addTrainView)
         {
-            switch(status)
-            {
-                case Status.Open:
-                    train = pTrain;
-                    status = Status.occupied;
-                    return true;
-                case Status.Reserved:
-                    if (pTrain == train)
-                    {
-                        ChangeSectorStatus(Status.occupied, pTrackNumber, pRemese);
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                default:
-                    return false;             
-            }                
+
+            SectorDTO sectorDto = new SectorDTO();
+
+            sectorDto.DepotName = "Remise Havenstraat";
+            sectorDto.SectorPosition = addTrainView.SectorPosition;
+            sectorDto.SectorStatus = addTrainView.SectorStatus;
+            sectorDto.TrackNumber = addTrainView.TrackNumber;
+            sectorDto.TramId = addTrainView.TramId;
+
+
+            //switch(status)
+            //{
+            //    case Status.Open:
+                   
+            //        status = Status.occupied;
+            //        return true;
+            //    case Status.Reserved:
+            //        if (pTrain == train)
+            //        {
+            //            ChangeSectorStatus(Status.occupied, pTrackNumber, pRemese);
+            //            return true;
+            //        }
+            //        else
+            //        {
+            //            return false;
+            //        }
+            //    default:
+            //        return false;             
+            //}    
+            return this.databaseSector.AddTrain(sectorDto);
+
+
         }
 
         public enum Status

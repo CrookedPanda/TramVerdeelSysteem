@@ -11,9 +11,9 @@ namespace Data
     public class Sector:IDatabaseSector
     {
         private readonly ConnectionClass _connect;
-        public Sector(ConnectionClass connect)
+        public Sector()
         {
-            _connect = connect;
+            _connect = new ConnectionClass(); 
         }
         
         public bool SectorStatusChange(SectorStatusChangeDTO sectorStatusChange)
