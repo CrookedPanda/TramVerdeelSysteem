@@ -40,7 +40,7 @@
 
 
 
-<div class="row">
+<div class="row-edited">
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
@@ -72,14 +72,16 @@
         <label id="IsLarge"></label>
 
         <br />
-        <form class="col-12" asp-action="Index">
+        <form class="col-12" asp-action="Index" style="padding-left:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
             <input asp-for="cleaning.TargetNumber" type="hidden" id="targetNumber" name="targetNumber" value="" />
             <input asp-for="cleaning.TargetIsLarge" type="hidden" id="targetIsLarge" name="targetIsLarge" value="" />
             <input asp-for="cleaning.TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
             <input asp-for="cleaning.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
-            <input type="submit" class="btn btn-primary float-right" value="clean" />
+            <label for="targetAnnotation"><b>Opmerkingen:</b></label>
+            <input asp-for="cleaning.TargetAnnotation" type="text" name="targetAnnotation" value="" required/>
+            <input type="submit" class="btn btn-primary float-right" value="Complete" />
         </form>
     </div>
 </div>
