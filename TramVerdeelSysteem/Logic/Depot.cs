@@ -7,16 +7,24 @@ using Data.Interfaces;
 
 namespace Logic
 {
+    using Model.DTOs;
+
     public class Depot
     {
         IDatabaseDepot iDepot;
 
         private IDatabaseMaintenance iMaintenance;
 
+        private IDatabaseSector iSector;
+
+        private Data.Track iTrack;
+
         public Depot()
         {
             this.iDepot = new Data.Depot();
             this.iMaintenance = new Data.Maintenance();
+            this.iTrack = new Data.Track();
+            this.iSector = new Data.Sector();
         }
         public Depot(IDatabaseDepot iDatabaseDepot)
         {
@@ -48,9 +56,36 @@ namespace Logic
             return false;
         }
 
-        public bool AddTrainToTrack(int tramNumber, List<int> trackNumber)
+        public bool AddTrainToTrack(int tramNumber, List<int> trackNumbers)
         {
+
+            List<SectorDTO> sectors = new List<SectorDTO>();
+            foreach (var trackNumber in trackNumbers)
+            {
+                var trackSectors = this.iTrack.GetTrack(trackNumber);
+                foreach (var sector in trackSectors)
+                {
+                    sectors.Add(sector);
+                }
+            }
+
+            for (int i = 0; i < sectors.Count; i++)
+            {
+                if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0)
+                {
+                    if (this.AddTrainToSector(sectors[i]))
+                    {
+                        return true;
+                    }
+ 
+                }
+            }
             return true;
+        }
+
+        public bool AddTrainToSector(SectorDTO sector)
+        {
+            return this.iSector.AddTrain(sector);
         }
 
         public bool ClearSector(string depotName, int trackNumber,int position)
