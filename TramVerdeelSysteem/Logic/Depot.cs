@@ -11,9 +11,12 @@ namespace Logic
     {
         IDatabaseDepot iDepot;
 
+        private IDatabaseMaintenance iMaintenance;
+
         public Depot()
         {
             this.iDepot = new Data.Depot();
+            this.iMaintenance = new Data.Maintenance();
         }
         public Depot(IDatabaseDepot iDatabaseDepot)
         {
@@ -26,9 +29,28 @@ namespace Logic
             return depotView;
         }
 
-        public bool AddTrain()
+        public bool AddTrain(int tramNumber)
         {
+            //is there need for maintenance? go to free maintenance sector
+            //is there a specific track assigned to the tram?
+            //is there a free non specific track?
+
+            var maintenanceList = this.iMaintenance.GetServiceList();
+            foreach (var maintenance in maintenanceList)
+            {
+                if (maintenance.TramNumber == tramNumber)
+                {
+                    AddTrainToTrack(tramNumber,  new List<int>{74,75});
+                }
+            }
+
+
             return false;
+        }
+
+        public bool AddTrainToTrack(int tramNumber, List<int> trackNumber)
+        {
+            return true;
         }
 
         public bool ClearSector(string depotName, int trackNumber,int position)

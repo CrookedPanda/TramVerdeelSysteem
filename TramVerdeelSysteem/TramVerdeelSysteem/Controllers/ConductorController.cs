@@ -12,6 +12,8 @@ namespace TramVerdeelSysteem.Controllers
     {
         conductor conductorLogic = new conductor();
 
+        Depot depotLogic = new Depot();
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -27,6 +29,7 @@ namespace TramVerdeelSysteem.Controllers
             {
                 if(Model.TramNumber != 0)
                 {
+                    this.depotLogic.AddTrain(Model.TramNumber);
                     conductorLogic.AddTramToCleaning(Model);
                 }
                 
