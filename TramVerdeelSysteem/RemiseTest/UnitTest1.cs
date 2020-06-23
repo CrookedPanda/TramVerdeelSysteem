@@ -64,5 +64,20 @@ namespace RemiseTest
             ClickSector(34, 1);
             AddTrain(2018);
         }
+
+        [Test]
+        public void Test2()
+        {
+            LoadHome();
+            ProceedError();
+            LoginAsUser();
+            _driver.Navigate().GoToUrl(_homeURL + "Conductor/Index");
+            _driver.FindElement(By.Id("2")).Click();
+            _driver.FindElement(By.Id("0")).Click();
+            _driver.FindElement(By.Id("1")).Click();
+            _driver.FindElement(By.Id("8")).Click();
+            _driver.FindElement(By.Name("Maintenance")).Click();
+            _driver.FindElement(By.Id("submitTask")).Click();
+        }
     }
 }

@@ -29,10 +29,10 @@ namespace TramVerdeelSysteem.Controllers
             {
                 if(Model.TramNumber != 0)
                 {
-                    this.depotLogic.AddTrain(Model.TramNumber);
                     conductorLogic.AddTramToCleaning(Model);
+                    this.depotLogic.AddTrain(Model.TramNumber);
                 }
-                
+
                 return Index();
             }
             catch

@@ -49,10 +49,9 @@ namespace Logic
                 if (maintenance.TramNumber == tramNumber)
                 {
                     AddTrainToTrack(tramNumber,  new List<int>{74,75});
+                    return true;
                 }
             }
-
-
             return false;
         }
 
@@ -73,6 +72,8 @@ namespace Logic
             {
                 if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0)
                 {
+                    sectors[i].TramId = tramNumber;
+                    sectors[i].DepotName = "Remise Havenstraat";
                     if (this.AddTrainToSector(sectors[i]))
                     {
                         return true;
