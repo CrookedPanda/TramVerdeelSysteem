@@ -106,29 +106,29 @@
             <div class="list-group">
                 <label class="list-group-item"><b>Trams:</b></label>
                 <!--TODO: FORLOOP-->
-                <input type="button" class="list-group-item text-center" onclick="openWijzigDiv()" value="202" />
+                <input type="button" class="list-group-item text-center" onclick="" value="202" />
                 <!--Must-->
-                <input type="button" id="addPopUp" class="btn-primary text-center" value="Add" />
-            </div>
+                <!--<input type="button" id="addPopUp" class="btn-primary text-center" value="Add" />-->
         </div>
+    </div>
 
-        <div class="col padding-75">
-            @foreach (TramVerdeelSysteem.Views.Depot.TrackPartition trackPartition in Model.trackPartitions)
-            {
-                <div class="row padding-bot">
-                    @foreach(Model.ViewModels.TrackDepotView trackDepotView in trackPartition.trackDepots)
-                    {
-                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                        <div class="list-group">
-                            <!--Rail-->
-                            <input type="button" class="list-group-item text-center" value="@trackDepotView.TrackNumber">
-                            <!--Line-->
-                            <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line">
-                            @foreach (Model.ViewModels.SectorDepotView sectorDepotView in trackDepotView.Sectors)
-                            {
-                                <input type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
-                            }
-                        </div>
+    <div class="col padding-75">
+        @foreach (TramVerdeelSysteem.Views.Depot.TrackPartition trackPartition in Model.trackPartitions)
+        {
+            <div class="row padding-bot">
+                @foreach(Model.ViewModels.TrackDepotView trackDepotView in trackPartition.trackDepots)
+                {
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
+                    <div class="list-group">
+                        <!--Rail-->
+                <input type="button" class="list-group-item text-center" value="@trackDepotView.TrackNumber">
+                <!--Line-->
+                <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line">
+                @foreach (Model.ViewModels.SectorDepotView sectorDepotView in trackDepotView.Sectors)
+                {
+                    <input type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
+                }
+            </div>
                     </div>
                     }
                 </div>
@@ -325,10 +325,10 @@
                             addPopUpContainer.style.visibility = 'hidden';
                         }
 
-                        document.getElementById("addPopUp").onclick = function () { openAddDiv() };
-                        function openAddDiv() {
-                            addPopUpContainer.style.visibility = 'visible';
-                        }
+                        //document.getElementById("addPopUp").onclick = function () { openAddDiv() };
+                        //function openAddDiv() {
+                        //    addPopUpContainer.style.visibility = 'visible';
+                        //}
 
                         //Wijzig Popup
                         var wijzigPopUpContainer = document.getElementById("wijzigPopUpContainer");
