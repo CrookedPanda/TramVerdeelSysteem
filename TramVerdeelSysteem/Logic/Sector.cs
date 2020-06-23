@@ -65,37 +65,18 @@ namespace Logic
         public bool AddTrain(AddTrainView addTrainView)
         {
 
-            SectorDTO sectorDto = new SectorDTO();
+            SectorDTO sectorDto = new SectorDTO
+            {
+                DepotName = "Remise Havenstraat",
+                SectorPosition = addTrainView.SectorPosition,
+                SectorStatus = addTrainView.SectorStatus,
+                TrackNumber = addTrainView.TrackNumber,
+                TramId = addTrainView.TramId
+            };
 
-            sectorDto.DepotName = "Remise Havenstraat";
-            sectorDto.SectorPosition = addTrainView.SectorPosition;
-            sectorDto.SectorStatus = addTrainView.SectorStatus;
-            sectorDto.TrackNumber = addTrainView.TrackNumber;
-            sectorDto.TramId = addTrainView.TramId;
-
-
-            //switch(status)
-            //{
-            //    case Status.Open:
-                   
-            //        status = Status.occupied;
-            //        return true;
-            //    case Status.Reserved:
-            //        if (pTrain == train)
-            //        {
-            //            ChangeSectorStatus(Status.occupied, pTrackNumber, pRemese);
-            //            return true;
-            //        }
-            //        else
-            //        {
-            //            return false;
-            //        }
-            //    default:
-            //        return false;             
-            //}    
+            this.databaseSector.ClearSectorWithTramNumber(sectorDto);
+            
             return this.databaseSector.AddTrain(sectorDto);
-
-
         }
 
         public enum Status
