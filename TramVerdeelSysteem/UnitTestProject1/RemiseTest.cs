@@ -19,5 +19,18 @@ namespace DataTest
 
             //Assert
         }
+
+        [TestMethod]
+        public void TestGetUser2()
+        {
+            //Arrange
+            ConnectionClass con = new ConnectionClass();
+            Track track = new Track(con);
+
+            //Act
+            var output = track.GetTrack(40);
+
+            //Assert
+        }
     }
 }

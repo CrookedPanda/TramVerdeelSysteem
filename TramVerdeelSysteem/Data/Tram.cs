@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Model.DTOs;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -61,5 +62,6 @@ namespace Data
                 _connect.Con.Close();
             }
         }
+
     }
 }

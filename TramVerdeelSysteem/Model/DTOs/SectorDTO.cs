@@ -10,6 +10,7 @@ namespace Model.DTOs
         public int TrackNumber { get; set; }
         public int SectorPosition { get; set; }
         public int SectorStatus { get; set; }
+        public int Line { get; set; }
         public string DepotName { get; set; }
     }
 }
