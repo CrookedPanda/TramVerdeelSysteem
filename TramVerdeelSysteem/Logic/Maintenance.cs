@@ -1,6 +1,4 @@
-﻿
-
-namespace Logic
+﻿namespace Logic
 {
     using System;
     using System.Collections.Generic;
@@ -16,10 +14,6 @@ namespace Logic
     public class Maintenance
     {
         private IDatabaseMaintenance DatabaseMaintenance;
-
-        private List<MaintenanceDTO> Services;
-
-        private List<CleaningDTO> Cleanings;
 
         public Maintenance(IDatabaseMaintenance iDatabaseMaintenance)
         {

@@ -126,7 +126,7 @@
                 <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line">
                 @foreach (Model.ViewModels.SectorDepotView sectorDepotView in trackDepotView.Sectors)
                 {
-                    <input type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
+                    <input id="@trackDepotView.TrackNumber.ToString() / @sectorDepotView.Position.ToString()" type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
                 }
             </div>
                     </div>
