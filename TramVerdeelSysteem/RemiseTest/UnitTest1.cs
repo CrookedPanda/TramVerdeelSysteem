@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 namespace RemiseTest
 {
@@ -14,7 +15,7 @@ namespace RemiseTest
         [SetUp]
         public void Setup()
         {
-            _homeURL = "https://localhost:44349/";
+            _homeURL = "https://localhost:44360/";
             _driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
         }
 
@@ -32,12 +33,36 @@ namespace RemiseTest
             _driver.FindElement(By.Id("submitLogin")).Click();
         }
 
+        private void ProceedError()
+        {
+            //only should be added when certificate error
+            _driver.FindElement(By.Id("details-button")).Click();
+            _driver.FindElement(By.Id("proceed-link")).Click();
+        }
 
+        private void ClickSector(int trackNumber, int sectorPosition)
+        {
+            Thread.Sleep(1000);
+            string id = trackNumber.ToString() + "/" + sectorPosition.ToString();
+            _driver.FindElement(By.Name(id)).Click();
+        }
+
+        private void AddTrain(int tramNumber)
+        {
+            Thread.Sleep(1000);
+            string id = tramNumber.ToString();
+            _driver.FindElement(By.Id("tramId")).SendKeys(id);
+            _driver.FindElement(By.Id("sectorAccept")).Click();
+        }
 
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            LoadHome();
+            ProceedError();
+            LoginAsUser();
+            ClickSector(34, 1);
+            AddTrain(2018);
         }
     }
 }

@@ -81,7 +81,7 @@
         </div>
         <form asp-action="AddTrain">
             <div class="row">
-                <input type="number" asp-for="Train.TramId" />
+                <input id="tramId" type="number" asp-for="Train.TramId" />
                 <input id="sectorPos" type="hidden" asp-for="Train.SectorPosition" />
                 <input id="trackNum" type="hidden" asp-for="Train.TrackNumber" />
                 @Html.DropDownListFor(m => m.Train.SectorStatus,
@@ -126,7 +126,7 @@
                 <input type="button" class="list-group-item text-center colorRed" value="@trackDepotView.Line">
                 @foreach (Model.ViewModels.SectorDepotView sectorDepotView in trackDepotView.Sectors)
                 {
-                    <input id="@trackDepotView.TrackNumber.ToString() / @sectorDepotView.Position.ToString()" type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
+                    <input name="@trackDepotView.TrackNumber.ToString()/@sectorDepotView.Position.ToString()" type="button" onclick="openSectorDiv(@trackDepotView.TrackNumber,@sectorDepotView.Position)" class="list-group-item text-center" value="@sectorDepotView.idTram">
                 }
             </div>
                     </div>
