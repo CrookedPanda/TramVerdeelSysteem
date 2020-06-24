@@ -34,7 +34,10 @@ namespace Data
 
                 if (dataReader.HasRows)
                 {
-                    hasSector = true;
+                    while(dataReader.Read())
+                    {
+                        hasSector = true;
+                    }
                 }
                 dataReader.Close();
             }
@@ -58,9 +61,9 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT MAX(Position), idTram FROM `sector`"
+                string query = "SELECT Position, idTram FROM `sector`"
                     + " INNER JOIN track ON track.idTrack = sector.idTrack"
-                    + " WHERE track.TrackNumber = @trackNumber";
+                    + " WHERE track.TrackNumber = @trackNumber ORDER BY sector.Position DESC LIMIT 0,1";
 
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 cmd.Parameters.AddWithValue("@trackNumber", trackNumber);
@@ -68,7 +71,10 @@ namespace Data
 
                 if (dataReader.HasRows)
                 {
-                    hasSector = dataReader.IsDBNull(dataReader.GetOrdinal("Number")) ? true : false;
+                    while(dataReader.Read())
+                    {
+                        hasSector = dataReader.IsDBNull(dataReader.GetOrdinal("idTram")) ? true : false;
+                    }
                 }
                 dataReader.Close();
             }
