@@ -63,5 +63,37 @@ namespace Data
             }
             return sectorList;
         }
+
+        public List<int> GetTrackWithLine(int lineNumber)
+        {
+            List<int> trackList = new List<int>();
+            try
+            {
+                _connect.Con.Open();
+                string query = "SELECT DISTINCT track.TrackNumber FROM `sector`"
+                    + " INNER JOIN track ON sector.idTrack = track.idTrack WHERE track.Line = @lineNumber";
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@lineNumber", lineNumber);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        trackList.Add(dataReader.GetInt32("TrackNumber"));
+                    }
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return trackList;
+        }
     }
 }

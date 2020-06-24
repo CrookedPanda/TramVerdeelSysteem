@@ -8,7 +8,7 @@ namespace Logic
 {
     class Service
     {
-        Train Train { get; set; }
+        Tram Train { get; set; }
         EnumCollection.Size ServiceSize { get; set; }
 
         bool Priority { get; set; }

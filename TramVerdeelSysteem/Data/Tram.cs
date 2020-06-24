@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Data
@@ -63,5 +64,34 @@ namespace Data
             }
         }
 
+        public int GetTramWithNumber(int tramNumber)
+        {
+            int line = 0;
+            try
+            {
+                _connect.Con.Open();
+                string query = "SELECT tram.Line FROM tram"
+                    + " WHERE tram.Number = @idTram";
+
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@idTram", tramNumber);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    line = dataReader.GetInt32("Line");
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return line;
+        }
     }
 }

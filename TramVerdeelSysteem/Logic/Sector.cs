@@ -12,7 +12,7 @@ namespace Logic
     {
         public int position { get; set; }
         public Status status { get; set; } = Status.Open;
-        public Train train { get; set; }
+        public Tram train { get; set; }
         private IDatabaseSector databaseSector;
 
         public Sector()
