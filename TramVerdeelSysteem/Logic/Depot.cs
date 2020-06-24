@@ -101,7 +101,7 @@ namespace Logic
 
             for (int i = 0; i < sectors.Count; i++)
             {
-                if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0)
+                if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0 && i != (sectors.Count - 1))
                 {
                     sectors[i].TramId = tramNumber;
                     sectors[i].DepotName = "Remise Havenstraat";

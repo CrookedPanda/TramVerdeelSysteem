@@ -24,19 +24,19 @@ namespace DataTest
             //Assert
         }
 
-        [TestMethod]
-        public void AddSectorTest()
-        {
-            //Arrange
-            Tram tram = new Tram();
+        //[TestMethod]
+        //public void AddSectorTest()
+        //{
+        //    //Arrange
+        //    Tram tram = new Tram();
 
-            //Act
-            for (int i = 1; i < 6; i++)
-            {
-                tram.AddSector(42, i);
-            }
+        //    //Act
+        //    for (int i = 1; i < 6; i++)
+        //    {
+        //        tram.AddSector(42, i);
+        //    }
 
-            //Assert
-        }
+        //    //Assert
+        //}
     }
 }
