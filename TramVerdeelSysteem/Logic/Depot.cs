@@ -98,10 +98,32 @@ namespace Logic
 
         public bool AddTrainToTrack(int tramNumber, List<int> trackNumbers)
         {
-
+            
             List<SectorDTO> sectors = new List<SectorDTO>();
             foreach (var trackNumber in trackNumbers)
             {
+                if (trackNumber == 32 || trackNumber == 34 || trackNumber == 36 || trackNumber == 38)
+                {
+                    switch (trackNumber)
+                    {
+                        case 32:
+
+                            break;
+
+                        case 34:
+
+                            break;
+
+                        case 36:
+
+                            break;
+
+                        case 38:
+
+                            break;
+
+                    }
+                }
                 var trackSectors = this.iTrack.GetTrack(trackNumber);
                 foreach (var sector in trackSectors)
                 {
@@ -111,7 +133,7 @@ namespace Logic
 
             for (int i = 0; i < sectors.Count; i++)
             {
-                if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0 && i != (sectors.Count - 1))
+                if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0)
                 {
                     sectors[i].TramId = tramNumber;
                     sectors[i].DepotName = "Remise Havenstraat";
