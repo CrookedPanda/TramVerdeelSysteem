@@ -29,11 +29,46 @@ namespace Data
                     + " WHERE tram.Number = @idTram";
 
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@idTram", sector.TramId);
                 var dataReader = cmd.ExecuteReader();
 
                 if (dataReader.HasRows)
                 {
                     hasSector = true;
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return hasSector;
+        }
+
+        public bool IsSectorFree(SectorDTO sector)
+        {
+            //SELECT MAX(Position), idTram FROM `sector`
+            //INNER JOIN track ON track.idTrack = sector.idTrack
+            //WHERE track.TrackNumber = 40
+            bool hasSector = false;
+            try
+            {
+                _connect.Con.Open();
+                string query = "SELECT MAX(Position), idTram FROM `sector`"
+                    + " INNER JOIN track ON track.idTrack = sector.idTrack"
+                    + " WHERE track.TrackNumber = @trackNumber";
+
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@trackNumber", sector.TrackNumber);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    hasSector = dataReader.IsDBNull(dataReader.GetOrdinal("Number")) ? true : false;
                 }
                 dataReader.Close();
             }
