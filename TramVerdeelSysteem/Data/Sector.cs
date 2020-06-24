@@ -139,7 +139,7 @@ namespace Data
             return true;
         }
 
-        public bool ClearSectorWithTramNumber(SectorDTO sector)
+        public bool ClearSectorWithTramNumber(int tramNumber)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace Data
                     + " SET sector.idTram = @idTram"
                     + " WHERE Tram.Number = @tramNumber";
                 cmd.Parameters.AddWithValue("@idTram", null);
-                cmd.Parameters.AddWithValue("@tramNumber", sector.TramId);
+                cmd.Parameters.AddWithValue("@tramNumber", tramNumber);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception e)

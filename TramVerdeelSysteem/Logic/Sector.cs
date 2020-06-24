@@ -74,7 +74,7 @@ namespace Logic
                 TramId = addTrainView.TramId
             };
 
-            this.databaseSector.ClearSectorWithTramNumber(sectorDto);
+            this.databaseSector.ClearSectorWithTramNumber(sectorDto.TramId);
             
             return this.databaseSector.AddTrain(sectorDto);
         }

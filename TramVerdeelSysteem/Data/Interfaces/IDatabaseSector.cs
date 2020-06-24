@@ -10,7 +10,7 @@ namespace Data.Interfaces
         public bool GetSector(SectorDTO sector);
         public bool IsSectorFree(int trackNumber);
         public bool SectorStatusChange(SectorStatusChangeDTO DTO);
-        public bool ClearSectorWithTramNumber(SectorDTO sector);
+        public bool ClearSectorWithTramNumber(int tramNumber);
         public bool ClearSector(SectorDTO DTO);
         //public bool ReserveSector(SectorDTO DTO);
         public bool AddTrain(SectorDTO DTO);

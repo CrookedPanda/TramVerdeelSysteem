@@ -45,8 +45,9 @@ namespace Logic
             return this.iTram.GetTramList();
         }
 
-        public bool AddTrain(int tramNumber)
+        public SectorDTO AddTrain(int tramNumber)
         {
+            iSector.ClearSectorWithTramNumber(tramNumber);
             //is there need for maintenance? go to free maintenance sector
             //is there a specific track assigned to the tram?
             //is there a free non specific track?
@@ -56,10 +57,10 @@ namespace Logic
             {
                 if (maintenance.TramNumber == tramNumber)
                 {
-
-                    if (AddTrainToTrack(tramNumber, new List<int> { 74, 75 }))
+                    var sector = AddTrainToTrack(tramNumber, new List<int> { 74, 75 });
+                    if (sector != null)
                     {
-                        return true;
+                        return sector;
                     }
 
                 }
@@ -69,34 +70,37 @@ namespace Logic
             var specificTracks = this.iTrack.GetTrackWithLine(line);
             if (specificTracks.Count != 0)
             {
-                if (AddTrainToTrack(tramNumber, specificTracks))
+                var sector = AddTrainToTrack(tramNumber, specificTracks);
+                if (sector != null)
                 {
-                    return true;
+                    return sector;
                 }
             }
 
             var nonSpecificTracks = this.iTrack.GetTrackWithLine(0);
             if (nonSpecificTracks.Count != 0)
             {
-                if (AddTrainToTrack(tramNumber, nonSpecificTracks))
+                var sector = AddTrainToTrack(tramNumber, nonSpecificTracks);
+                if (sector != null)
                 {
-                    return true;
+                    return sector;
                 }
             }
 
             var otherSpecificTracks = this.iTrack.GetOtherTracks(line);
             if (otherSpecificTracks.Count != 0)
             {
-                if (AddTrainToTrack(tramNumber, otherSpecificTracks))
+                var sector = AddTrainToTrack(tramNumber, otherSpecificTracks);
+                if (sector != null)
                 {
-                    return true;
+                    return sector;
                 }
             }
 
-            return false;
+            return null;
         }
 
-        public bool AddTrainToTrack(int tramNumber, List<int> trackNumbers)
+        public SectorDTO AddTrainToTrack(int tramNumber, List<int> trackNumbers)
         {
             bool isFree = false;
             List<SectorDTO> sectors = new List<SectorDTO>();
@@ -116,9 +120,9 @@ namespace Logic
                 {
                     sectors[i].TramId = tramNumber;
                     sectors[i].DepotName = "Remise Havenstraat";
-                    if (this.AddTrainToSector(sectors[i]))
+                    if (this.AddTrainToSector(sectors[i]) != null)
                     {
-                        return true;
+                        return sectors[i];
                     }
                 }else if (sectors[i].SectorStatus == 1)
                 {
@@ -128,21 +132,26 @@ namespace Logic
                         {
                             sectors[i].TramId = tramNumber;
                             sectors[i].DepotName = "Remise Havenstraat";
-                            if (this.AddTrainToSector(sectors[i]))
+                            if (this.AddTrainToSector(sectors[i]) != null)
                             {
-                                return true;
+                                return sectors[i];
                             }
                         }
                     }
                 }
             }
-            return false;
+            return null;
         }
 
-        public bool AddTrainToSector(SectorDTO sector)
+        public SectorDTO AddTrainToSector(SectorDTO sector)
         {
-            iSector.ClearSectorWithTramNumber(sector);
-            return this.iSector.AddTrain(sector);
+            
+            if (this.iSector.AddTrain(sector))
+            {
+                return sector;
+            }
+
+            return null;
         }
 
         public bool ClearSector(string depotName, int trackNumber,int position)
