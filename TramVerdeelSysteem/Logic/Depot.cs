@@ -40,6 +40,11 @@ namespace Logic
             return depotView;
         }
 
+        public List<int> GetTramList()
+        {
+            return this.iTram.GetTramList();
+        }
+
         public bool AddTrain(int tramNumber)
         {
             //is there need for maintenance? go to free maintenance sector
@@ -111,6 +116,7 @@ namespace Logic
 
         public bool AddTrainToSector(SectorDTO sector)
         {
+            iSector.ClearSectorWithTramNumber(sector);
             return this.iSector.AddTrain(sector);
         }
 

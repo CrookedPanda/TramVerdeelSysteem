@@ -79,7 +79,10 @@ namespace Data
 
                 if (dataReader.HasRows)
                 {
-                    line = dataReader.GetInt32("Line");
+                    while (dataReader.Read())
+                    {
+                        line = dataReader.GetInt32("Line");
+                    }
                 }
                 dataReader.Close();
             }
@@ -92,6 +95,36 @@ namespace Data
                 _connect.Con.Close();
             }
             return line;
+        }
+
+        public List<int> GetTramList()
+        {
+            List<int> iList = new List<int>();
+            try
+            {
+                _connect.Con.Open();
+                string query = "SELECT DISTINCT Number FROM `tram` LIMIT 50";
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        iList.Add(dataReader.GetInt32("Number"));
+                    }
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return iList;
         }
     }
 }

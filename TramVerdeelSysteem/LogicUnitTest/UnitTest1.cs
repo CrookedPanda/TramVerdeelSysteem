@@ -1,38 +1,34 @@
-//using NUnit.Framework;
-//using Logic.Interfaces;
-//using Logic;
-//using Model.DTOs;
+using NUnit.Framework;
+using Logic.Interfaces;
+using Logic;
+using Model.DTOs;
+using System.Collections.Generic;
 
-//namespace LogicUnitTest
-//{
-//    public class Tests
-//    {
-//        static DBcontext context = new DBcontext();
-//        Authentication auth = new Authentication(context);
+namespace LogicUnitTest
+{
+    public class Tests
+    {
+        Logic.Depot depot;
+        [SetUp]
+        public void Setup()
+        {
+            depot = new Logic.Depot();
+        }
 
-//        [SetUp]
-//        public void Setup()
-//        {
+        [Test]
+        public void AddTrain()
+        {
+            List<int> iList = depot.GetTramList();
+            foreach (var item in iList)
+            {
+                depot.AddTrain(item);
+            }
+        }
 
-//        }
-
-//       //[Test]
-//        public void AddAccount()
-//        {
-
-//            auth.AddAccount("Test", "test123", 1);
-//            AccountDTO result = context.accounts.Find(x => x.Username == "Test");
-//            Assert.AreEqual(result.Username, "Test");
-//        }
-
-//       // [Test]
-//        public void Login()
-//        {
-//            auth.Login("Test", "test123");
-//            LoginStampDTO result = context.loginstamps.Find(x => x.username == "Test");
-
-//            Assert.AreEqual(result.username, "Test");
-//            Assert.Pass();
-//        }
-//    }
-//}
+        [Test]
+        public void Login()
+        {
+            
+        }
+    }
+}
