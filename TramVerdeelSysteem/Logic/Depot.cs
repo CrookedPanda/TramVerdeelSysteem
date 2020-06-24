@@ -65,7 +65,8 @@ namespace Logic
                 }
             }
 
-            var specificTracks = this.iTrack.GetTrackWithLine(this.iTram.GetTramWithNumber(tramNumber));
+            var line = this.iTram.GetTramWithNumber(tramNumber);
+            var specificTracks = this.iTrack.GetTrackWithLine(line);
             if (specificTracks.Count != 0)
             {
                 if (AddTrainToTrack(tramNumber, specificTracks))
@@ -78,6 +79,15 @@ namespace Logic
             if (nonSpecificTracks.Count != 0)
             {
                 if (AddTrainToTrack(tramNumber, nonSpecificTracks))
+                {
+                    return true;
+                }
+            }
+
+            var otherSpecificTracks = this.iTrack.GetTrackWithLine(0);
+            if (otherSpecificTracks.Count != 0)
+            {
+                if (AddTrainToTrack(tramNumber, otherSpecificTracks))
                 {
                     return true;
                 }
