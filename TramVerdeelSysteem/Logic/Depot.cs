@@ -98,7 +98,7 @@ namespace Logic
 
         public bool AddTrainToTrack(int tramNumber, List<int> trackNumbers)
         {
-            
+            bool isFree = false;
             List<SectorDTO> sectors = new List<SectorDTO>();
             foreach (var trackNumber in trackNumbers)
             {
@@ -107,7 +107,12 @@ namespace Logic
                     switch (trackNumber)
                     {
                         case 32:
+                            if (!this.iSector.IsSectorFree(trackNumber))
+                            {
+                                isFree = true;
+                            }
 
+                            
                             break;
 
                         case 34:
@@ -134,6 +139,14 @@ namespace Logic
             for (int i = 0; i < sectors.Count; i++)
             {
                 if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 0)
+                {
+                    sectors[i].TramId = tramNumber;
+                    sectors[i].DepotName = "Remise Havenstraat";
+                    if (this.AddTrainToSector(sectors[i]))
+                    {
+                        return true;
+                    }
+                }else if (sectors[i].SectorStatus == 1 && isFree)
                 {
                     sectors[i].TramId = tramNumber;
                     sectors[i].DepotName = "Remise Havenstraat";

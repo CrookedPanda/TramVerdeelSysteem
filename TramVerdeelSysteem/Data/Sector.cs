@@ -49,7 +49,7 @@ namespace Data
             return hasSector;
         }
 
-        public bool IsSectorFree(SectorDTO sector)
+        public bool IsSectorFree(int trackNumber)
         {
             //SELECT MAX(Position), idTram FROM `sector`
             //INNER JOIN track ON track.idTrack = sector.idTrack
@@ -63,7 +63,7 @@ namespace Data
                     + " WHERE track.TrackNumber = @trackNumber";
 
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
-                cmd.Parameters.AddWithValue("@trackNumber", sector.TrackNumber);
+                cmd.Parameters.AddWithValue("@trackNumber", trackNumber);
                 var dataReader = cmd.ExecuteReader();
 
                 if (dataReader.HasRows)
