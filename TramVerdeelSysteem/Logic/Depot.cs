@@ -104,29 +104,9 @@ namespace Logic
             {
                 if (trackNumber == 32 || trackNumber == 34 || trackNumber == 36 || trackNumber == 38)
                 {
-                    switch (trackNumber)
+                    if (!this.iSector.IsSectorFree(trackNumber))
                     {
-                        case 32:
-                            if (!this.iSector.IsSectorFree(trackNumber))
-                            {
-                                isFree = true;
-                            }
-
-                            
-                            break;
-
-                        case 34:
-
-                            break;
-
-                        case 36:
-
-                            break;
-
-                        case 38:
-
-                            break;
-
+                        isFree = true;
                     }
                 }
                 var trackSectors = this.iTrack.GetTrack(trackNumber);
