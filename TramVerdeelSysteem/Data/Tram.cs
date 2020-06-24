@@ -103,7 +103,7 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT DISTINCT Number FROM `tram` LIMIT 50";
+                string query = "SELECT DISTINCT Number FROM `tram`";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 

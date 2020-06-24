@@ -95,5 +95,36 @@ namespace Data
             }
             return trackList;
         }
+
+        public List<int> GetOtherTracks(int number)
+        {
+            List<int> trackList = new List<int>();
+            try
+            {
+                _connect.Con.Open();
+                string query = "SELECT TrackNumber FROM track WHERE line NOT IN (@number, 0, 100, 200, 300)";
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@number", number);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        trackList.Add(dataReader.GetInt32("TrackNumber"));
+                    }
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return trackList;
+        }
     }
 }

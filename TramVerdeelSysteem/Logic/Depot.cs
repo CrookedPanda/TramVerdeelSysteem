@@ -84,7 +84,7 @@ namespace Logic
                 }
             }
 
-            var otherSpecificTracks = this.iTrack.GetTrackWithLine(0);
+            var otherSpecificTracks = this.iTrack.GetOtherTracks(line);
             if (otherSpecificTracks.Count != 0)
             {
                 if (AddTrainToTrack(tramNumber, otherSpecificTracks))
