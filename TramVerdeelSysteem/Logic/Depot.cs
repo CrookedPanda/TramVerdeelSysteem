@@ -19,12 +19,15 @@ namespace Logic
 
         private Data.Track iTrack;
 
+        private Data.Tram iTram;
+
         public Depot()
         {
             this.iDepot = new Data.Depot();
             this.iMaintenance = new Data.Maintenance();
             this.iTrack = new Data.Track();
             this.iSector = new Data.Sector();
+            this.iTram = new Data.Tram();
         }
         public Depot(IDatabaseDepot iDatabaseDepot)
         {
@@ -48,10 +51,33 @@ namespace Logic
             {
                 if (maintenance.TramNumber == tramNumber)
                 {
-                    AddTrainToTrack(tramNumber,  new List<int>{74,75});
+
+                    if (AddTrainToTrack(tramNumber, new List<int> { 74, 75 }))
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            var specificTracks = this.iTrack.GetTrackWithLine(this.iTram.GetTramWithNumber(tramNumber));
+            if (specificTracks.Count != 0)
+            {
+                if (AddTrainToTrack(tramNumber, specificTracks))
+                {
                     return true;
                 }
             }
+
+            var nonSpecificTracks = this.iTrack.GetTrackWithLine(0);
+            if (nonSpecificTracks.Count != 0)
+            {
+                if (AddTrainToTrack(tramNumber, nonSpecificTracks))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -80,7 +106,7 @@ namespace Logic
                     }
                 }
             }
-            return true;
+            return false;
         }
 
         public bool AddTrainToSector(SectorDTO sector)
