@@ -97,6 +97,26 @@ namespace Logic
                 }
             }
 
+            var entryTracks = this.iTrack.GetTrackWithLine(100);
+            if (entryTracks.Count != 0)
+            {
+                var sector = AddTrainToTrack(tramNumber, entryTracks);
+                if (sector != null)
+                {
+                    return sector;
+                }
+            }
+
+            var exitracks = this.iTrack.GetTrackWithLine(200);
+            if (exitracks.Count != 0)
+            {
+                var sector = AddTrainToTrack(tramNumber, exitracks);
+                if (sector != null)
+                {
+                    return sector;
+                }
+            }
+
             return null;
         }
 
