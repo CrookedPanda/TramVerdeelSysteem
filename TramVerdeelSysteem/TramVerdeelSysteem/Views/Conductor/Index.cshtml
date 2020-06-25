@@ -5,60 +5,65 @@
 }
 
 <body>
-    <div class="align-items-center">
-        <form class="align-content-center text-center">
-            <div class="form-group" id="ConductorForm">
+<div class="align-items-center">
+    
+    <form class="align-content-center text-center">
+        
+        <div class="form-group" id="ConductorForm">
+            <div class="form-row">
                 <p class="text-danger">@TempData["Error"]</p>
-                <h2>Track number: @TempData["TrackNumber"]</h2>
-                <h2>Sector position: @TempData["SectorPosition"]</h2>
-                <div class="form-row">
-
+            </div>
+            <div class="form-row">
+                <h5>Rail nummer: @TempData["TrackNumber"]</h5>
+            </div>
+            <div class="form-row">
+                <h5>Sector positie: @TempData["SectorPosition"]</h5>
+            </div>
+            <div class="form-row">
+                <label>Tram nummer: </label><label id="TramID"></label>
+            </div>
+            <div class="form-row">
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(1)" id="1" value="1" class="btn btn-primary form-control"/>
                 </div>
-                <div class="form-row">
-                    <label>Tram nummer: </label><label id="TramID"></label>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(2)" id="2" value="2" class="btn btn-primary form-control"/>
                 </div>
-                <div class="form-row">
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(1)" id="1" value="1" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(2)" id="2" value="2" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(3)" id="3" value="3" class="btn btn-primary form-control"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(4)" id="4" value="4" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(5)" id="5" value="5" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(6)" id="6" value="6" class="btn btn-primary form-control"/>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(7)" id="7" value="7" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(8)" id="8" value="8" class="btn btn-primary form-control"/>
-                    </div>
-                    <div class="col buttonNumbers">
-                        <input type="button" onclick="addNumber(9)" id="9" value="9" class="btn btn-primary form-control"/>
-                    </div>
-                </div>
-                <div class="form-row buttonZeroBack">
-                    <input type="button" onclick="addNumber(0)" id="0" value="0" class="btn btn-primary form-control"/>
-                </div>
-                <div class="form-row buttonZeroBack">
-                    <input type="button" onclick="addNumber(-1)" id="-1" value="Backspace" class="btn btn-primary form-control"/>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(3)" id="3" value="3" class="btn btn-primary form-control"/>
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(4)" id="4" value="4" class="btn btn-primary form-control"/>
+                </div>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(5)" id="5" value="5" class="btn btn-primary form-control"/>
+                </div>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(6)" id="6" value="6" class="btn btn-primary form-control"/>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(7)" id="7" value="7" class="btn btn-primary form-control"/>
+                </div>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(8)" id="8" value="8" class="btn btn-primary form-control"/>
+                </div>
+                <div class="col buttonNumbers">
+                    <input type="button" onclick="addNumber(9)" id="9" value="9" class="btn btn-primary form-control"/>
+                </div>
+            </div>
+            <div class="form-row buttonZeroBack">
+                <input type="button" onclick="addNumber(0)" id="0" value="0" class="btn btn-primary form-control"/>
+            </div>
+            <div class="form-row buttonZeroBack">
+                <input type="button" onclick="addNumber(-1)" id="-1" value="Backspace" class="btn btn-primary form-control"/>
+            </div>
+        </div>
 
-            @*<div class="form-group">
+        @*<div class="form-group">
                 <div class="form-row">
                     <text>Schoonmaak Beurt</text><input type="checkbox" id="Schoonmaak" class="form-check-input" />
                 </div>
@@ -66,22 +71,22 @@
                     <text>Technische Beurt</text><input type="checkbox" id="Technisch" class="form-check-input" />
                 </div>
             </div>*@
-        </form>
+    </form>
 
-        <form id="ActionForm" asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <label>Technische hulp:</label>
-            <input asp-for="Maintenance" type="checkbox" id="Maintenance" name="Maintenance"/>
-            <br />
-            <label>Schoonmaak:</label>
-            <input asp-for="Cleaning" type="checkbox" id="Cleaning" name="Cleaning" />
+    <form id="ActionForm" asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <label>Technische hulp:</label>
+        <input asp-for="Maintenance" type="checkbox" id="Maintenance" name="Maintenance"/>
+        <br/>
+        <label>Schoonmaak:</label>
+        <input asp-for="Cleaning" type="checkbox" id="Cleaning" name="Cleaning"/>
 
-            <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber"/>
-            <div class="form-group">
-                <input id="submitTask" type="submit" value="verstuur" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <input asp-for="TramNumber" type="hidden" id="TramNumber" name="TramNumber"/>
+        <div class="form-group">
+            <input id="submitTask" type="submit" value="verstuur" class="btn btn-primary"/>
+        </div>
+    </form>
+</div>
 </body>
 
 @*<script type="text/javascript">
