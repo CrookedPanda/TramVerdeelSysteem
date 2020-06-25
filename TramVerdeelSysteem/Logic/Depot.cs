@@ -144,7 +144,7 @@ namespace Logic
                     {
                         return sectors[i];
                     }
-                }else if (sectors[i].SectorStatus == 1)
+                }else if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 1)
                 {
                     if (sectors[i].TrackNumber == 32 || sectors[i].TrackNumber == 34 || sectors[i].TrackNumber == 36 || sectors[i].TrackNumber == 38)
                     {
