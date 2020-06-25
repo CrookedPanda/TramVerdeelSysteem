@@ -86,7 +86,7 @@
 
 @if (Model != null)
 {
-    <script>
+<script>
         mapboxgl.accessToken = 'pk.eyJ1Ijoic2FuZGVybiIsImEiOiJjam8xaXVubXQwYjV4M3BrdTF2eWViOXk1In0.KqdhiFgZrFqFaRwo6bZ_1g';
         var map = new mapboxgl.Map({
             container: 'map',
@@ -115,7 +115,8 @@
                                         'type': 'Feature',
                                         'properties': {
                                             'description':
-                                                '<strong>Tram nummer:</strong><br><strong>@train.TargetNumber</strong>',
+                                                '<strong>Tram nummer:</strong><br><strong>@train.TargetNumber</strong><br /><strong>Tram Positie:</strong><br><strong>Rails: @train.TargetRail, Sector: @train.TargetSector</strong>',
+
                                             'icon': 'monument'
                                         },
                                         'geometry': {
@@ -174,7 +175,7 @@
             });
 
         });
-    </script>
+</script>
 }
     <script type="text/javascript">
         function ShowTram(TramNumber, Rail, Sector) {
