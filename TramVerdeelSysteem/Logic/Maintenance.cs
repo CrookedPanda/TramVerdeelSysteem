@@ -134,8 +134,6 @@
 
         public List<MaintenanceView> GetServiceList()
         {
-
-
             try
             {
                 //var services = new List<MaintenanceDTO>();
@@ -150,6 +148,8 @@
                     service.Key = DTO.AuthKey;
                     service.TargetNumber = DTO.TramNumber;
                     service.TargetAnnotation = DTO.Annotation;
+                    service.TargetRail = DTO.TargetRail;
+                    service.TargetSector = DTO.TargetSector;
                     serviceView.Add(service);
                 }
 
@@ -180,6 +180,8 @@
                     cleaning.Key = DTO.AuthKey;
                     cleaning.TargetNumber = DTO.TramNumber;
                     cleaning.TargetAnnotation = DTO.Annotation;
+                    cleaning.TargetRail = DTO.TargetRail;
+                    cleaning.TargetSector = DTO.TargetSector;
                     cleaningsView.Add(cleaning);
                 }
                 

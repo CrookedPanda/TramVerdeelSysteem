@@ -10,6 +10,8 @@ namespace Model.DTOs
         public string Annotation { get; set; }
         public string AuthKey { get; set; }
         public bool Urgent { get; set; }
+        public int TargetRail { get; set; }
+        public int TargetSector { get; set; }
         public List<Logic.CleaningTramModel> CleaningList { get; set; }
     }
 }

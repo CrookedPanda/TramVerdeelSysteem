@@ -44,33 +44,30 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-            @foreach (var train in Model.cleanings)
+            @if (Model.cleanings != null)
             {
-                @if (train.TargetRail != 0)
+                @foreach (var train in Model.cleanings)
                 {
-
+                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
                 }
-
-                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
             }
         </div>
     </div>
 
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-row">
+            <p class="text-danger">@TempData["Error"]</p>
+        </div>
         <label><b>Tram Nummer:</b></label>
         <label id="TramNumber"></label>
         <br />
 
-        <label><b>Spoor numer:</b></label>
+        <label><b>Spoor nummer:</b></label>
         <label id="Spoor"></label>
 
         <br />
         <label><b>Sector nummer:</b></label>
         <label id="Sector"></label>
-        <br />
-        <label><b>grote/kleine schoonmaak:</b></label>
-        <label id="IsLarge"></label>
-
         <br />
         <form class="col-12" asp-action="Index" style="padding-left:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -80,8 +77,8 @@
             <input asp-for="cleaning.TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
             <input asp-for="cleaning.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
             <label for="targetAnnotation"><b>Opmerkingen:</b></label>
-            <input asp-for="cleaning.TargetAnnotation" type="text" name="targetAnnotation" value="" required/>
-            <input type="submit" class="btn btn-primary float-right" value="Complete" />
+            <input asp-for="cleaning.TargetAnnotation" type="text" name="targetAnnotation" value="" required />
+            <input type="submit" class="btn btn-primary float-right" value="Voltooid" />
         </form>
     </div>
 </div>

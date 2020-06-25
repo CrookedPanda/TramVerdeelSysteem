@@ -8,15 +8,20 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-
-            @foreach (var train in Model.maintenances)
+            @if (Model.maintenances != null)
             {
-                <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
+                @foreach (var train in Model.maintenances)
+                {
+                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
+                }
             }
         </div>
     </div>
 
     <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12">
+        <div class="form-row">
+            <p class="text-danger">@TempData["Error"]</p>
+        </div>
         <label><b>Tram Nummer:</b></label>
         <label id="TramNumber"></label>
         <br />
@@ -28,10 +33,6 @@
         <label><b>Sector nummer:</b></label>
         <label id="Sector"></label>
         <br />
-        <label><b>grote/kleine onderhoudsbeurt:</b></label>
-        <label id="IsLarge"></label>
-
-        <br />
         <form class="col-12" asp-action="Index" style="padding-left:0">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
@@ -41,7 +42,7 @@
             <input asp-for="maintenance.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
             <label for="targetAnnotation"><b>Opmerkingen:</b></label>
             <input asp-for="maintenance.TargetAnnotation" type="text" name="targetAnnotation" value="" required />
-            <input type="submit" class="btn btn-primary float-right" value="Complete" />
+            <input type="submit" class="btn btn-primary float-right" value="Voltooid" />
         </form>
     </div>
 </div>

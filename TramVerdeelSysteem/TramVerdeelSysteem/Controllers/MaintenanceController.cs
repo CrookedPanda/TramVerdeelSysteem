@@ -25,9 +25,16 @@ namespace TramVerdeelSysteem.Controllers
             //ReparatieDienstViewModel Model = new ReparatieDienstViewModel();
            // GeoFeature geoFeature = new GeoFeature();
             MaintenanceMasterView Model = new MaintenanceMasterView();
-
-            Model.maintenances = maintenanceLogic.GetServiceList();
-            Model.maintenance = new MaintenanceView();
+            try
+            {
+                Model.maintenances = maintenanceLogic.GetServiceList();
+                Model.maintenance = new MaintenanceView();
+            }
+            catch (Exception e)
+            {
+                TempData["Error"] = e.Message;
+            }
+            
 
             return View(Model);
         }
@@ -44,7 +51,8 @@ namespace TramVerdeelSysteem.Controllers
             }
             catch(Exception e)
             {
-                throw e;
+                TempData["Error"] = "Probeer het later opnieuw.";
+                return View();
             }
         }
 

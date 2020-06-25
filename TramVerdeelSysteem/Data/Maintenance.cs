@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using Data.Interfaces;
 using Model.DTOs;
@@ -116,10 +117,13 @@ namespace Data
             List<MaintenanceDTO> maintenanceList = new List<MaintenanceDTO>();
             try
             {
+                //SELECT Tram.Number, service.Size, service.Priority, service.Description, track.TrackNumber, sector.Position FROM service
                 _connect.Con.Open();
-                string query = "SELECT Tram.Number, service.Size, service.Priority, service.Description FROM service"
-                    + " INNER JOIN Tram ON Tram.idTram = service.idTram";
-                    
+                string query = "SELECT Tram.Number, service.Size, service.Priority, service.Description, track.TrackNumber, sector.Position FROM service"
+                    + " INNER JOIN Tram ON Tram.idTram = service.idTram"
+                    + " INNER JOIN sector ON tram.idTram = sector.idTram"
+                    + " INNER JOIN track ON track.idTrack = tram.idTram";
+
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
@@ -131,16 +135,19 @@ namespace Data
                         {
                             TramNumber = dataReader.GetInt32("Number"),
                             Annotation = dataReader.GetString("Description"),
-                            Urgent = dataReader.GetBoolean("Priority")
+                            Urgent = dataReader.GetBoolean("Priority"),
+                            TargetRail = dataReader.GetInt32("TrackNumber"),
+                            TargetSector = dataReader.GetInt32("Position")
                         };
                         maintenanceList.Add(maintenance);
                     }
                 }
                 dataReader.Close();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Debug.Write(e);
+                return null;
             }
             finally
             {
@@ -285,8 +292,10 @@ namespace Data
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT Tram.Number, cleaning.Size, cleaning.Priority, cleaning.Description FROM cleaning"
-                    + " INNER JOIN Tram ON Tram.idTram = cleaning.idTram";
+                string query = "SELECT Tram.Number, cleaning.Size, cleaning.Priority, cleaning.Description, track.TrackNumber, sector.Position FROM cleaning"
+                    + " INNER JOIN Tram ON Tram.idTram = cleaning.idTram"
+                    + " INNER JOIN sector ON tram.idTram = sector.idTram"
+                    + " INNER JOIN track ON track.idTrack = tram.idTram";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
@@ -298,7 +307,9 @@ namespace Data
                         {
                             TramNumber = dataReader.GetInt32("Number"),
                             Annotation = dataReader.GetString("Description"),
-                            Urgent = dataReader.GetBoolean("Priority")
+                            Urgent = dataReader.GetBoolean("Priority"),
+                            TargetRail = dataReader.GetInt32("TrackNumber"),
+                            TargetSector = dataReader.GetInt32("Position")
                         };
                         cleaningList.Add(cleaning);
                     }

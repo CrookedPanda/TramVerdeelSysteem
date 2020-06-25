@@ -47,13 +47,19 @@ namespace Logic
 
         public SectorDTO AddTrain(int tramNumber)
         {
+            bool isTramInList = false;
             var trams = this.GetTramList();
             foreach (var tram in trams)
             {
-                if (tram != tramNumber)
+                if (tram == tramNumber)
                 {
-                    return null;
+                    isTramInList = true;
+                    break;
                 }
+            }
+            if (!isTramInList)
+            {
+                return null;
             }
             iSector.ClearSectorWithTramNumber(tramNumber);
             //is there need for maintenance? go to free maintenance sector

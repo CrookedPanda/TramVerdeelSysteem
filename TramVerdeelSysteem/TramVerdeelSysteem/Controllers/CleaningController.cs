@@ -20,6 +20,7 @@ namespace TramVerdeelSysteem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            CleaningMasterView Model = new CleaningMasterView();
             //CleaningView model;
             //model = new CleaningView();
             //tijdelijke model inhoud
@@ -27,12 +28,18 @@ namespace TramVerdeelSysteem.Controllers
             // implemetn get cleaning list logic;
             //model = new CleaningView();
             //dynamic model = new ExpandoObject();
-
-            CleaningMasterView Model = new CleaningMasterView();
-            Model.cleanings = maintenanceLogic.GetCleaningList();
-            Model.cleaning = new CleaningView();
-            GeoFeature geo = new GeoFeature();
-            Model.geo = geo;
+            try
+            {
+                Model.cleanings = maintenanceLogic.GetCleaningList();
+                Model.cleaning = new CleaningView();
+                GeoFeature geo = new GeoFeature();
+                Model.geo = geo;
+            }
+            catch (Exception e)
+            {
+                TempData["Error"] = e.Message;
+            }
+            
             return View(Model);
         }
 
@@ -48,7 +55,8 @@ namespace TramVerdeelSysteem.Controllers
             }
             catch(Exception e)
             {
-                throw (e);
+                TempData["Error"] = "Probeer het later opnieuw.";
+                return View();
             }
         }
     }
