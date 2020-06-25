@@ -47,6 +47,14 @@ namespace Logic
 
         public SectorDTO AddTrain(int tramNumber)
         {
+            var trams = this.GetTramList();
+            foreach (var tram in trams)
+            {
+                if (tram != tramNumber)
+                {
+                    return null;
+                }
+            }
             iSector.ClearSectorWithTramNumber(tramNumber);
             //is there need for maintenance? go to free maintenance sector
             //is there a specific track assigned to the tram?
@@ -144,7 +152,8 @@ namespace Logic
                     {
                         return sectors[i];
                     }
-                }else if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 1)
+                }
+                else if (sectors[i].TramId == 0 && sectors[i].SectorStatus == 1)
                 {
                     if (sectors[i].TrackNumber == 32 || sectors[i].TrackNumber == 34 || sectors[i].TrackNumber == 36 || sectors[i].TrackNumber == 38)
                     {

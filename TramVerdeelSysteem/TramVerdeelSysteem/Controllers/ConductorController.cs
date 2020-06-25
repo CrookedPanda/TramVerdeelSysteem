@@ -31,8 +31,16 @@ namespace TramVerdeelSysteem.Controllers
                 {
                     conductorLogic.AddTramToCleaning(Model);
                     var sector = this.depotLogic.AddTrain(Model.TramNumber);
-                    TempData["TrackNumber"] = sector.TrackNumber;
-                    TempData["SectorPosition"] = sector.SectorPosition;
+                    if (sector != null)
+                    {
+                        TempData["TrackNumber"] = sector.TrackNumber;
+                        TempData["SectorPosition"] = sector.SectorPosition;
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Voer een geldig nummer in.";
+                    }
+                    
                 }
 
                 return Index();
