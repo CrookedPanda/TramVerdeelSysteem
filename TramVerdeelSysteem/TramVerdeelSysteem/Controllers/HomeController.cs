@@ -22,7 +22,7 @@ namespace TramVerdeelSysteem.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             LoginViewModel user = new LoginViewModel();
             return View(user);
@@ -45,11 +45,17 @@ namespace TramVerdeelSysteem.Controllers
                 {
                     HttpContext.Response.Cookies.Append("key", auth.Key);
                     return RedirectToAction("Index","Depot");
-                } else return RedirectToAction("Index", "Home");
+                } 
+                else
+                {
+                    TempData["Error"] = "Inloggen mislukt.";
+                    return View();
+                }  
             }
             catch
             {
-                return RedirectToAction("Index", "Home");
+                TempData["Error"] = "Inloggen mislukt.";
+                return View();
             }
         }
     }

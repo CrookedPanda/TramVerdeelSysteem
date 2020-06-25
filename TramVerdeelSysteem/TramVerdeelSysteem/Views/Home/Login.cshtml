@@ -1,0 +1,53 @@
+﻿@model Model.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<!--<div class="formcontainer">
+    <form class="loginform" asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group ">
+            <input asp-for="name" class="form-control" placeholder="login"/>
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input asp-for="password" class="form-control" placeholder="password"/>
+            <span asp-validation-for="password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+</div>-->
+
+
+    <body>
+        <div class="wrapper fadeInDown" id="loginwrapper">
+            <div id="formContent">
+                <div class="fadeIn first">
+                    <img src="https://static.thenounproject.com/png/79183-200.png" id="icon" alt="Trein Icoon" />
+                </div>
+
+                <!-- Login Form--> 
+                <form asp-action="Login">
+                    <div class="form-row">
+                        <p class="text-danger">@TempData["Error"]</p>
+                    </div>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input asp-for="name" type="text" id="login" class="fadeIn second" placeholder="Gebruikersnaam">
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="password" type="password" id="password" class="fadeIn third" placeholder="Wachtwoord">
+                        <span asp-validation-for="password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="submitLogin" type="submit" class="fadeIn fourth" value="Inloggen">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>

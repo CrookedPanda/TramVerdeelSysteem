@@ -22,9 +22,11 @@ namespace TramVerdeelSysteem.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            //ReparatieDienstViewModel Model = new ReparatieDienstViewModel();
-           // GeoFeature geoFeature = new GeoFeature();
             MaintenanceMasterView Model = new MaintenanceMasterView();
+            Model.maintenances = new List<MaintenanceView>();
+            //ReparatieDienstViewModel Model = new ReparatieDienstViewModel();
+            // GeoFeature geoFeature = new GeoFeature();
+            
             try
             {
                 Model.maintenances = maintenanceLogic.GetServiceList();

@@ -19,9 +19,11 @@
         .pb-3 {
             height: 100%;
         }
+
         #mapbox {
             margin-top: 20px;
         }
+
         #map {
             position: absolute;
             margin-left: 25%;
@@ -37,18 +39,15 @@
     }
 </style>
 
-
-
-
 <div class="row-editted">
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-            @if (Model.cleanings != null)
+            @if (Model != null)
             {
                 @foreach (var train in Model.cleanings)
                 {
-                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
+                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector)" value="@train.TargetNumber.ToString()" />
                 }
             }
         </div>
@@ -73,7 +72,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
             <input asp-for="cleaning.TargetNumber" type="hidden" id="targetNumber" name="targetNumber" value="" />
-            <input asp-for="cleaning.TargetIsLarge" type="hidden" id="targetIsLarge" name="targetIsLarge" value="" />
             <input asp-for="cleaning.TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
             <input asp-for="cleaning.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
             <label for="targetAnnotation"><b>Opmerkingen:</b></label>
@@ -85,120 +83,109 @@
 <div id="mapbox">
     <div id="map"></div>
 </div>
-<div class="row">
-    @*<form class="col-12" asp-action="Index">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="TargetNumber" type="hidden"  id="targetNumber" name="targetNumber" value=""/>
-            <input asp-for="TargetIsLarge" type="hidden" id="targetIsLarge"  name="targetIsLarge" value=""/>
-            <input asp-for="TargetRail" type="hidden" id="targetRail"  name="targetRail" value=""/>
-            <input asp-for="TargetSector" type="hidden" id="targetSector"  name="targetSector" value=""/>
-            <input type="submit" class="btn btn-primary float-right" value="clean" />
-        </form>*@
-</div>
 
+@if (Model != null)
+{
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic2FuZGVybiIsImEiOiJjam8xaXVubXQwYjV4M3BrdTF2eWViOXk1In0.KqdhiFgZrFqFaRwo6bZ_1g';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v11',
+            center: [4.852428, 52.347953],
+            zoom: 17.5,
+            bearing: -60,
+            interactive: false
+        });
 
+        map.on('load', function () {
+            map.addSource('places', {
 
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1Ijoic2FuZGVybiIsImEiOiJjam8xaXVubXQwYjV4M3BrdTF2eWViOXk1In0.KqdhiFgZrFqFaRwo6bZ_1g';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/outdoors-v11',
-        center: [4.852428, 52.347953],
-        zoom: 17.5,
-        bearing: -60,
-        interactive: false
-    });
-
-    map.on('load', function () {
-        map.addSource('places', {
-
-            'type': 'geojson',
-            'data': {
-                'type': 'FeatureCollection',
-                'features': [
-        @foreach (var train in Model.cleanings)
-        {
-            @if (train.TargetRail >= 0)
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [
+            @foreach (var train in Model.cleanings)
             {
-                <text>
+                @if (train.TargetRail >= 0)
+                {
+                    <text>
 
 
-                                {
-                                    'type': 'Feature',
-                                    'properties': {
-                                        'description':
-                                            '<strong>Tram nummer:</strong><br><strong>@train.TargetNumber</strong>',
-                                        'icon': 'monument'
+                                    {
+                                        'type': 'Feature',
+                                        'properties': {
+                                            'description':
+                                                '<strong>Tram nummer:</strong><br><strong>@train.TargetNumber</strong>',
+                                            'icon': 'monument'
+                                        },
+                                        'geometry': {
+                                            'type': 'Point',
+                                            'coordinates': [4.852828, 52.347853]
+                                        }
                                     },
-                                    'geometry': {
-                                        'type': 'Point',
-                                        'coordinates': [4.852828, 52.347853]
-                                    }
-                                },
 
 
-                </text>
+                    </text>
+                }
             }
+                    ]
+                }
+            });
+
+            // Add a layer showing the places.
+            map.addLayer({
+                'id': 'places',
+                'type': 'symbol',
+                'source': 'places',
+                'layout': {
+                    'icon-image': '{icon}-15',
+                    'icon-allow-overlap': true,
+                    'icon-size': 1.5
+                }
+            });
+
+            // When a click event occurs on a feature in the places layer, open a popup at the
+            // location of the feature, with description HTML from its properties.
+            map.on('click', 'places', function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'places', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'places', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+        });
+    </script>
+}
+    <script type="text/javascript">
+        function ShowTram(TramNumber, Rail, Sector) {
+            document.getElementById('TramNumber').innerText = TramNumber;
+            document.getElementById('Spoor').innerText = Rail;
+            document.getElementById('Sector').innerText = Sector;
+
+            document.getElementById('targetNumber').value = TramNumber;
+            document.getElementById('targetRail').value = Rail;
+            document.getElementById('targetSector').value = Sector;
+
+            //document.getElementById('tragetAnnotation').value = "";
         }
-                ]
-            }
-        });
-
-        // Add a layer showing the places.
-        map.addLayer({
-            'id': 'places',
-            'type': 'symbol',
-            'source': 'places',
-            'layout': {
-                'icon-image': '{icon}-15',
-                'icon-allow-overlap': true,
-                'icon-size': 1.5
-            }
-        });
-
-        // When a click event occurs on a feature in the places layer, open a popup at the
-        // location of the feature, with description HTML from its properties.
-        map.on('click', 'places', function (e) {
-            var coordinates = e.features[0].geometry.coordinates.slice();
-            var description = e.features[0].properties.description;
-
-            // Ensure that if the map is zoomed out such that multiple
-            // copies of the feature are visible, the popup appears
-            // over the copy being pointed to.
-            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            new mapboxgl.Popup()
-                .setLngLat(coordinates)
-                .setHTML(description)
-                .addTo(map);
-        });
-
-        // Change the cursor to a pointer when the mouse is over the places layer.
-        map.on('mouseenter', 'places', function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'places', function () {
-            map.getCanvas().style.cursor = '';
-        });
-
-    });
-</script>
-<script type="text/javascript">
-    function ShowTram(TramNumber, Rail, Sector, Islarge) {
-        document.getElementById('TramNumber').innerText = TramNumber;
-        document.getElementById('Spoor').innerText = Rail;
-        document.getElementById('Sector').innerText = Sector;
-        document.getElementById('IsLarge').innerText = Islarge;
-
-        document.getElementById('targetNumber').value = TramNumber;
-        document.getElementById('targetIsLarge').value = Islarge;
-        document.getElementById('targetRail').value = Rail;
-        document.getElementById('targetSector').value = Sector;
-
-        //document.getElementById('tragetAnnotation').value = "";
-    }
-</script>
+    </script>

@@ -33,8 +33,8 @@
             </select>
         </div>
         <div class="row">
-            <input type="button" id="addCancel" class="btn-danger" value="Cancel" />
-            <input type="button" id="addAccept" class="btn-success" value="Accept" />
+            <input type="button" id="addCancel" class="btn-danger" value="Annuleren" />
+            <input type="button" id="addAccept" class="btn-success" value="Toevoegen" />
         </div>
     </div>
 
@@ -70,8 +70,8 @@
             <input type="button" id="wijzigDelete" class="btn-warning" value="Delete" />
         </div>
         <div class="row">
-            <input type="button" id="wijzigCancel" class="btn-danger" value="Cancel" />
-            <input type="button" id="wijzigAccept" class="btn-success" value="Accept" />
+            <input type="button" id="wijzigCancel" class="btn-danger" value="Annuleren" />
+            <input type="button" id="wijzigAccept" class="btn-success" value="Toevoegen" />
         </div>
     </div>
 
@@ -86,16 +86,12 @@
                 <input id="trackNum" type="hidden" asp-for="Train.TrackNumber" />
                 @Html.DropDownListFor(m => m.Train.SectorStatus,
                         new SelectList(Enum.GetValues(typeof(Model.ViewModels.AddTrainView.Status))))
-                <input type="button" id="freeUp" class="btn-warning" value="Free up" />
             </div>
             <div class="row">
-                <label>geblokkeerd</label><input type="checkbox" id="blocked" value="Blocked" />
-            </div>
-            <div class="row">
-                <input type="button" id="sectorCancel" class="btn-danger" value="Cancel" />
+                <input type="button" id="sectorCancel" class="btn-danger" value="Annuleren" />
                 @using (Html.BeginForm("AddTrain", "Depot", FormMethod.Post))
                 {
-                    <input type="submit" id="sectorAccept" class="btn-success" value="Accept" />
+                    <input type="submit" id="sectorAccept" class="btn-success" value="Toevoegen" />
                 }
             </div>
         </form>

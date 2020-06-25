@@ -8,11 +8,11 @@
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
         <div class="list-group">
             <label class="list-group-item"><b>Trams:</b></label>
-            @if (Model.maintenances != null)
+            @if (Model != null)
             {
                 @foreach (var train in Model.maintenances)
                 {
-                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector, @train.TargetIsLarge.ToString().ToLower())" value="@train.TargetNumber.ToString()" />
+                    <input class="list-group-item text-left" type="button" onclick="ShowTram(@train.TargetNumber, @train.TargetRail, @train.TargetSector)" value="@train.TargetNumber.ToString()" />
                 }
             }
         </div>
@@ -26,7 +26,7 @@
         <label id="TramNumber"></label>
         <br />
 
-        <label><b>Spoor numer:</b></label>
+        <label><b>Spoor nummer:</b></label>
         <label id="Spoor"></label>
 
         <br />
@@ -37,7 +37,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input asp-for="TargetAnnotation" type="text" id="tragetAnnotation" name="tragetAnnotation" value=""/>*@
             <input asp-for="maintenance.TargetNumber" type="hidden" id="targetNumber" name="targetNumber" value="" />
-            <input asp-for="maintenance.TargetIsLarge" type="hidden" id="targetIsLarge" name="targetIsLarge" value="" />
             <input asp-for="maintenance.TargetRail" type="hidden" id="targetRail" name="targetRail" value="" />
             <input asp-for="maintenance.TargetSector" type="hidden" id="targetSector" name="targetSector" value="" />
             <label for="targetAnnotation"><b>Opmerkingen:</b></label>
@@ -59,14 +58,12 @@
 </div>
 
 <script type="text/javascript">
-    function ShowTram(TramNumber, Rail, Sector, Islarge) {
+    function ShowTram(TramNumber, Rail, Sector) {
         document.getElementById('TramNumber').innerText = TramNumber;
         document.getElementById('Spoor').innerText = Rail;
         document.getElementById('Sector').innerText = Sector;
-        document.getElementById('IsLarge').innerText = Islarge;
 
         document.getElementById('targetNumber').value = TramNumber;
-        document.getElementById('targetIsLarge').value = Islarge;
         document.getElementById('targetRail').value = Rail;
         document.getElementById('targetSector').value = Sector;
 

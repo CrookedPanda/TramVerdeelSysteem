@@ -21,6 +21,7 @@ namespace TramVerdeelSysteem.Controllers
         public IActionResult Index()
         {
             CleaningMasterView Model = new CleaningMasterView();
+            Model.cleanings = new List<CleaningView>();
             //CleaningView model;
             //model = new CleaningView();
             //tijdelijke model inhoud

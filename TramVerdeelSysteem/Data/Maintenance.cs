@@ -164,7 +164,7 @@ namespace Data
                 _connect.Con.Open();
                 string query = "SELECT user.Name, tram.Number, sh.ServiceDate, sh.Description FROM servicehistory AS sh"
                     + " INNER JOIN user ON user.idUser = sh.idUser"
-                    + " INNER JOIN tram ON tram.idTram = sh.idTram";
+                    + " INNER JOIN tram ON tram.idTram = sh.idTram ORDER BY sh.ServiceDate DESC";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
@@ -335,7 +335,7 @@ namespace Data
                 _connect.Con.Open();
                 string query = "SELECT user.Name, tram.Number, ch.CleaningDate, ch.Description FROM cleaninghistory AS ch"
                     + " INNER JOIN user ON user.idUser = ch.idUser"
-                    + " INNER JOIN tram ON tram.idTram = ch.idTram";
+                    + " INNER JOIN tram ON tram.idTram = ch.idTram ORDER BY ch.CleaningDate DESC";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
                 var dataReader = cmd.ExecuteReader();
 
