@@ -38,6 +38,17 @@ namespace TramVerdeelSysteem.Controllers
             return this.RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult AddTrains()
+        {
+            List<int> iList = this.lDepot.GetTramList(75);
+            foreach (var item in iList)
+            {
+                this.lDepot.AddTrain(item);
+            }
+            return this.RedirectToAction("Index");
+        }
+
         /*public IActionResult AddPopUp()
         {
             return View();

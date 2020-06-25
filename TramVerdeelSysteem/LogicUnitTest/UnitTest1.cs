@@ -18,7 +18,7 @@ namespace LogicUnitTest
         [Test]
         public void AddTrain()
         {
-            List<int> iList = depot.GetTramList();
+            List<int> iList = depot.GetTramList(75);
             foreach (var item in iList)
             {
                 depot.AddTrain(item);

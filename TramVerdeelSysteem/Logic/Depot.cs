@@ -40,15 +40,15 @@ namespace Logic
             return depotView;
         }
 
-        public List<int> GetTramList()
+        public List<int> GetTramList(int limit)
         {
-            return this.iTram.GetTramList();
+            return this.iTram.GetTramList(limit);
         }
 
         public SectorDTO AddTrain(int tramNumber)
         {
             bool isTramInList = false;
-            var trams = this.GetTramList();
+            var trams = this.GetTramList(300);
             foreach (var tram in trams)
             {
                 if (tram == tramNumber)

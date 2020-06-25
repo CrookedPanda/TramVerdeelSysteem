@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutDepot.cshtml";
 }
 
-    <div class="addPopUp" id="addPopUpContainer">
+    @*<div class="addPopUp" id="addPopUpContainer">
         <div class="row">
             <input type="number" />
             <select id="Spoor" name="Spoor">
@@ -36,9 +36,9 @@
             <input type="button" id="addCancel" class="btn-danger" value="Annuleren" />
             <input type="button" id="addAccept" class="btn-success" value="Toevoegen" />
         </div>
-    </div>
+    </div>*@
 
-    <div class="wijzigPopUp" id="wijzigPopUpContainer">
+    @*<div class="wijzigPopUp" id="wijzigPopUpContainer">
         <div class="row">
             <input type="number" value="202" />
             <select id="wijzigSpoor" name="Spoor">
@@ -73,7 +73,7 @@
             <input type="button" id="wijzigCancel" class="btn-danger" value="Annuleren" />
             <input type="button" id="wijzigAccept" class="btn-success" value="Toevoegen" />
         </div>
-    </div>
+    </div>*@
 
     <div class="sectorPopUp" id="sectorPopUpContainer">
         <div class="row">
@@ -100,12 +100,12 @@
     <div class="row-editted">
         <div class="col-lg-2 col-md-4 col-sm-8 col-xs-8 options">
             <div class="list-group">
-                <label class="list-group-item"><b>Trams:</b></label>
-                <!--TODO: FORLOOP-->
-                <input type="button" class="list-group-item text-center" onclick="" value="202" />
                 <!--Must-->
-                <!--<input type="button" id="addPopUp" class="btn-primary text-center" value="Add" />-->
-        </div>
+                @using (Html.BeginForm("AddTrains", "Depot", FormMethod.Post))
+                {
+                    <input type="submit" id="autoAdd" class="btn-secondary" value="Automatisch Toevoegen" />
+                }
+            </div>
     </div>
 
     <div class="col padding-75">
@@ -132,194 +132,17 @@
         </div>
     </div>
 
-                @*<div class="col padding-50">
-                    <div class="row padding-bot">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="31">
-                                Line
-                                <input type="button" class="list-group-item text-center colorRed" value="1">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(31,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(31,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="32">
-                                Line
-                                <input type="button" class="list-group-item text-center colorBlue" value="5">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(32,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(32,3)" class="list-group-item text-center colorReserved" value="202">
-                                <input type="button" onclick="openSectorDiv(32,3)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="33">
-                                Line
-                                <input type="button" class="list-group-item text-center colorYellow" value="8">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(33,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(33,2)" class="list-group-item text-center colorBlocked" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="34">
-                                Line
-                                <input type="button" class="list-group-item text-center colorGreen" value="3">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(34,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(34,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="35">
-                                Line
-                                <input type="button" class="list-group-item text-center colorPurple" value="9">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(35,1)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row padding-bot">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="10">
-                                Line
-                                <input type="button" class="list-group-item text-center colorYellow" value="8">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(10,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(10,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="11">
-                                Line
-                                <input type="button" class="list-group-item text-center colorPurple" value="9">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(11,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(11,2)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(11,3)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="12">
-                                Line
-                                <input type="button" class="list-group-item text-center colorBlue" value="5">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(12,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(12,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="13">
-                                Line
-                                <input type="button" class="list-group-item text-center colorRed" value="1">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(13,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(13,2)" class="list-group-item text-center colorBlocked" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="14">
-                                Line
-                                <input type="button" class="list-group-item text-center colorGreen" value="3">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(14,1)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col padding-50">
-                    <div class="row padding-bot">
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="60">
-                                Line
-                                <input type="button" class="list-group-item text-center colorOrange" value="4">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(60,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(60,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="61">
-                                Line
-                                <input type="button" class="list-group-item text-center colorGreen" value="3">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(61,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(61,2)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(61,3)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="62">
-                                Line
-                                <input type="button" class="list-group-item text-center colorBlue" value="5">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(62,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(62,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="63">
-                                Line
-                                <input type="button" class="list-group-item text-center colorOrange" value="4">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(63,1)" class="list-group-item text-center" value="">
-                                <input type="button" onclick="openSectorDiv(63,2)" class="list-group-item text-center" value="">
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 padding-0">
-                            <div class="list-group">
-                                Rail
-                                <input type="button" class="list-group-item text-center" value="64">
-                                Line
-                                <input type="button" class="list-group-item text-center colorYellow" value="8">
-                                Sectors
-                                <input type="button" onclick="openSectorDiv(64,1)" class="list-group-item text-center colorBlocked" value="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
 
                     <script type="text/javascript">
                         //Add Popup
-                        var addPopUpContainer = document.getElementById("addPopUpContainer");
-                        addPopUpContainer.style.visibility = 'hidden';
+                        //var addPopUpContainer = document.getElementById("addPopUpContainer");
+                        //addPopUpContainer.style.visibility = 'hidden';
 
-                        document.getElementById("addCancel").onclick = function () { closeAddDiv() };
-                        document.getElementById("addAccept").onclick = function () { closeAddDiv() };
-                        function closeAddDiv() {
-                            addPopUpContainer.style.visibility = 'hidden';
-                        }
+                        //document.getElementById("addCancel").onclick = function () { closeAddDiv() };
+                        //document.getElementById("addAccept").onclick = function () { closeAddDiv() };
+                        //function closeAddDiv() {
+                        //    addPopUpContainer.style.visibility = 'hidden';
+                        //}
 
                         //document.getElementById("addPopUp").onclick = function () { openAddDiv() };
                         //function openAddDiv() {
@@ -327,19 +150,19 @@
                         //}
 
                         //Wijzig Popup
-                        var wijzigPopUpContainer = document.getElementById("wijzigPopUpContainer");
-                        wijzigPopUpContainer.style.visibility = 'hidden';
+                        //var wijzigPopUpContainer = document.getElementById("wijzigPopUpContainer");
+                        //wijzigPopUpContainer.style.visibility = 'hidden';
 
-                        document.getElementById("wijzigCancel").onclick = function () { closeWijzigDiv() };
-                        document.getElementById("wijzigAccept").onclick = function () { closeWijzigDiv() };
-                        document.getElementById("wijzigDelete").onclick = function () { closeWijzigDiv() };
-                        function closeWijzigDiv() {
-                            wijzigPopUpContainer.style.visibility = 'hidden';
-                        }
+                        //document.getElementById("wijzigCancel").onclick = function () { closeWijzigDiv() };
+                        //document.getElementById("wijzigAccept").onclick = function () { closeWijzigDiv() };
+                        //document.getElementById("wijzigDelete").onclick = function () { closeWijzigDiv() };
+                        //function closeWijzigDiv() {
+                        //    wijzigPopUpContainer.style.visibility = 'hidden';
+                        //}
 
-                        function openWijzigDiv() {
-                            wijzigPopUpContainer.style.visibility = 'visible';
-                        }
+                        //function openWijzigDiv() {
+                        //    wijzigPopUpContainer.style.visibility = 'visible';
+                        //}
 
                         //Sector Popup
                         var sectorPopUpContainer = document.getElementById("sectorPopUpContainer");

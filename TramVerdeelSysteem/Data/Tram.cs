@@ -97,14 +97,15 @@ namespace Data
             return line;
         }
 
-        public List<int> GetTramList()
+        public List<int> GetTramList(int limit)
         {
             List<int> iList = new List<int>();
             try
             {
                 _connect.Con.Open();
-                string query = "SELECT DISTINCT Number FROM `tram`";
+                string query = "SELECT DISTINCT Number FROM `tram` ORDER BY RAND() LIMIT @limit";
                 MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                cmd.Parameters.AddWithValue("@limit", limit);
                 var dataReader = cmd.ExecuteReader();
 
                 if (dataReader.HasRows)
