@@ -156,6 +156,46 @@ namespace Data
             return maintenanceList;
         }
 
+        public List<MaintenanceDTO> GetMaintenanceList()
+        {
+            List<MaintenanceDTO> maintenanceList = new List<MaintenanceDTO>();
+            try
+            {
+                //SELECT Tram.Number, service.Size, service.Priority, service.Description, track.TrackNumber, sector.Position FROM service
+                _connect.Con.Open();
+                string query = "SELECT Tram.Number, service.Size, service.Priority, service.Description FROM service"
+                    + " INNER JOIN Tram ON Tram.idTram = service.idTram";
+
+                MySqlCommand cmd = new MySqlCommand(query, _connect.Con);
+                var dataReader = cmd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        MaintenanceDTO maintenance = new MaintenanceDTO
+                        {
+                            TramNumber = dataReader.GetInt32("Number"),
+                            Annotation = dataReader.GetString("Description"),
+                            Urgent = dataReader.GetBoolean("Priority"),
+                        };
+                        maintenanceList.Add(maintenance);
+                    }
+                }
+                dataReader.Close();
+            }
+            catch (Exception e)
+            {
+                Debug.Write(e);
+                return null;
+            }
+            finally
+            {
+                _connect.Con.Close();
+            }
+            return maintenanceList;
+        }
+
         public List<MaintenanceHistoryDTO> GetServiceHistory()
         {
             List<MaintenanceHistoryDTO> maintenanceList = new List<MaintenanceHistoryDTO>();

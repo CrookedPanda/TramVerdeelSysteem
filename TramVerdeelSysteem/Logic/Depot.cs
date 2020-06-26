@@ -66,7 +66,7 @@ namespace Logic
             //is there a specific track assigned to the tram?
             //is there a free non specific track?
 
-            var maintenanceList = this.iMaintenance.GetServiceList();
+            var maintenanceList = this.iMaintenance.GetMaintenanceList();
             foreach (var maintenance in maintenanceList)
             {
                 if (maintenance.TramNumber == tramNumber)

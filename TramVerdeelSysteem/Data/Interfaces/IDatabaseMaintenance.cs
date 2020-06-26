@@ -14,6 +14,7 @@ namespace Data.Interfaces
         bool IndicateCompleteCleaning(CleaningDTO cleaning);
         bool IndicateCompleteService(MaintenanceDTO service);
         List<MaintenanceDTO> GetServiceList();
+        List<MaintenanceDTO> GetMaintenanceList();
         List<CleaningDTO> GetCleaningList();
         List<CleaningHistoryDTO> GetCleaningHistory();
         List<MaintenanceHistoryDTO> GetServiceHistory();
